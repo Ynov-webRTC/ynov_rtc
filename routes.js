@@ -9,10 +9,10 @@ module.exports = function (app) {
     app.get('/test', function (req, res) {
         res.end("salut mon pote");
     });
-
-    app.post('/login',
-    passport.authenticate('local'),
-    function(req, res) {
+    app.get('/signup', function (req,res) {
+        res.end('signup');
+    });
+    app.post('/login', passport.authenticate('local'), function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
         res.redirect('/');
