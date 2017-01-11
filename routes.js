@@ -1,5 +1,6 @@
 var passport = require('passport');
 
+
 module.exports = function (app) {
 
     app.get('/', function (req, res) {
@@ -10,7 +11,10 @@ module.exports = function (app) {
         res.end("salut mon pote");
     });
     app.get('/signup', function (req,res) {
-        res.end('signup');
+        res.render('signup');
+    });
+    app.post('/signup',function (req,res) {
+
     });
     app.post('/login', passport.authenticate('local'), function(req, res) {
     // If this function gets called, authentication was successful.
