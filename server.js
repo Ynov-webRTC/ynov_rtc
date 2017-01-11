@@ -60,7 +60,6 @@ function connexionUser() {
 app.use(express.static(path.join(__dirname, 'static')));
 
 app.set("views", './views');
-app.engine('.html', require('ejs').__express);
-app.set('view engine', 'html');
+app.set('view engine', 'hbs');
 
 require('./routes.js')(app);
