@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="bower_components/demo-console/index.css">
     <link rel="stylesheet" href="bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
     <link rel="stylesheet" href="css/kurento.css">
+    <link rel="stylesheet" href="css/connexion.css">
 
     <script src="bower_components/adapter.js/adapter.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -32,6 +33,28 @@
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></button>
             <a class="navbar-brand" href=".">Projet WebRTC</a>
+          </div>
+
+          <div class="navbar-form navbar-right">
+              <a href="#" data-toggle="modal" data-target="#login-modal" class="btn btn-primary">Login</a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+          <div class="loginmodal-container">
+            <h1>Login to Your Account</h1><br>
+            <form action="/login" method="post">
+              <input type="text" name="username" placeholder="Username">
+              <input type="password" name="password" placeholder="Password">
+              <input type="submit" name="login" class="login loginmodal-submit" value="Log In">
+            </form>
+
+            <div class="login-help">
+              <a href="/signup">Register</a>
+            </div>
           </div>
         </div>
       </div>
@@ -66,6 +89,5 @@
         </div>
       </div>
     </div>
-
   </body>
 </html>
