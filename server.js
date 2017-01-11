@@ -6,6 +6,7 @@ var ws = require('ws');
 var kurento = require('kurento-client');
 var fs    = require('fs');
 var https = require('https');
+var passport = require('passport-local');
 
 var argv = minimist(process.argv.slice(2), {
     default: {

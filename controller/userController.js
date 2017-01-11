@@ -7,10 +7,10 @@ var User = function () {
 };
 
 User.prototype.create = function (req, callback){
-
+    var username = req.body.username;
     var email = req.body.email;
     var password = req.body.password;
-    var user = new userModel({"username": username,"password": password,"email":email});
+    var user = new userModel({"username": username,"password": password,"email": email});
     user.save();
 
     callback();
