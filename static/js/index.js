@@ -15,7 +15,7 @@
  *
  */
 
-var ws = new WebSocket('wss://' + location.host + '/one2many');
+var ws = new WebSocket('wss://edwinnss.fr:8888/kurento');
 var video;
 var webRtcPeer;
 
@@ -175,6 +175,10 @@ function hideSpinner() {
 		arguments[i].poster = './img/webrtc.png';
 		arguments[i].style.background = '';
 	}
+}
+
+function onError(error) {
+	console.log('%c'+error, 'background: #222; color: #bada55');
 }
 
 /**
