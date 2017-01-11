@@ -205,6 +205,13 @@ function checkForm(form)
         return false;
     }
 
+    re = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+    if(!re.test(form.email.value)) {
+        alert("Error: Please enter a valid email address (name@domain.com)");
+        form.email.focus();
+        return false;
+    }
+
     if(form.password.value != "" && form.password.value == form.confirm.value) {
         if(form.password.value.length < 6) {
             alert("Error: Password must contain at least six characters!");
@@ -241,6 +248,6 @@ function checkForm(form)
     }
 
     //message de confirmation provisoire
-    alert("You entered a valid password: " + form.password.value);
+    alert("Bravo ! Vous vous êtes inscrit");
     return true;
 }
