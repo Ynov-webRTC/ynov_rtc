@@ -35,11 +35,22 @@
                 </div>
 
                 <div class="navbar-form navbar-right">
-                    <a href="#" data-toggle="modal" data-target="#login-modal" class="btn btn-primary">Login</a>
+                    {{#if isConnected}}
+                        <a href="/logout" class="btn btn-primary">Logout</a>
+                    {{else}}
+                        <a href="#" data-toggle="modal" data-target="#login-modal" class="btn btn-primary">Login</a>
+                    {{/if}}
                 </div>
 
             </div>
         </div>
+
+        {{#if message}}
+            <div class="alert alert-info">
+                <strong>Info!</strong> {{message}}
+            </div>
+        {{/if}}
+
 
         <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">

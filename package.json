@@ -6,7 +6,10 @@
     "postinstall": "cd static && bower install"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
     "express": "~4.12.4",
+    "express-session": "^1.14.2",
     "hbs": "^4.0.1",
     "kurento-client": "6.6.0",
     "minimist": "^1.1.1",
