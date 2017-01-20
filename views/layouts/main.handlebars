@@ -84,22 +84,12 @@
         {{{body}}}
     </div>
 
-    <div class="modal fade" id="login-modal" role="dialog">
-        <div class="modal-dialog">
-            <div class="loginmodal-container">
-                <h1>Login to Your Account</h1><br>
-                <form action="/login" method="post">
-                    <input type="text" name="username" placeholder="Username">
-                    <input type="password" name="password" placeholder="Password">
-                    <input type="submit" name="login" class="login loginmodal-submit" value="Log In">
-                </form>
+    {{#unless isConnected}}
+        {{>login}}
+    {{/unless}}
 
-                <div class="login-help">
-                    <a href="/signup">Register</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -110,7 +100,6 @@
             return false;
         });
         socket.on('chat message', function(msg){
-        	console.log(msg);
             $('.chat_window .messages_chat').append("" +
                     "<li class='message right'>" +
                     "   <div class='avatar'>" +
