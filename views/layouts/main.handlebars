@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="public/bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
     <link rel="stylesheet" href="public/css/kurento.css">
     <link rel="stylesheet" href="public/css/connexion.css">
+    <link rel="stylesheet" href="public/css/chat.css">
 
     <script src="public/bower_components/adapter.js/adapter.js"></script>
     <script src="public/bower_components/jquery/dist/jquery.min.js"></script>
@@ -99,5 +100,28 @@
             </div>
         </div>
     </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io();
+        $('form').submit(function(){
+            socket.emit('chat message', $('.chat_window .message_input').val());
+            $('.chat_window .message_input').val('');
+            return false;
+        });
+        socket.on('chat message', function(msg){
+        	console.log(msg);
+            $('.chat_window .messages_chat').append("" +
+                    "<li class='message right'>" +
+                    "   <div class='avatar'>" +
+                    "   </div>" +
+                    "   <div class='text_wrapper'>" +
+                    "       <div class='text'>" +
+                            msg +
+                    "       </div>" +
+                    "   </div>" +
+                    "</li>");
+        });
+    </script>
 </body>
 </html>

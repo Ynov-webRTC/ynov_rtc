@@ -28,4 +28,8 @@ router.get('/account', auth.grantedAccess, function(req, res) {
 	})
 });
 
+router.get('/chat', function(req, res) {
+	res.render('chat');
+});
+
 module.exports = router;

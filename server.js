@@ -8,6 +8,7 @@ const fs = require('fs');
 const https = require('https');
 const mongoose = require("mongoose");
 const exphbs = require('express-handlebars');
+const io = require('socket.io')(https);
 const app = express();
 
 const argv = minimist(process.argv.slice(2), {
@@ -35,6 +36,16 @@ mongoose.connect("mongodb://localhost/rtc", function (err) {
 			path : '/kurento'
 		});
 		require('./kurento.js')(wss, argv);
+		io.listen(server);
+
+	});
+});
+
+io.on('connection', function(socket){
+	socket.on('chat message', function(msg){
+		if(msg.length > 0) {
+			io.emit('chat message', msg);
+		}
 	});
 });
 
