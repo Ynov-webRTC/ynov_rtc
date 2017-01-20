@@ -16,15 +16,6 @@
  */
 @CHARSET "UTF-8";
 
-html {
-	position: relative;
-	min-height: 100%;
-}
-
-body {
-	padding-top: 40px;
-}
-
 video,#console {
 	display: block;
 	font-size: 14px;

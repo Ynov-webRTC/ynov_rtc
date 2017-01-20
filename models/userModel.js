@@ -1,7 +1,8 @@
 "use strict";
-var mongoose = require("mongoose");
 
-var userSchema = mongoose.Schema({
+const mongoose = require("mongoose");
+
+const userSchema = mongoose.Schema({
     username: {
         type: String
     },
@@ -11,11 +12,11 @@ var userSchema = mongoose.Schema({
     email:{
         type: String
     },
-    date: {
+    date_created: {
         type: Date,
         default: Date.now()
     }
 });
-var userModel = mongoose.model("user", userSchema);
+const userModel = mongoose.model("user", userSchema);
 
 module.exports = userModel;
