@@ -5,9 +5,16 @@ var user = new userController();
 module.exports = function (app) {
 
     app.get('/', function (req, res) {
+        //console.log(req);
+        if (req.session.messages) {
+            var message = req.session.messages[0];
+            //console.log(req);
+        }else{
+            message = false;
+        }
+
         var isConnected = req.isAuthenticated();
-        console.log(req);
-        var message = req.session.messages[0];
+
         res.render('index', {isConnected: isConnected, message: message});
     });
 
@@ -20,9 +27,13 @@ module.exports = function (app) {
 
             req.login(user, function (err) {
                 if ( ! err ){
-                    res.redirect('/account');
+
+                    res.redirect('/',{message: 'test'});
+                    //console.log(res.message);
                 } else {
-                    res.render('index',{message: 'ajout réussi'});
+
+                    res.render('index',{message: 'Erreur d inscription'});
+                    //console.log(res.message);
                 }
             })
         });
@@ -33,7 +44,8 @@ module.exports = function (app) {
             failureRedirect: '/',
             failureMessage : "Impossible de vous connectez",
             successMessage : "Welcome",
-            failureFlash: true })
+            failureFlash: true
+             })
     );
 
     app.get('/logout', function(req, res){
@@ -45,6 +57,7 @@ module.exports = function (app) {
         if (req.isAuthenticated()){
             return next();
             //ici les routes quand nous somme authentifier
+
         }
         else
         {
