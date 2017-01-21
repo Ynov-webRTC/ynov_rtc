@@ -12,24 +12,12 @@ router.get(['/', '/index'], function(req, res) {
 	});
 });
 
-router.get('/signup', function(req, res) {
-	res.render('signup', {
+router.get('/stream', auth.grantedAccess, function(req, res) {
+	res.render('stream', {
 		isConnected: auth.isConnected(req),
 		messages: req.flash("success"),
 		errors: req.flash("error")
 	});
-});
-
-router.get('/account', auth.grantedAccess, function(req, res) {
-	res.render('account', {
-		isConnected: auth.isConnected(req),
-		messages: req.flash("success"),
-		errors: req.flash("error")
-	})
-});
-
-router.get('/chat', function(req, res) {
-	res.render('chat');
 });
 
 module.exports = router;

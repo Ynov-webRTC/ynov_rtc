@@ -22,6 +22,10 @@
     "ws": "~1.1.1"
   },
   "devDependencies": {
-    "bower": "^1.4.1"
+    "bower": "^1.4.1",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.3.2",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-rename": "^1.2.2"
   }
 }

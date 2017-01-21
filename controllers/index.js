@@ -5,11 +5,6 @@ const auth = require('../services/auth');
 
 router.use('/', require('./homeController'));
 router.use('/login', require('./loginController'));
-
-router.get('/logout', function(req, res, next) {
-	req.logout();
-	res.redirect('/');
-});
-
+router.use('/account', require('./accountController'));
 
 module.exports = router;

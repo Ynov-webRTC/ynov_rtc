@@ -43,6 +43,7 @@ mongoose.connect("mongodb://localhost/rtc", function (err) {
 
 io.on('connection', function(socket){
 	socket.on('chat message', function(msg){
+		console.log(msg);
 		if(msg.length > 0) {
 			io.emit('chat message', msg);
 		}

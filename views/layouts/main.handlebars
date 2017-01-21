@@ -10,21 +10,19 @@
 
     <link rel="stylesheet" href="https://bootswatch.com/readable/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="public/bower_components/demo-console/index.css">
-    <link rel="stylesheet" href="public/bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
-    <link rel="stylesheet" href="public/css/kurento.css">
-    <link rel="stylesheet" href="public/css/connexion.css">
-    <link rel="stylesheet" href="public/css/chat.css">
+    <link rel="stylesheet" href="/public/bower_components/demo-console/index.css">
+    <link rel="stylesheet" href="/public/bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
+    <link rel="stylesheet" href="/public/css/style.min.css">
 
-    <script src="public/bower_components/adapter.js/adapter.js"></script>
-    <script src="public/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="public/bower_components/demo-console/index.js"></script>
-    <script src="public/bower_components/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+    <script src="/public/bower_components/adapter.js/adapter.js"></script>
+    <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/bower_components/demo-console/index.js"></script>
+    <script src="/public/bower_components/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
 
-    <script src="public/bower_components/kurento-utils/js/kurento-utils.js"></script>
+    <script src="/public/bower_components/kurento-utils/js/kurento-utils.js"></script>
 
-    <script src="public/js/index.js"></script>
+    <script src="/public/js/index.js"></script>
     <title>Projet Ynov</title>
 </head>
 <body>
@@ -48,11 +46,14 @@
                             <a href="/account">Account</a>
                         </li>
                         <li>
-                            <a href="/logout">Logout</a>
+                            <a href="/login/logout">Logout</a>
                         </li>
                     {{else}}
                         <li>
-                            <a href="#" data-toggle="modal" data-target="#login-modal" class="btn btn-default">Login</a>
+                            <a href="/login/signup">Signup</a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
                         </li>
                     {{/if}}
                 </ul>
@@ -88,13 +89,10 @@
         {{>login}}
     {{/unless}}
 
-
-
-
     <script src="/socket.io/socket.io.js"></script>
     <script>
         let socket = io();
-        $('form').submit(function(){
+        $('#formChat').submit(function(){
             socket.emit('chat message', $('.chat_window .message_input').val());
             $('.chat_window .message_input').val('');
             return false;
