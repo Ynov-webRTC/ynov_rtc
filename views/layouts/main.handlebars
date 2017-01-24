@@ -95,12 +95,13 @@
     <script>
         let socket = io();
         $('#formChat').submit(function(){
-            socket.emit('chat message', $('.chat_window .message_input').val());
-            $('.chat_window .message_input').val('');
+            socket.emit('chat message', $('.chat_window #message_chat').val());
+            $('.chat_window #message_chat').val('');
             return false;
         });
         socket.on('chat message', function(msg){
-            $('.chat_window .messages_chat').append("" +
+            $('.chat_window .messages').append("<li>"+msg+"</li>");
+            /*$('.chat_window .messages_chat').append("" +
                     "<li class='message right'>" +
                     "   <div class='avatar'>" +
                     "   </div>" +
@@ -109,7 +110,7 @@
                             msg +
                     "       </div>" +
                     "   </div>" +
-                    "</li>");
+                    "</li>");*/
         });
     </script>
 </body>
