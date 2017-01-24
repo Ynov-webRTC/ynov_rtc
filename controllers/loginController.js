@@ -36,7 +36,7 @@ router.post('/signup', function(req, res) {
 		}
 		req.login(user, function() {
 			req.flash('success', 'Inscription réussi!');
-			res.redirect('account');
+			res.redirect('/account');
 		});
 	});
 });
