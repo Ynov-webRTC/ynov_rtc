@@ -12,7 +12,7 @@ router.get(['/', '/index'], function(req, res) {
 	});
 });
 
-router.get('/stream', auth.grantedAccess, function(req, res) {
+router.get('/stream', function(req, res) {
 	res.render('stream', {
 		isConnected: auth.isConnected(req),
 		messages: req.flash("success"),

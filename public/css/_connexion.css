@@ -1,0 +1,15 @@
+/****** LOGIN MODAL ******/
+.loginmodal-container {
+  overflow: hidden;
+  width: 100% !important;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 2px;
+  background-color: #f7f7f7;
+}
+
+.loginmodal-container h1 {
+  font-size: 1.8em;
+  text-align: center;
+}

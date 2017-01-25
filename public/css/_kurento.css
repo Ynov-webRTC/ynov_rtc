@@ -1,0 +1,52 @@
+@CHARSET 'UTF-8';
+
+video,
+#console {
+  font-size: 14px;
+  line-height: 1.42857143;
+  display: block;
+  -webkit-transition: border-color ease-in-out .15s, box-shadow
+    ease-in-out .15s;
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff none;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+#console {
+  min-height: 120px;
+  max-height: 360px;
+}
+
+#videoContainer {
+  position: absolute;
+  float: left;
+}
+
+#videoBig {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 480px;
+}
+
+div#videoSmall {
+  position: absolute;
+  z-index: 10;
+  top: 15px;
+  left: 400px;
+  width: 240px;
+  height: 180px;
+  padding: 0;
+  cursor: pointer;
+}
+
+div.dragged {
+  z-index: 10 !important;
+  cursor: all-scroll !important;
+  border-color: blue !important;
+}
