@@ -13,8 +13,8 @@ const app = express();
 
 const argv = minimist(process.argv.slice(2), {
     default: {
-        as_uri: 'https://edwinnss.fr:8888/',
-        ws_uri: 'wss://edwinnss.fr:8888/kurento'
+        as_uri: 'https://edwinnss.fr:8443/',
+        ws_uri: 'ws://edwinnss.fr:8888/kurento'
     }
 });
 
@@ -29,7 +29,7 @@ mongoose.connect("mongodb://localhost/rtc", function (err) {
 	if (err) {
 		throw err;
 	}
-	const server = https.createServer(options, app).listen(8888, function() {
+	const server = https.createServer(options, app).listen(8443, function() {
 		console.log('init server');
 		const wss = new ws.Server({
 			server : server,

@@ -15,7 +15,7 @@
  *
  */
 
-var ws = new WebSocket('wss://edwinnss.fr:8888/kurento');
+var ws = new WebSocket('wss://'+ location.host +'/kurento');
 var video;
 var webRtcPeer;
 
