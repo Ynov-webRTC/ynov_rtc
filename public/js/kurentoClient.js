@@ -179,5 +179,3 @@ function hideSpinner() {
 function onError(error) {
 	console.log('%c'+error, 'background: #222; color: #bada55');
 }
-
-$("#formSignup").validator();

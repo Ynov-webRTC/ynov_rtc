@@ -14,6 +14,7 @@
     "express-session": "^1.15.0",
     "handlebars-helpers": "^0.7.7",
     "kurento-client": "6.6.0",
+    "loadjs": "^3.3.1",
     "minimist": "^1.2.0",
     "mongoose": "^4.7.8",
     "passport": "^0.3.2",
