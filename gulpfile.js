@@ -1,24 +1,29 @@
-'use strict';
+"use strict";
 
 const gulp = require('gulp');
-const cleanCss = require('gulp-clean-css');
-const concatCss = require('gulp-concat-css');
-const gulpRename = require('gulp-rename');
-const urlCss = 'public/css/';
 
-gulp.task('concat-css', function() {
-	return gulp.src(urlCss+'*.css')
-		.pipe(concatCss('style.css'))
-		.pipe(gulp.dest(urlCss));
+// Include plugins
+const plugins = require('gulp-load-plugins')(); // tous les plugins de package.json
+
+// Variables de chemins
+const source = './public/'; // dossier de travail
+
+// Tâche "css" = autoprefixer + CSScomb + beautify + minify
+gulp.task('css', function () {
+	return gulp.src(source + 'css/_*.css')
+		.pipe(plugins.concatCss('style.css'))
+		.pipe(plugins.csscomb())
+		.pipe(plugins.cssbeautify({indent: '  '}))
+		.pipe(gulp.dest(source + 'css/'))
+		.pipe(plugins.rename({suffix: '.min'}))
+		.pipe(plugins.csso())
+		.pipe(gulp.dest(source + 'css/'));
 });
 
-gulp.task('css', ['concat-css'], function() {
-	return gulp.src(urlCss+'style.css')
-		.pipe(cleanCss())
-		.pipe(gulpRename('style.min.css'))
-		.pipe(gulp.dest(urlCss));
-});
-
+// Watch Files For Changes
 gulp.task('watch', function () {
-	gulp.watch(urlCss+'*.css', ['css']);
+	gulp.watch(source+'css/_*.css', ['css']);
 });
+
+// Tasks
+gulp.task('default', ['css']);

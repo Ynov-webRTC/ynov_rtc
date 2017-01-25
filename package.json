@@ -7,25 +7,28 @@
     "postinstall": "cd public && bower install"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.16.0",
     "connect-flash": "^0.1.1",
     "express": "~4.14.0",
     "express-handlebars": "^3.0.0",
-    "express-session": "^1.14.2",
+    "express-session": "^1.15.0",
     "handlebars-helpers": "^0.7.7",
     "kurento-client": "6.6.0",
-    "minimist": "^1.1.1",
-    "mongoose": "^4.7.6",
+    "minimist": "^1.2.0",
+    "mongoose": "^4.7.8",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "socket.io": "^1.7.2",
     "ws": "~1.1.1"
   },
   "devDependencies": {
-    "bower": "^1.4.1",
-    "gulp": "^3.9.1",
-    "gulp-clean-css": "^2.3.2",
-    "gulp-concat-css": "^2.3.0",
-    "gulp-rename": "^1.2.2"
+    "bower": "latest",
+    "gulp": "latest",
+    "gulp-concat-css": "latest",
+    "gulp-cssbeautify": "latest",
+    "gulp-csscomb": "latest",
+    "gulp-csso": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-rename": "latest"
   }
 }
