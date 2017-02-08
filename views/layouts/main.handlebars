@@ -8,23 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="public/img/kurento.png" type="image/png" />
 
+    <!-- files CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/readable/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/public/bower_components/demo-console/index.css">
-    <link rel="stylesheet" href="/public/bower_components/ekko-lightbox/dist/ekko-lightbox.min.css">
+    <link rel="stylesheet" href="/public/bower_components/wdt-emoji-bundle/wdt-emoji-bundle.css">
     <link rel="stylesheet" href="/public/css/style.css">
 
-    <script src="/public/bower_components/adapter.js/adapter.js"></script>
+    <!-- files JS --->
     <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/public/bower_components/demo-console/index.js"></script>
-    <script src="/public/bower_components/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
 
-    <script src="/public/bower_components/bootstrap-validator/dist/validator.min.js"></script>
+    {{#each scripts}}
+        <script src="{{this}}"></script>
+    {{/each}}
 
-    <script src="/public/bower_components/kurento-utils/js/kurento-utils.js"></script>
-
-    <script src="/public/js/kurentoClient.js"></script>
     <title>Projet Ynov</title>
 </head>
 <body>
@@ -90,31 +86,49 @@
         {{{body}}}
     </div>
 
+    <div class="wdt-emoji-popup">
+        <a href="#" class="wdt-emoji-popup-mobile-closer"> × </a>
+        <div class="wdt-emoji-menu-content">
+            <div id="wdt-emoji-menu-header">
+                <a class="wdt-emoji-tab active" data-group-name="Recent"></a>
+                <a class="wdt-emoji-tab" data-group-name="People"></a>
+                <a class="wdt-emoji-tab" data-group-name="Nature"></a>
+                <a class="wdt-emoji-tab" data-group-name="Foods"></a>
+                <a class="wdt-emoji-tab" data-group-name="Activity"></a>
+                <a class="wdt-emoji-tab" data-group-name="Places"></a>
+                <a class="wdt-emoji-tab" data-group-name="Objects"></a>
+                <a class="wdt-emoji-tab" data-group-name="Symbols"></a>
+                <a class="wdt-emoji-tab" data-group-name="Flags"></a>
+                <a class="wdt-emoji-tab" data-group-name="Custom"></a>
+            </div>
+            <div class="wdt-emoji-scroll-wrapper">
+                <div id="wdt-emoji-menu-items">
+                    <input id="wdt-emoji-search" type="text" placeholder="Search">
+                    <h3 id="wdt-emoji-search-result-title">Search Results</h3>
+                    <div class="wdt-emoji-sections"></div>
+                    <div id="wdt-emoji-no-result">No emoji found</div>
+                </div>
+            </div>
+            <div id="wdt-emoji-footer">
+                <div id="wdt-emoji-preview">
+                    <span id="wdt-emoji-preview-img"></span>
+                    <div id="wdt-emoji-preview-text">
+                        <span id="wdt-emoji-preview-name"></span><br>
+                        <span id="wdt-emoji-preview-aliases"></span>
+                    </div>
+                </div>
+                <div id="wdt-emoji-preview-bundle">
+                    <span>WDT Emoji Bundle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{#unless isConnected}}
         {{>login}}
     {{/unless}}
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-        let socket = io();
-        $('#formChat').submit(function(){
-            socket.emit('chat message', $('.chat_window #message_chat').val());
-            $('.chat_window #message_chat').val('');
-            return false;
-        });
-        socket.on('chat message', function(msg){
-            $('.chat_window .messages').append("<li>"+msg+"</li>");
-            /*$('.chat_window .messages_chat').append("" +
-                    "<li class='message right'>" +
-                    "   <div class='avatar'>" +
-                    "   </div>" +
-                    "   <div class='text_wrapper'>" +
-                    "       <div class='text'>" +
-                            msg +
-                    "       </div>" +
-                    "   </div>" +
-                    "</li>");*/
-        });
-    </script>
+    <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/public/js/chatStream.js"></script>
 </body>
 </html>

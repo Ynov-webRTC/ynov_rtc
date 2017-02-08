@@ -1,13 +1,14 @@
 /*
- * Definition of global variables.
+ * Definition of global letiables.
  */
-var idCounter = 0;
-var candidatesQueue = {};
-var kurentoClient = null;
-var presenter = null;
-var viewers = [];
-var noPresenterMessage = 'No active presenter. Try again later...';
-var kurento = require('kurento-client');
+const kurento = require('kurento-client');
+let idCounter = 0;
+let candidatesQueue = {};
+let kurentoClient = null;
+let presenter = null;
+let viewers = [];
+const noPresenterMessage = 'No active presenter. Try again later...';
+
 
 function nextUniqueId() {
 	idCounter++;
@@ -18,7 +19,7 @@ module.exports = function (wss, argv) {
 
     wss.on('connection', function(ws) {
 
-        var sessionId = nextUniqueId();
+        let sessionId = nextUniqueId();
         console.log('Connection received with sessionId ' + sessionId);
 
         ws.on('error', function(error) {
@@ -32,7 +33,7 @@ module.exports = function (wss, argv) {
         });
 
         ws.on('message', function(_message) {
-            var message = JSON.parse(_message);
+            let message = JSON.parse(_message);
             console.log('Connection ' + sessionId + ' received message ', message);
 
             switch (message.id) {
@@ -119,7 +120,7 @@ module.exports = function (wss, argv) {
             id : sessionId,
             pipeline : null,
             webRtcEndpoint : null
-        }
+        };
 
         getKurentoClient(function(error, kurentoClient) {
             if (error) {
@@ -159,13 +160,13 @@ module.exports = function (wss, argv) {
 
                     if (candidatesQueue[sessionId]) {
                         while(candidatesQueue[sessionId].length) {
-                            var candidate = candidatesQueue[sessionId].shift();
+                            let candidate = candidatesQueue[sessionId].shift();
                             webRtcEndpoint.addIceCandidate(candidate);
                         }
                     }
 
                     webRtcEndpoint.on('OnIceCandidate', function(event) {
-                        var candidate = kurento.getComplexType('IceCandidate')(event.candidate);
+                        let candidate = kurento.getComplexType('IceCandidate')(event.candidate);
                         ws.send(JSON.stringify({
                             id : 'iceCandidate',
                             candidate : candidate
@@ -213,7 +214,7 @@ module.exports = function (wss, argv) {
             viewers[sessionId] = {
                 "webRtcEndpoint" : webRtcEndpoint,
                 "ws" : ws
-            }
+            };
 
             if (presenter === null) {
                 stop(sessionId);
@@ -222,13 +223,13 @@ module.exports = function (wss, argv) {
 
             if (candidatesQueue[sessionId]) {
                 while(candidatesQueue[sessionId].length) {
-                    var candidate = candidatesQueue[sessionId].shift();
+                    let candidate = candidatesQueue[sessionId].shift();
                     webRtcEndpoint.addIceCandidate(candidate);
                 }
             }
 
             webRtcEndpoint.on('OnIceCandidate', function(event) {
-                var candidate = kurento.getComplexType('IceCandidate')(event.candidate);
+                let candidate = kurento.getComplexType('IceCandidate')(event.candidate);
                 ws.send(JSON.stringify({
                     id : 'iceCandidate',
                     candidate : candidate
@@ -275,8 +276,8 @@ module.exports = function (wss, argv) {
 
     function stop(sessionId) {
         if (presenter !== null && presenter.id == sessionId) {
-            for (var i in viewers) {
-                var viewer = viewers[i];
+            for (let i in viewers) {
+                let viewer = viewers[i];
                 if (viewer.ws) {
                     viewer.ws.send(JSON.stringify({
                         id : 'stopCommunication'
@@ -296,7 +297,7 @@ module.exports = function (wss, argv) {
     }
 
     function onIceCandidate(sessionId, _candidate) {
-        var candidate = kurento.getComplexType('IceCandidate')(_candidate);
+        let candidate = kurento.getComplexType('IceCandidate')(_candidate);
 
         if (presenter && presenter.id === sessionId && presenter.webRtcEndpoint) {
             console.info('Sending presenter candidate');
@@ -314,5 +315,5 @@ module.exports = function (wss, argv) {
             candidatesQueue[sessionId].push(candidate);
         }
     }
-}
+};
 

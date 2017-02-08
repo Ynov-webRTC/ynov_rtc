@@ -17,6 +17,10 @@ router.post('/',
 
 router.get('/signup', function(req, res) {
     res.render('signup', {
+        scripts: [
+            '/public/bower_components/bootstrap-validator/dist/validator.min.js',
+            '/public/js/scriptLogin.js'
+        ],
         isConnected: auth.isConnected(req),
         messages: req.flash("success"),
         errors: req.flash("error")
