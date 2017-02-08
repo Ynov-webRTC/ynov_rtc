@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "node server.js",
     "postinstall": "cd public && bower install"
   },
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.16.0",
     "connect-flash": "^0.1.1",
     "express": "~4.14.0",
@@ -17,8 +19,10 @@
     "loadjs": "^3.3.1",
     "minimist": "^1.2.0",
     "mongoose": "^4.7.8",
+    "nodemailer": "^3.0.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "q": "^1.4.1",
     "socket.io": "^1.7.2",
     "ws": "~1.1.1"
   },

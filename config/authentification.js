@@ -6,13 +6,14 @@ const User = require('../models/userModel');
 const bodyParser = require("body-parser");
 const flash = require('connect-flash');
 const session = require('express-session');
+const bcrypt = require('bcrypt');
 
 module.exports = function (app) {
 
 	app.use(bodyParser.urlencoded({extended: false}));
 	app.use(flash());
 	app.use(session({
-		secret: 'ynovrtcnacim',
+		secret: 'ynovrtcwebgroupe',
 		resave: true,
 		saveUninitialized: true
 	}));
@@ -27,13 +28,18 @@ module.exports = function (app) {
 				if (!user) {
 					return done(null, false, { message: 'Nom invalide.' });
 				}
-				if (user.password !== password) {
+				if(!validPassword(password, user.password)) {
 					return done(null, false, { message: 'Mot de passe invalide.' });
 				}
+
 				return done(null, user);
 			});
 		}
 	));
+
+	let validPassword = function(password1, password2) {
+		return bcrypt.compareSync(password1, password2);
+	};
 
 	passport.serializeUser(function(user, done) {
 		done(null, user);
