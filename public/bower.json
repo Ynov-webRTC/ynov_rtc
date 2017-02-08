@@ -21,9 +21,8 @@
   "dependencies": {
     "adapter.js": "v0.2.9",
     "bootstrap": "~3.3.0",
-    "ekko-lightbox": "~3.3.0",
-    "demo-console": "1.5.1",
     "kurento-utils": "6.6.0",
-    "bootstrap-validator": "^0.11.9"
+    "bootstrap-validator": "^0.11.9",
+    "wdt-emoji-bundle": "^0.1.4"
   }
 }

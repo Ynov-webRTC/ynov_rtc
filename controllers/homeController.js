@@ -12,8 +12,16 @@ router.get(['/', '/index'], function(req, res) {
 	});
 });
 
-router.get('/stream', auth.grantedAccess, function(req, res) {
+router.get('/stream', function(req, res) {
 	res.render('stream', {
+		scripts: [
+			'/public/bower_components/adapter.js/adapter.js',
+			'/public/bower_components/kurento-utils/js/kurento-utils.js',
+			'/public/js/kurentoClient.js',
+			'/public/bower_components/wdt-emoji-bundle/emoji.min.js',
+			'/public/bower_components/wdt-emoji-bundle/wdt-emoji-bundle.min.js',
+			'/socket.io/socket.io.js',
+		],
 		isConnected: auth.isConnected(req),
 		messages: req.flash("success"),
 		errors: req.flash("error")
