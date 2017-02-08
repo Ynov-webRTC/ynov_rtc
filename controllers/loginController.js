@@ -33,16 +33,17 @@ router.post('/signup', function(req, res) {
         email : req.body.email,
         password : req.body.password
     };
-    userService.createUser(user, function(error, user){
-        if(error) {
-            req.flash('error', 'Impossible de créer cet utilisateur!');
-            res.redirect('/signup');
+    userService.createUser(user)
+        .then(function(user){
+            req.login(user, function() {
+                req.flash('success', 'Inscription réussi!');
+                res.redirect('/account');
+            });
+        }, function(error) {
+	        req.flash('error', error);
+	        res.redirect('/login/signup');
         }
-        req.login(user, function() {
-            req.flash('success', 'Inscription réussi!');
-            res.redirect('/account');
-        });
-    });
+    );
 });
 
 router.get('/logout', function(req, res) {

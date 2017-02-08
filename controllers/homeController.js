@@ -12,7 +12,7 @@ router.get(['/', '/index'], function(req, res) {
 	});
 });
 
-router.get('/stream', function(req, res) {
+router.get('/stream', auth.grantedAccess, function(req, res) {
 	res.render('stream', {
 		scripts: [
 			'/public/bower_components/adapter.js/adapter.js',

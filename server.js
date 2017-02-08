@@ -9,6 +9,7 @@ const https = require('https');
 const mongoose = require("mongoose");
 const exphbs = require('express-handlebars');
 const io = require('socket.io')(https);
+
 const app = express();
 
 const argv = minimist(process.argv.slice(2), {
@@ -58,3 +59,30 @@ app.engine('handlebars', exphbs({
 }));
 app.set("view engine", "handlebars");
 
+/*
+let transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: 'gmail.user@gmail.com',
+		pass: 'yourpass'
+	}
+});
+
+// setup email data with unicode symbols
+let mailOptions = {
+	from: '"Fred Foo 👻" <foo@blurdybloop.com>', // sender address
+	to: 'bar@blurdybloop.com, baz@blurdybloop.com', // list of receivers
+	subject: 'Hello ✔', // Subject line
+	text: 'Hello world ?', // plain text body
+	html: '<b>Hello world ?</b>' // html body
+};
+
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, (error, info) => {
+	if (error) {
+		return console.log(error);
+	}
+	console.log('Message %s sent: %s', info.messageId, info.response);
+});
+*/
