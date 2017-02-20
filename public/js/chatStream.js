@@ -1,15 +1,19 @@
 'use strict';
 
-let socket = io();
+$(document).ready(function() {
 
-wdtEmojiBundle.defaults.emojiSheets.apple = './public/bower_components/wdt-emoji-bundle/sheets/sheet_emojione_64_indexed_128.png';
-wdtEmojiBundle.init('#message_cha');
+	$(".alert").fadeTo(2000, 500).slideUp(500);
 
-$('#formChat').submit(function(){
-	socket.emit('chat message', $('.chat_window #message_chat').val());
-	$('.chat_window #message_chat').val('');
-	return false;
+	let socket = io();
+
+	$('#formChat').submit(function(){
+		socket.emit('chat message', $('.chat_window #message_chat').val());
+		$('.chat_window #message_chat').val('');
+		return false;
+	});
+	socket.on('chat message', function(msg){
+		$('.chat_window .chat_messages').append("<li>"+emojione.shortnameToImage(msg)+"</li>");
+	});
+
 });
-socket.on('chat message', function(msg){
-	$('.chat_window .chat_messages').append("<li>"+wdtEmojiBundle.render(msg)+"</li>");
-});
+
