@@ -19,9 +19,8 @@ router.get('/stream', auth.grantedAccess, function(req, res) {
 			'/public/bower_components/kurento-utils/js/kurento-utils.js',
 			'/public/js/kurentoClient.js',
 			'/public/bower_components/emojione/lib/js/emojione.js',
-			'/public/bower_components/wdt-emoji-bundle/wdt-emoji-bundle.min.js',
 			'/socket.io/socket.io.js',
-			'/public/js/chatStream.js'
+			'/public/js/scriptStream.js'
 		],
 		isConnected: auth.isConnected(req),
 		messages: req.flash("success"),

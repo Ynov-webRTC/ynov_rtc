@@ -23,6 +23,7 @@
     "bootstrap": "~3.3.0",
     "kurento-utils": "6.6.0",
     "bootstrap-validator": "^0.11.9",
-    "emojione": "^2.2.7"
+    "emojione": "^2.2.7",
+    "sweetalert2": "^6.4.2"
   }
 }
