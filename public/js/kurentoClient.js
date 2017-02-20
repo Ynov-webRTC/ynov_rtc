@@ -22,7 +22,8 @@ let webRtcPeer;
 window.onload = function() {
 	video = document.getElementById('video');
 
-	document.getElementById('call').addEventListener('click', function() { presenter(); } );
+	document.getElementById('call').addEventListener('click', function() { presenter('webcam'); } );
+	document.getElementById('share_screen').addEventListener('click', function() { presenter('screen'); } );
 	document.getElementById('viewer').addEventListener('click', function() { viewer(); } );
 	document.getElementById('terminate').addEventListener('click', function() { stop(); } );
 };
@@ -73,14 +74,19 @@ function viewerResponse(message) {
 	}
 }
 
-function presenter() {
+function presenter(source) {
 	if (!webRtcPeer) {
 		showSpinner(video);
 
 		let options = {
 			localVideo: video,
-			onicecandidate : onIceCandidate
-	    };
+			onicecandidate : onIceCandidate,
+			sendSource: source
+		};
+
+		if(source === "screen") {
+			options.mediaConstraints = {};
+		}
 
 		webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(options, function(error) {
 			if(error) return onError(error);
@@ -177,5 +183,14 @@ function hideSpinner() {
 }
 
 function onError(error) {
+	if(error === "not-installed") {
+		swal({
+			title: 'Erreur!',
+			html: "<html>Le partage d'écran ne fonctionne pas sans le plugin que vous pouvez téléchargez " +
+			"<a href='https://chrome.google.com/webstore/detail/screen-capturing/ajhifddimkapgcifgcodmmfdlknahffk'>" +
+			"ici</a>!</html>",
+			type: 'error'
+		});
+	}
 	console.log('%c'+error, 'background: #222; color: #bada55');
 }

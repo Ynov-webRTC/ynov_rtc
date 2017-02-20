@@ -15,7 +15,7 @@ $(document).ready(function() {
 		$('.chat_window .chat_messages').append("<li>"+emojione.shortnameToImage(msg)+"</li>");
 	});
 
-	$('#share_screen').on('click', function() {
+	/*$('#share_screen').on('click', function() {
 		getScreenId(function (error, sourceId, screen_constraints) {
 			if (error === 'not-installed') {
 				return swal({
@@ -41,7 +41,7 @@ $(document).ready(function() {
 				console.error(error);
 			});
 		});
-	});
+	});*/
 
 });
 
