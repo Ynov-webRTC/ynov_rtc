@@ -11,11 +11,14 @@
     <!-- files CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/readable/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/public/bower_components/wdt-emoji-bundle/wdt-emoji-bundle.css">
+    <link rel="stylesheet" href="/public/bower_components/emojione/assets/css/emojione.min.css">
+    <link rel="stylesheet" href="/public/bower_components/sweetalert2/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="/public/css/style.css">
 
     <!-- files JS --->
     <script src="/public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.WebRTC-Experiment.com/getScreenId.js"></script>
+    <script src="https://webrtcexperiment-webrtc.netdna-ssl.com/MediaStreamRecorder.js"></script>
 
     {{#each scripts}}
         <script src="{{this}}"></script>
@@ -87,6 +90,7 @@
     {{/if}}
 
     <div class="container">
+
         {{{body}}}
     </div>
 
@@ -95,6 +99,6 @@
     {{/unless}}
 
     <script src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/public/js/chatStream.js"></script>
+    <script src="/public/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
 </body>
 </html>

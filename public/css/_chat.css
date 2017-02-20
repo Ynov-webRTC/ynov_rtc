@@ -40,7 +40,7 @@
 
 .chat_window {
   position: fixed;
-  z-index: 1000;
+  z-index: 10;
   right: 0;
   bottom: 0;
   width: 300px;
