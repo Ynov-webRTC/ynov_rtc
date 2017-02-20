@@ -28,7 +28,15 @@ $(document).ready(function() {
 			}
 			navigator.getUserMedia = navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 			navigator.getUserMedia(screen_constraints, function (stream) {
-				$('.video_share_screen').attr('src', URL.createObjectURL(stream));
+				navigator.getUserMedia({audio: true}, function (audioStream) {
+					stream.addTrack(audioStream.getAudioTracks()[0]);
+					let mediaRecorder = new MediaStreamRecorder(stream);
+					mediaRecorder.mimeType = 'video/mp4';
+					mediaRecorder.stream = stream;
+					$('.video_share_screen').attr('src', URL.createObjectURL(stream));
+				}, function(error) {
+					console.log(error);
+				});
 			}, function (error) {
 				console.error(error);
 			});
