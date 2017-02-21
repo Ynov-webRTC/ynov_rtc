@@ -16,12 +16,11 @@
  */
 
 const ws = new WebSocket('wss://'+ location.host +'/kurento');
-let video;
 let webRtcPeer;
 
 window.onload = function() {
-	video = document.getElementById('video');
-	videoShare = document.getElementById('videoShare');
+	let video = document.getElementById('video');
+	let videoShare = document.getElementById('videoShare');
 
 	document.getElementById('call').addEventListener('click', function() { presenter('webcam',video); } );
 	document.getElementById('share_screen').addEventListener('click', function() { presenter('screen',videoShare); } );
@@ -58,8 +57,11 @@ ws.onmessage = function(message) {
 
 function presenterResponse(message) {
 	if (message.response !== 'accepted') {
-		let errorMsg = message.message ? message.message : 'Unknow error';
-		console.warn('Call not accepted for the following reason: ' + errorMsg);
+		swal({
+			title: 'Erreur!',
+			text: "Impossible de lancer le stream!",
+			type: 'error'
+		});
 		dispose();
 	} else {
 		webRtcPeer.processAnswer(message.sdpAnswer);
@@ -68,8 +70,11 @@ function presenterResponse(message) {
 
 function viewerResponse(message) {
 	if (message.response !== 'accepted') {
-		let errorMsg = message.message ? message.message : 'Unknow error';
-		console.warn('Call not accepted for the following reason: ' + errorMsg);
+		swal({
+			title: 'Erreur!',
+			text: "Aucun streamer sur cette url!",
+			type: 'error'
+		});
 		dispose();
 	} else {
 		webRtcPeer.processAnswer(message.sdpAnswer);
@@ -85,6 +90,12 @@ function presenter(source,video) {
 			onicecandidate : onIceCandidate,
 			sendSource: source
 		};
+
+		if(source === "screen") {
+			options.mediaConstraints = {};
+		}
+
+		console.log("partage");
 
 		webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(options, function(error) {
 			if(error) return onError(error);
@@ -106,7 +117,7 @@ function onOfferPresenter(error, offerSdp) {
 
 function viewer() {
 	if (!webRtcPeer) {
-		showSpinner(video);
+		showSpinner();
 
 		let options = {
 			remoteVideo: video,
@@ -141,22 +152,22 @@ function onIceCandidate(candidate) {
 	   sendMessage(message);
 }
 
-function stop(video) {
+function stop() {
 	if (webRtcPeer) {
 		let message = {
 				id : 'stop'
 		};
 		sendMessage(message);
-		dispose(video);
+		dispose();
 	}
 }
 
-function dispose(video) {
+function dispose() {
 	if (webRtcPeer) {
 		webRtcPeer.dispose();
 		webRtcPeer = null;
 	}
-	hideSpinner(video);
+	hideSpinner();
 }
 
 function sendMessage(message) {
@@ -166,20 +177,26 @@ function sendMessage(message) {
 }
 
 function showSpinner() {
-	for (let i = 0; i < arguments.length; i++) {
-		arguments[i].poster = './public/img/transparent-1px.png';
-		arguments[i].style.background = 'center transparent url("./public/img/spinner.gif") no-repeat';
-	}
+	video.poster = './public/img/transparent-1px.png';
+	videoShare.poster = './public/img/transparent-1px.png';
 }
 
 function hideSpinner() {
-	for (let i = 0; i < arguments.length; i++) {
-		arguments[i].src = '';
-		arguments[i].poster = './public/img/webrtc.png';
-		arguments[i].style.background = '';
-	}
+	video.src = '';
+	video.poster = './public/img/transparent-1px.png';
+	videoShare.src = '';
+	videoShare.poster = './public/img/transparent-1px.png';
 }
 
 function onError(error) {
+	if(error === "not-installed") {
+		swal({
+			title: 'Erreur!',
+			html: "<html>Le partage d'écran ne fonctionne pas sans le plugin que vous pouvez téléchargez " +
+			"<a href='https://chrome.google.com/webstore/detail/screen-capturing/ajhifddimkapgcifgcodmmfdlknahffk'>" +
+			"ici</a>!</html>",
+			type: 'error'
+		});
+	}
 	console.log('%c'+error, 'background: #222; color: #bada55');
 }

@@ -59,7 +59,7 @@
 	};
 
 	function getScreenConstraints(error, sourceId) {
-		var screen_constraints = {
+		let screen_constraints = {
 			audio: false,
 			video: {
 				mandatory: {
