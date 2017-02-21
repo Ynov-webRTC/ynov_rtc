@@ -21,11 +21,13 @@ let webRtcPeer;
 
 window.onload = function() {
 	video = document.getElementById('video');
+	videoShare = document.getElementById('videoShare');
 
-	document.getElementById('call').addEventListener('click', function() { presenter('webcam'); } );
-	document.getElementById('share_screen').addEventListener('click', function() { presenter('screen'); } );
+	document.getElementById('call').addEventListener('click', function() { presenter('webcam',video); } );
+	document.getElementById('share_screen').addEventListener('click', function() { presenter('screen',videoShare); } );
 	document.getElementById('viewer').addEventListener('click', function() { viewer(); } );
-	document.getElementById('terminate').addEventListener('click', function() { stop(); } );
+	document.getElementById('terminate').addEventListener('click', function() { stop(video); } );
+	document.getElementById('terminateShare').addEventListener('click', function() { stop(videoShare); } );
 };
 
 window.onbeforeunload = function() {
@@ -74,7 +76,7 @@ function viewerResponse(message) {
 	}
 }
 
-function presenter(source) {
+function presenter(source,video) {
 	if (!webRtcPeer) {
 		showSpinner(video);
 
@@ -139,17 +141,17 @@ function onIceCandidate(candidate) {
 	   sendMessage(message);
 }
 
-function stop() {
+function stop(video) {
 	if (webRtcPeer) {
 		let message = {
 				id : 'stop'
 		};
 		sendMessage(message);
-		dispose();
+		dispose(video);
 	}
 }
 
-function dispose() {
+function dispose(video) {
 	if (webRtcPeer) {
 		webRtcPeer.dispose();
 		webRtcPeer = null;
