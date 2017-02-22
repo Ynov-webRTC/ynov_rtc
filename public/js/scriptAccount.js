@@ -2,9 +2,9 @@
 
 $(document).ready(function() {
 
-	$('#edit').on('click', function () {
-		$('.inputUpdate').each(function () {
-			$(this).attr('disabled', false);
-		});
-	});
+    $('#edit').on('click', function () {
+        $('.inputUpdate').each(function () {
+            $(this).attr('disabled', false);
+        });
+    });
 });

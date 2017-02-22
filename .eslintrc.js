@@ -7,6 +7,7 @@ module.exports = {
             "es6": true
     },
     "rules": {
-        "indent": ["error", "tab"]
+        "indent": ["error", 4, {"SwitchCase": 1}],
+
     }
 };

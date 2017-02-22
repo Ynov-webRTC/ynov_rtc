@@ -1,13 +1,13 @@
 module.exports = {
 
-	grantedAccess: function (req, res, next) {
-		if (req.isAuthenticated()) {
-			return next();
-		}
-		res.redirect('/');
-	},
+    grantedAccess: function (req, res, next) {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        res.redirect('/');
+    },
 
-	isConnected: function (req) {
-		return req.isAuthenticated();
-	}
+    isConnected: function (req) {
+        return req.isAuthenticated();
+    }
 };
