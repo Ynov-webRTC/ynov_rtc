@@ -122,6 +122,11 @@ body {
 
 .accountPage{
   background-color: white;
-  padding: 10px;
-  border-radius: 15px;
+  padding-top: 30px;
+
+  border-radius: 5px;
 }
+.imageUser{
+  margin-bottom: 10px;
+}
+textarea { resize: vertical; }

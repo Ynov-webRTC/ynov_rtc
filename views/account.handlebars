@@ -1,45 +1,39 @@
-<h3>Bienvenue sur votre compte</h3>
-<div class="row">
+       <h3>Bienvenue sur votre compte</h3>
+<div class="row accountPage">
   <div class="col-md-2">
-    <ul class="list-group">
-        <li class="list-group-item">
-            <a id="call" href="#" class="btn btn-default">
-                <span class="glyphicon glyphicon-user"></span> My profile
-            </a>
-        </li>
-    </ul>
+    <div class="imageUser">
+      <div align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+    </div>
   </div>
-  <div class="col-md-10 accountPage">
+  <div class="col-md-10 ">
+
+        <form class="" action="index.html" method="post">
+          <div class="form-group">
+            <label  for="prenom">Prénon:</label>
+            <input type="text" class="form-control inputUpdate" id="prenom" name="prenom" value="{{user.prenom}}" placeholder="{{user.prenom}}" disabled="disabled">
+          </div>
+          <div class="form-group">
+            <label  for="nom">Nom:</label>
+            <input type="text" class="form-control inputUpdate" id="nom" name="nom" placeholder="{{user.nom}}" value="{{user.nom}}" disabled="disabled">
+          </div>
+          <div class="form-group">
+            <label  for="username">Pseudo:</label>
+            <input type="text" class="form-control inputUpdate" id="username" name="username" placeholder="{{user.username}}" value="{{user.username}}" disabled="disabled">
+          </div>
+          <div class="form-group">
+            <label  for="bio">Bio:</label>
+            <textarea type="text" class="form-control inputUpdate" id="bio" name="bio" disabled="disabled">{{user.bio}}</textarea>
+          </div>
+          <div class="form-group">
+            <label  for="email">Email:</label>
+            <input type="text" class="form-control inputUpdate" id="email" name="email"  placeholder="{{user.email}}" value="{{user.email}}" disabled="disabled">
+          </div>
+          <a type="button" href="#" id="edit" class="btn btn-default">Edit</a>
+          <button type="submit inputUpdate" class="btn btn-default" disabled="disabled">Submit</button>
+        </form>
 
 
-        <div class="form-group">
-            <label for="username" class="control-label">Name</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Name" data-error="This name is required" required>
-            <div class="help-block with-errors"></div>
-        </div>
 
-        <div class="form-group">
-            <label for="email" class="control-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email" name="email" data-error="This email is invalid" required>
-            <div class="help-block with-errors"></div>
-        </div>
 
-        <div class="form-group">
-            <label for="password" class="control-label">Password</label>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="password" data-minlength="6" class="form-control" name="password" id="password" placeholder="Password" required>
-                        <div class="help-block">Minimum of 6 characters</div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="confirm" data-match="#password" data-match-error="These password don't match ..." placeholder="Confirm password" required>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
   </div>
 </div>

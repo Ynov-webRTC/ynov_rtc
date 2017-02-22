@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const gulp = require('gulp');
 
@@ -22,7 +22,7 @@ gulp.task('css', function () {
 
 // Watch Files For Changes
 gulp.task('watch', function () {
-	gulp.watch(source+'css/_*.css', ['css']);
+	gulp.watch(source + 'css/_*.css', ['css']);
 });
 
 // Tasks

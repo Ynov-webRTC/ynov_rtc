@@ -21,12 +21,12 @@
  });
  */
 
-(function() {
-	window.getScreenId = function(callback) {
+(function () {
+	window.getScreenId = function (callback) {
 		// for Firefox:
 		// sourceId == 'firefox'
 		// screen_constraints = {...}
-		if (!!navigator.mozGetUserMedia) {
+		if (navigator.mozGetUserMedia) {
 			callback(null, 'firefox', {
 				video: {
 					mozMediaSource: 'window',
@@ -39,12 +39,16 @@
 		window.addEventListener('message', onIFrameCallback);
 
 		function onIFrameCallback(event) {
-			if (!event.data) return;
+			if (!event.data) {
+				return;
+			}
 
 			if (event.data.chromeMediaSourceId) {
 				if (event.data.chromeMediaSourceId === 'PermissionDeniedError') {
 					callback('permission-denied');
-				} else callback(null, event.data.chromeMediaSourceId, getScreenConstraints(null, event.data.chromeMediaSourceId));
+				} else {
+					callback(null, event.data.chromeMediaSourceId, getScreenConstraints(null, event.data.chromeMediaSourceId));
+				}
 			}
 
 			if (event.data.chromeExtensionStatus) {
@@ -59,7 +63,7 @@
 	};
 
 	function getScreenConstraints(error, sourceId) {
-		var screen_constraints = {
+		let screen_constraints = {
 			audio: false,
 			video: {
 				mandatory: {
@@ -97,9 +101,9 @@
 	var iframe;
 
 	// this function is used in RTCMultiConnection v3
-	window.getScreenConstraints = function(source, callback) {
-		loadIFrame(function() {
-			getScreenId(function(error, sourceId, screen_constraints) {
+	window.getScreenConstraints = function (source, callback) {
+		loadIFrame(function () {
+			getScreenId(function (error, sourceId, screen_constraints) {
 				callback(error, screen_constraints);
 			});
 		});
@@ -112,7 +116,7 @@
 		}
 
 		iframe = document.createElement('iframe');
-		iframe.onload = function() {
+		iframe.onload = function () {
 			iframe.isLoaded = true;
 
 			loadCallback();
@@ -122,9 +126,9 @@
 		(document.body || document.documentElement).appendChild(iframe);
 	}
 
-	window.getChromeExtensionStatus = function(callback) {
+	window.getChromeExtensionStatus = function (callback) {
 		// for Firefox:
-		if (!!navigator.mozGetUserMedia) {
+		if (navigator.mozGetUserMedia) {
 			callback('installed-enabled');
 			return;
 		}
@@ -132,7 +136,9 @@
 		window.addEventListener('message', onIFrameCallback);
 
 		function onIFrameCallback(event) {
-			if (!event.data) return;
+			if (!event.data) {
+				return;
+			}
 
 			if (event.data.chromeExtensionStatus) {
 				callback(event.data.chromeExtensionStatus);

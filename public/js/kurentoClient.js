@@ -16,50 +16,62 @@
  */
 
 const ws = new WebSocket('wss://'+ location.host +'/kurento');
-let video;
 let webRtcPeer;
 
 window.onload = function() {
-	video = document.getElementById('video');
-	videoShare = document.getElementById('videoShare');
+	let video = document.getElementById('video');
+	let videoShare = document.getElementById('videoShare');
 
-	document.getElementById('call').addEventListener('click', function() { presenter('webcam',video); } );
-	document.getElementById('share_screen').addEventListener('click', function() { presenter('screen',videoShare); } );
-	document.getElementById('viewer').addEventListener('click', function() { viewer(); } );
-	document.getElementById('terminate').addEventListener('click', function() { stop(video); } );
-	document.getElementById('terminateShare').addEventListener('click', function() { stop(videoShare); } );
+	document.getElementById('call').addEventListener('click', function () {
+		presenter('webcam', video);
+	});
+	document.getElementById('share_screen').addEventListener('click', function () {
+		presenter('screen', videoShare);
+	});
+	document.getElementById('viewer').addEventListener('click', function () {
+		viewer();
+	});
+	document.getElementById('terminate').addEventListener('click', function () {
+		stop(video);
+	});
+	document.getElementById('terminateShare').addEventListener('click', function () {
+		stop(videoShare);
+	});
 };
 
-window.onbeforeunload = function() {
+window.onbeforeunload = function () {
 	ws.close();
 };
 
-ws.onmessage = function(message) {
+ws.onmessage = function (message) {
 	let parsedMessage = JSON.parse(message.data);
 	console.info('Received message: ' + message.data);
 
 	switch (parsedMessage.id) {
-	case 'presenterResponse':
-		presenterResponse(parsedMessage);
-		break;
-	case 'viewerResponse':
-		viewerResponse(parsedMessage);
-		break;
-	case 'stopCommunication':
-		dispose();
-		break;
-	case 'iceCandidate':
-		webRtcPeer.addIceCandidate(parsedMessage.candidate);
-		break;
-	default:
-		console.error('Unrecognized message', parsedMessage);
+		case 'presenterResponse':
+			presenterResponse(parsedMessage);
+			break;
+		case 'viewerResponse':
+			viewerResponse(parsedMessage);
+			break;
+		case 'stopCommunication':
+			dispose();
+			break;
+		case 'iceCandidate':
+			webRtcPeer.addIceCandidate(parsedMessage.candidate);
+			break;
+		default:
+			console.error('Unrecognized message', parsedMessage);
 	}
 };
 
 function presenterResponse(message) {
 	if (message.response !== 'accepted') {
-		let errorMsg = message.message ? message.message : 'Unknow error';
-		console.warn('Call not accepted for the following reason: ' + errorMsg);
+		swal({
+			title: 'Erreur!',
+			text: "Impossible de lancer le stream!",
+			type: 'error'
+		});
 		dispose();
 	} else {
 		webRtcPeer.processAnswer(message.sdpAnswer);
@@ -68,26 +80,40 @@ function presenterResponse(message) {
 
 function viewerResponse(message) {
 	if (message.response !== 'accepted') {
-		let errorMsg = message.message ? message.message : 'Unknow error';
-		console.warn('Call not accepted for the following reason: ' + errorMsg);
+		swal({
+			title: 'Erreur!',
+			text: "Aucun streamer sur cette url!",
+			type: 'error'
+		});
 		dispose();
 	} else {
 		webRtcPeer.processAnswer(message.sdpAnswer);
 	}
 }
 
-function presenter(source,video) {
+function presenter(source, video) {
 	if (!webRtcPeer) {
 		showSpinner(video);
 
 		let options = {
 			localVideo: video,
-			onicecandidate : onIceCandidate,
+			onicecandidate: onIceCandidate,
 			sendSource: source
 		};
 
+		if(source === "screen") {
+			options.mediaConstraints = {};
+		}
+
+		console.log("partage");
+
 		webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(options, function(error) {
 			if(error) return onError(error);
+
+		webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(options, function (error) {
+			if (error) {
+				return onError(error);
+			}
 
 			this.generateOffer(onOfferPresenter);
 		});
@@ -95,26 +121,30 @@ function presenter(source,video) {
 }
 
 function onOfferPresenter(error, offerSdp) {
-    if (error) return onError(error);
+	if (error) {
+		return onError(error);
+	}
 
 	let message = {
-		id : 'presenter',
-		sdpOffer : offerSdp
+		id: 'presenter',
+		sdpOffer: offerSdp
 	};
 	sendMessage(message);
 }
 
 function viewer() {
 	if (!webRtcPeer) {
-		showSpinner(video);
+		showSpinner();
 
 		let options = {
 			remoteVideo: video,
-			onicecandidate : onIceCandidate
+			onicecandidate: onIceCandidate
 		};
 
-		webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, function(error) {
-			if(error) return onError(error);
+		webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, function (error) {
+			if (error) {
+				return onError(error);
+			}
 
 			this.generateOffer(onOfferViewer);
 		});
@@ -122,11 +152,13 @@ function viewer() {
 }
 
 function onOfferViewer(error, offerSdp) {
-	if (error) return onError(error);
+	if (error) {
+		return onError(error);
+	}
 
 	let message = {
-		id : 'viewer',
-		sdpOffer : offerSdp
+		id: 'viewer',
+		sdpOffer: offerSdp
 	};
 	sendMessage(message);
 }
@@ -135,28 +167,28 @@ function onIceCandidate(candidate) {
 	   console.log('Local candidate' + JSON.stringify(candidate));
 
 	   let message = {
-	      id : 'onIceCandidate',
-	      candidate : candidate
+	      id: 'onIceCandidate',
+	      candidate: candidate
 	   };
 	   sendMessage(message);
 }
 
-function stop(video) {
+function stop() {
 	if (webRtcPeer) {
 		let message = {
-				id : 'stop'
+			id: 'stop'
 		};
 		sendMessage(message);
-		dispose(video);
+		dispose();
 	}
 }
 
-function dispose(video) {
+function dispose() {
 	if (webRtcPeer) {
 		webRtcPeer.dispose();
 		webRtcPeer = null;
 	}
-	hideSpinner(video);
+	hideSpinner();
 }
 
 function sendMessage(message) {
@@ -166,20 +198,26 @@ function sendMessage(message) {
 }
 
 function showSpinner() {
-	for (let i = 0; i < arguments.length; i++) {
-		arguments[i].poster = './public/img/transparent-1px.png';
-		arguments[i].style.background = 'center transparent url("./public/img/spinner.gif") no-repeat';
-	}
+	video.poster = './public/img/transparent-1px.png';
+	videoShare.poster = './public/img/transparent-1px.png';
 }
 
 function hideSpinner() {
-	for (let i = 0; i < arguments.length; i++) {
-		arguments[i].src = '';
-		arguments[i].poster = './public/img/webrtc.png';
-		arguments[i].style.background = '';
-	}
+	video.src = '';
+	video.poster = './public/img/transparent-1px.png';
+	videoShare.src = '';
+	videoShare.poster = './public/img/transparent-1px.png';
 }
 
 function onError(error) {
+	if(error === "not-installed") {
+		swal({
+			title: 'Erreur!',
+			html: "<html>Le partage d'écran ne fonctionne pas sans le plugin que vous pouvez téléchargez " +
+			"<a href='https://chrome.google.com/webstore/detail/screen-capturing/ajhifddimkapgcifgcodmmfdlknahffk'>" +
+			"ici</a>!</html>",
+			type: 'error'
+		});
+	}
 	console.log('%c'+error, 'background: #222; color: #bada55');
 }
