@@ -88,10 +88,10 @@ module.exports = function (wss, argv) {
     });
 
     // Recover kurentoClient for the first time.
-    function getKurentoClient(callback) {
-        if (kurentoClient !== null) {
-            return callback(null, kurentoClient);
-        }
+	function getKurentoClient(callback) {
+		if (kurentoClient !== null) {
+			return callback(null, kurentoClient);
+		}
 
         kurento(argv.ws_uri, function (error, _kurentoClient) {
             if (error) {
@@ -100,13 +100,13 @@ module.exports = function (wss, argv) {
                         '. Exiting with error ' + error);
             }
 
-            kurentoClient = _kurentoClient;
-            callback(null, kurentoClient);
-        });
-    }
+			kurentoClient = _kurentoClient;
+			callback(null, kurentoClient);
+		});
+	}
 
-    function startPresenter(sessionId, ws, sdpOffer, callback) {
-        clearCandidatesQueue(sessionId);
+	function startPresenter(sessionId, ws, sdpOffer, callback) {
+		clearCandidatesQueue(sessionId);
 
         if (presenter !== null) {
             stop(sessionId);
@@ -125,10 +125,10 @@ module.exports = function (wss, argv) {
                 return callback(error);
             }
 
-            if (presenter === null) {
-                stop(sessionId);
-                return callback(noPresenterMessage);
-            }
+			if (presenter === null) {
+				stop(sessionId);
+				return callback(noPresenterMessage);
+			}
 
             kurentoClient.create('MediaPipeline', function (error, pipeline) {
                 if (error) {
@@ -136,10 +136,10 @@ module.exports = function (wss, argv) {
                     return callback(error);
                 }
 
-                if (presenter === null) {
-                    stop(sessionId);
-                    return callback(noPresenterMessage);
-                }
+				if (presenter === null) {
+					stop(sessionId);
+					return callback(noPresenterMessage);
+				}
 
                 presenter.pipeline = pipeline;
                 pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
@@ -148,12 +148,12 @@ module.exports = function (wss, argv) {
                         return callback(error);
                     }
 
-                    if (presenter === null) {
-                        stop(sessionId);
-                        return callback(noPresenterMessage);
-                    }
+					if (presenter === null) {
+						stop(sessionId);
+						return callback(noPresenterMessage);
+					}
 
-                    presenter.webRtcEndpoint = webRtcEndpoint;
+					presenter.webRtcEndpoint = webRtcEndpoint;
 
                     if (candidatesQueue[sessionId]) {
                         while (candidatesQueue[sessionId].length) {
@@ -176,13 +176,13 @@ module.exports = function (wss, argv) {
                             return callback(error);
                         }
 
-                        if (presenter === null) {
-                            stop(sessionId);
-                            return callback(noPresenterMessage);
-                        }
+						if (presenter === null) {
+							stop(sessionId);
+							return callback(noPresenterMessage);
+						}
 
-                        callback(null, sdpAnswer);
-                    });
+						callback(null, sdpAnswer);
+					});
 
                     webRtcEndpoint.gatherCandidates(function (error) {
                         if (error) {
@@ -195,13 +195,13 @@ module.exports = function (wss, argv) {
         });
     }
 
-    function startViewer(sessionId, ws, sdpOffer, callback) {
-        clearCandidatesQueue(sessionId);
+	function startViewer(sessionId, ws, sdpOffer, callback) {
+		clearCandidatesQueue(sessionId);
 
-        if (presenter === null) {
-            stop(sessionId);
-            return callback(noPresenterMessage);
-        }
+		if (presenter === null) {
+			stop(sessionId);
+			return callback(noPresenterMessage);
+		}
 
         presenter.pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
             if (error) {
@@ -213,10 +213,10 @@ module.exports = function (wss, argv) {
                 ws: ws
             };
 
-            if (presenter === null) {
-                stop(sessionId);
-                return callback(noPresenterMessage);
-            }
+			if (presenter === null) {
+				stop(sessionId);
+				return callback(noPresenterMessage);
+			}
 
             if (candidatesQueue[sessionId]) {
                 while (candidatesQueue[sessionId].length) {
@@ -265,11 +265,11 @@ module.exports = function (wss, argv) {
         });
     }
 
-    function clearCandidatesQueue(sessionId) {
-        if (candidatesQueue[sessionId]) {
-            delete candidatesQueue[sessionId];
-        }
-    }
+	function clearCandidatesQueue(sessionId) {
+		if (candidatesQueue[sessionId]) {
+			delete candidatesQueue[sessionId];
+		}
+	}
 
     function stop(sessionId) {
         if (presenter !== null && presenter.id == sessionId) {
@@ -289,8 +289,8 @@ module.exports = function (wss, argv) {
             delete viewers[sessionId];
         }
 
-        clearCandidatesQueue(sessionId);
-    }
+	function onIceCandidate(sessionId, _candidate) {
+		let candidate = kurento.getComplexType('IceCandidate')(_candidate);
 
     function onIceCandidate(sessionId, _candidate) {
         let candidate = kurento.getComplexType('IceCandidate')(_candidate);
