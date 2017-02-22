@@ -119,9 +119,3 @@ div.dragged {
 body {
   background-image: url('../img/sayagata-400px.png') !important;
 }
-
-.accountPage{
-  background-color: white;
-  padding: 10px;
-  border-radius: 15px;
-}

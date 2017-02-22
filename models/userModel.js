@@ -1,15 +1,24 @@
-"use strict";
+'use strict';
 
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
     username: {
         type: String
     },
-    password:{
-        type:String
+    prenom: {
+        type: String
     },
-    email:{
+    nom: {
+        type: String
+    },
+    bio: {
+        type: String
+    },
+    password: {
+        type: String
+    },
+    email: {
         type: String
     },
     date_created: {
@@ -17,6 +26,6 @@ const userSchema = mongoose.Schema({
         default: Date.now()
     }
 });
-const userModel = mongoose.model("user", userSchema);
+const userModel = mongoose.model('user', userSchema);
 
 module.exports = userModel;
