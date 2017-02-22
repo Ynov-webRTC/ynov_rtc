@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const gulp = require('gulp');
 
@@ -10,7 +10,7 @@ const source = './public/'; // dossier de travail
 
 // Tâche "css" = autoprefixer + CSScomb + beautify + minify
 gulp.task('css', function () {
-	return gulp.src(source + 'css/_*.css')
+    return gulp.src(source + 'css/_*.css')
 		.pipe(plugins.concatCss('style.css'))
 		.pipe(plugins.csscomb())
 		.pipe(plugins.cssbeautify({indent: '  '}))
@@ -22,7 +22,7 @@ gulp.task('css', function () {
 
 // Watch Files For Changes
 gulp.task('watch', function () {
-	gulp.watch(source+'css/_*.css', ['css']);
+    gulp.watch(source + 'css/_*.css', ['css']);
 });
 
 // Tasks
