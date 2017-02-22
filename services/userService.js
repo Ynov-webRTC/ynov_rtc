@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const q = require('q');
+const chalk = require('chalk');
 
 module.exports = {
 
@@ -24,6 +25,20 @@ module.exports = {
     }
 }
 		);
+        return deferred.promise;
+    },
+    updateUser(user){
+        let deferred = q.defer();
+        console.dir(user, {depth: null});
+        User.findById(user.id, function(err, user){
+            if(err){
+                console.log(chalk.red(err));
+                deferred.reject("Impossible d'éditer cet utilisateur!");
+            }else{
+                console.log(chalk.blue(user));
+                deferred.resolve(user);
+            }
+        });
         return deferred.promise;
     }
 

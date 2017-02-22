@@ -6,10 +6,10 @@ const userSchema = mongoose.Schema({
     username: {
         type: String
     },
-    prenom: {
+    name: {
         type: String
     },
-    nom: {
+    lastname: {
         type: String
     },
     bio: {
