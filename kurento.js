@@ -23,8 +23,8 @@ router.get('/', function (req, res) {
 
             ps.push({
                 id: p.id,
-                viewersCount:  _.filter(p.viewers, function(v) {
-                    return v.id;
+                viewersCount:  _.filter(p.viewers, function(v, index) {
+                    return !_.isEmpty(index);
                 }).length
             });
         }
