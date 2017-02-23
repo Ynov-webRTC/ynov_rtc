@@ -108,7 +108,7 @@ module.exports = function (wss, argv) {
     function startPresenter(sessionId, ws, sdpOffer, callback) {
         clearCandidatesQueue(sessionId);
 
-        if (presenter.length == 0) {
+        if (presenter.length > 0) {
             console.log("-----");
             console.log(presenter.length);
             stop(sessionId);
