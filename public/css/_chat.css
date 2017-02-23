@@ -1,48 +1,98 @@
-.chat_messages {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+/****** CHAT MODAL ******/
+
+#sidebar-wrapper {
+    margin-right: -250px;
+    right: 0;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 999 ;
+    transition: all 0.5s ease-in 0s;
+    -webkit-transition: all 0.5s ease-in 0s;
+    -moz-transition: all 0.5s ease-in 0s;
+    -ms-transition: all 0.5s ease-in 0s;
+    -o-transition: all 0.5s ease-in 0s;
 }
 
-.chat_messages li {
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  border-bottom: 1px dotted #b3a9a9;
+.sidebar-nav {
+    position: fixed;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    list-style: none;
+    margin: 100px 0 0 0;
+    padding: 0;
+    background: #ffffff;
 }
 
-.chat_messages li.left .chat-body {
-  margin-left: 60px;
+.sidebar-nav li {
+    line-height: 50px;
+    text-indent: 20px;
 }
 
-.chat_messages li.right .chat-body {
-  margin-right: 60px;
+.sidebar-nav li a {
+    color: #999999;
+    display: block;
+    text-decoration: none;
 }
 
-.chat_messages li .chat-body p {
-  margin: 0;
-  color: #777;
+.sidebar-nav li a:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    text-decoration: none;
 }
 
-.panel .slidedown .glyphicon,
-.chat_messages .glyphicon {
-  margin-right: 5px;
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+    text-decoration: none;
 }
 
-.panel {
-  height: 100%;
-  margin-bottom: 0;
+.sidebar-nav > .sidebar-brand {
+    height: 55px;
+    line-height: 55px;
+    font-size: 18px;
 }
 
-.panel-body {
-  overflow-y: scroll;
-  height: 82%;
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
 }
 
-.chat_window {
-  position: fixed;
-  z-index: 10;
-  right: 0;
-  bottom: 0;
-  width: 300px;
-  height: 90%;
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+#menu-toggle {
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    list-style: none;
+    margin: 100px 0 0 0;
+    padding: 0;
+}
+
+#sidebar-wrapper.active {
+    right: 250px;
+    width: 250px;
+    transition: all 0.5s ease-out 0s;
+    -webkit-transition: all 0.5s ease-out 0s;
+    -moz-transition: all 0.5s ease-out 0s;
+    -ms-transition: all 0.5s ease-out 0s;
+    -o-transition: all 0.5s ease-out 0s;
+}
+
+.toggle {
+    margin: 5px 5px 0 0;
+}
+
+@media screen and (max-width: 1020px) {
+    .sidebar-nav{
+        display: none;
+    }
+    #menu-toggle{
+        display: none;
+    }
 }
