@@ -142,7 +142,7 @@ module.exports = {
                         return callback(error);
                     }
 
-                    if (presentes[sessionId] === null) {
+                    if (presenters[sessionId] === null) {
                         stop(sessionId);
                         return callback(noPresenterMessage);
                     }
