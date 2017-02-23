@@ -29,13 +29,10 @@ module.exports = {
     },
     updateUser(user){
         let deferred = q.defer();
-        console.dir(user, {depth: null});
-        User.findById(user.id, function(err, user){
+        User.findByIdAndUpdate(user._id,{$set:{name: user.name,lastname: user.lastname, bio: user.bio }}, function(err, user){
             if(err){
-                console.log(chalk.red(err));
                 deferred.reject("Impossible d'éditer cet utilisateur!");
             }else{
-                console.log(chalk.blue(user));
                 deferred.resolve(user);
             }
         });

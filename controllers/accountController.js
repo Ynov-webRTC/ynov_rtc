@@ -16,8 +16,8 @@ router.get('/', function (req, res) {
 
 router.post('/update', auth.grantedAccess, function (req, res) {
     let user = req.user;
-    user.name = req.body.prenom;
-    user.lastname = req.body.nom;
+    user.name = req.body.name;
+    user.lastname = req.body.lastname;
     user.bio = req.body.bio;
     userService.updateUser(user).then(function(user){
         req.flash('success', 'Modification réussi!');
