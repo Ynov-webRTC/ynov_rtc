@@ -36,7 +36,7 @@ mongoose.connect('mongodb://localhost/rtc', function (err) {
             server: server,
             path: '/kurento'
         });
-        require('./kurento.js')(wss, argv);
+        require('./kurento.js').kurento(wss, argv);
         io.listen(server);
     });
 });
