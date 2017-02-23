@@ -304,12 +304,12 @@ module.exports = {
             console.log('---------------');
             console.log(presenters);
             console.log('---------------');
-            if (presenters[0] && presenters[0].id === sessionId && presenters[0].webRtcEndpoint) {
+            if (presenters[sessionId] && presenters[sessionId].id === sessionId && presenters[sessionId].webRtcEndpoint) {
                 console.info('Sending presenter candidate');
-                presenters[0].webRtcEndpoint.addIceCandidate(candidate);
-            } else if (presenters[0].viewers[sessionId] && presenters[0].viewers[sessionId].webRtcEndpoint) {
+                presenters[sessionId].webRtcEndpoint.addIceCandidate(candidate);
+            } else if (presenters[sessionId].viewers[sessionId] && presenters[sessionId].viewers[sessionId].webRtcEndpoint) {
                 console.info('Sending viewer candidate');
-                presenters[0].viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
+                presenters[sessionId].viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
             } else {
                 console.info('Queueing candidate');
                 if (!candidatesQueue[sessionId]) {
