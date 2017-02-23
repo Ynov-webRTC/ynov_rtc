@@ -106,11 +106,11 @@ module.exports = function (wss, argv) {
     }
 
     function startPresenter(sessionId, ws, sdpOffer, callback) {
-        console.log(presenter);
         clearCandidatesQueue(sessionId);
 
-        if (presenter !== []) {
+        if (presenter.length == 0) {
             console.log("0-----");
+            console.log(presenter);
             stop(sessionId);
             return callback('Another user is currently acting as presenter. Try again later ...');
         }
