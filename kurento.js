@@ -16,7 +16,7 @@ function nextUniqueId() {
 }
 
 router.get('/', function (req, res) {
-    return res.json(presenters);
+    return res.json(JSON.stringify(presenters));
 });
 
 module.exports = {
