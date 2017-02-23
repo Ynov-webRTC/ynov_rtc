@@ -153,7 +153,8 @@ function onOfferViewer (error, offerSdp) {
 
     let message = {
         id: 'viewer',
-        sdpOffer: offerSdp
+        sdpOffer: offerSdp,
+        roomId: 1
     };
     sendMessage(message);
 }
@@ -188,7 +189,7 @@ function dispose () {
 
 function sendMessage (message) {
     let jsonMessage = JSON.stringify(message);
-    console.log('Senging message: ' + jsonMessage);
+    console.log('Sending message: ' + jsonMessage);
     ws.send(jsonMessage);
 }
 
@@ -210,7 +211,7 @@ function onError (error) {
             title: 'Erreur!',
             html: '<html>Le partage d\'écran ne fonctionne pas sans le plugin que vous pouvez téléchargez ' +
             '<a href=\'https://chrome.google.com/webstore/detail/screen-capturing/ajhifddimkapgcifgcodmmfdlknahffk\'>' +
-            'ici</a>!</html>',
+            'ici</a> !</html>',
             type: 'error'
         });
     }

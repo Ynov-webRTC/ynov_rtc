@@ -61,7 +61,7 @@ module.exports = {
                         break;
 
                     case 'viewer':
-                        startViewer(sessionId, ws, message.sdpOffer, function (error, sdpAnswer) {
+                        startViewer(sessionId, ws, message.sdpOffer, message.roomId, function (error, sdpAnswer) {
                             if (error) {
                                 return ws.send(JSON.stringify({
                                     id: 'viewerResponse',
@@ -201,27 +201,27 @@ module.exports = {
             });
         }
 
-        function startViewer(sessionId, ws, sdpOffer, callback) {
-            clearCandidatesQueue(sessionId);
+        function startViewer(sessionId, ws, sdpOffer, roomId, callback) {
+            // clearCandidatesQueue(sessionId);
 
-            if (presenters[0] === null) {
+            if (presenters[roomId] === null) {
                 stop(sessionId);
                 return callback(noPresenterMessage);
             }
 
-            presenters[0].pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
+            presenters[roomId].pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
                 if (error) {
                     stop(sessionId);
                     return callback(error);
                 }
-                presenters[0].viewers[sessionId] = {
+                presenters[roomId].viewers[sessionId] = {
                     webRtcEndpoint: webRtcEndpoint,
                     ws: ws
                 };
 
                 console.log("Starting viewer : id  :" + sessionId);
 
-                if (presenters[0] === null) {
+                if (presenters[roomId] === null) {
                     stop(sessionId);
                     return callback(noPresenterMessage);
                 }
@@ -246,17 +246,17 @@ module.exports = {
                         stop(sessionId);
                         return callback(error);
                     }
-                    if (presenters[0] === null) {
+                    if (presenters[roomId] === null) {
                         stop(sessionId);
                         return callback(noPresenterMessage);
                     }
 
-                    presenters[0].webRtcEndpoint.connect(webRtcEndpoint, function (error) {
+                    presenters[roomId].webRtcEndpoint.connect(webRtcEndpoint, function (error) {
                         if (error) {
                             stop(sessionId);
                             return callback(error);
                         }
-                        if (presenters[0] === null) {
+                        if (presenters[roomId] === null) {
                             stop(sessionId);
                             return callback(noPresenterMessage);
                         }
@@ -279,31 +279,28 @@ module.exports = {
             }
         }
 
-        function stop(sessionId) {
-            if (presenters[0] !== null && presenters[0].id == sessionId) {
-                for (let i in presenters[0].viewers) {
-                    let viewer = presenters[0].viewers[i];
+        function stop(sessionId, roomId) {
+            if (presenters[roomId] !== null && presenters[roomId].id == sessionId) {
+                for (let i in presenters[roomId].viewers) {
+                    let viewer = presenters[roomId].viewers[i];
                     if (viewer.ws) {
                         viewer.ws.send(JSON.stringify({
                             id: 'stopCommunication'
                         }));
                     }
                 }
-                presenters[0].pipeline.release();
-                presenters[0] = null;
-                presenters[0].viewers = [];
-            } else if (presenters[0].viewers[sessionId]) {
-                presenters[0].viewers[sessionId].webRtcEndpoint.release();
-                delete presenters[0].viewers[sessionId];
+                presenters[roomId].pipeline.release();
+                presenters[roomId] = null;
+                presenters[roomId].viewers = [];
+            } else if (presenters[roomId].viewers[sessionId]) {
+                presenters[roomId].viewers[sessionId].webRtcEndpoint.release();
+                delete presenters[roomId].viewers[sessionId];
             }
         }
 
         function onIceCandidate(sessionId, _candidate) {
             let candidate = kurento.getComplexType('IceCandidate')(_candidate);
 
-            console.log('---------------');
-            console.log(presenters);
-            console.log('---------------');
             if (presenters[sessionId] && presenters[sessionId].id === sessionId && presenters[sessionId].webRtcEndpoint) {
                 console.info('Sending presenter candidate');
                 presenters[sessionId].webRtcEndpoint.addIceCandidate(candidate);
