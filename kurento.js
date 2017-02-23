@@ -121,6 +121,7 @@ module.exports = function (wss, argv) {
         });
 
         console.log("Starting presenter : id  :" + sessionId);
+        console.log(presenter);
 
         getKurentoClient(function (error, kurentoClient) {
             if (error) {
