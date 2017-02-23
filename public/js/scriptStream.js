@@ -6,12 +6,12 @@ $(document).ready(function () {
     let socket = io();
 
     $('#formChat').submit(function () {
-        socket.emit('chat message', $('.chat_window #message_chat').val());
-        $('.chat_window #message_chat').val('');
+        socket.emit('chat message', $('#message_chat').val());
+        $('#message_chat').val('');
         return false;
     });
     socket.on('chat message', function (msg) {
-        $('.chat_window .chat_messages').append('<li>' + emojione.shortnameToImage(msg) + '</li>');
+        $('.chat_messages').append('<li>' + emojione.shortnameToImage(msg) + '</li>');
     });
 
 	/* $('#share_screen').on('click', function() {
