@@ -16,7 +16,7 @@ function nextUniqueId() {
 }
 
 router.get('/', function (req, res) {
-    console.log(presenters)
+    console.dir(presenters, {depth: null});
     return res.json(presenters);
 });
 
