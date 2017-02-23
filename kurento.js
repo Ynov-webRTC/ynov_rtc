@@ -106,6 +106,7 @@ module.exports = function (wss, argv) {
     }
 
     function startPresenter(sessionId, ws, sdpOffer, callback) {
+        console.log(presenter);
         clearCandidatesQueue(sessionId);
 
         if (presenter !== null) {
@@ -121,7 +122,6 @@ module.exports = function (wss, argv) {
         });
 
         console.log("Starting presenter : id  :" + sessionId);
-        console.log(presenter);
 
         getKurentoClient(function (error, kurentoClient) {
             if (error) {
