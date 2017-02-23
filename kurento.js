@@ -18,13 +18,8 @@ function nextUniqueId() {
 
 router.get('/', function (req, res) {
     let ps = [];
-    let presentersLodash = _.omitBy(presenters, _.isEmpty);
-    if(!_.isArray(presentersLodash)) {
-        presentersLodash = [presentersLodash];
-    }
-    console.log(presentersLodash);
-    _.forEach(presentersLodash, function(p, key) {
-        if(p.viewers) {
+    _.forEach(presenters, function(p, key) {
+        if(p && p.viewers) {
             console.log(p.id);
             ps.push({
                 id: p.id,
