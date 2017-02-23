@@ -18,11 +18,12 @@ function nextUniqueId() {
 router.get('/', function (req, res) {
     let ps = [];
     for(let p in presenters){
-        ps.push({
-            id: p.id,
-            viewersCount: p.viewers.length
-        });
-        console.log(p.viewers);
+        if(p.viewers) {
+            ps.push({
+                id: p.id,
+                viewersCount: p.viewers.length
+            });
+        }
     }
     return res.json(ps);
 });
@@ -123,8 +124,7 @@ module.exports = {
         }
 
         function startPresenter(sessionId, ws, sdpOffer, callback) {
-
-            presenters["" + sessionId] = {
+            presenters[sessionId] = {
                 id: sessionId,
                 pipeline: null,
                 webRtcEndpoint: null,
