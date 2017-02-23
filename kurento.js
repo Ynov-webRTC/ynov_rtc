@@ -301,6 +301,7 @@ module.exports = {
         function onIceCandidate(sessionId, _candidate) {
             let candidate = kurento.getComplexType('IceCandidate')(_candidate);
 
+            console.log(presenters);
             if (presenters[0] && presenters[0].id === sessionId && presenters[0].webRtcEndpoint) {
                 console.info('Sending presenter candidate');
                 presenters[0].webRtcEndpoint.addIceCandidate(candidate);
