@@ -109,8 +109,8 @@ module.exports = function (wss, argv) {
         clearCandidatesQueue(sessionId);
 
         if (presenter.length == 0) {
-            console.log("0-----");
-            console.log(presenter);
+            console.log("-----");
+            console.log(presenter.length);
             stop(sessionId);
             return callback('Another user is currently acting as presenter. Try again later ...');
         }
