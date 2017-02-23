@@ -36,10 +36,12 @@
     padding: 12px 0 0 0;
 }
 
-#menu-close {
-    position: fixed;
-    margin: 3px;
-    color : red;
+.close {
+    margin: 0;
+    padding: 0px;
+    height: 27px;
+    width: 27px;
+    color: red;
 }
 
 .chat_messages {
@@ -80,6 +82,15 @@
 .panel-body {
     overflow-y: scroll;
     height: 82%;
+}
+
+.chat_window {
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    height: 90%;
 }
 
 .chat_window {

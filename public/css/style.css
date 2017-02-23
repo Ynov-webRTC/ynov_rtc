@@ -36,9 +36,11 @@
   list-style: none;
 }
 
-#menu-close {
-  position: fixed;
-  margin: 3px;
+.close {
+  width: 27px;
+  height: 27px;
+  margin: 0;
+  padding: 0;
   color: red;
 }
 
@@ -80,6 +82,15 @@
 .panel-body {
   overflow-y: scroll;
   height: 82%;
+}
+
+.chat_window {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  height: 90%;
 }
 
 .chat_window {
