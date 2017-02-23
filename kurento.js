@@ -317,7 +317,7 @@ module.exports = function (wss, argv) {
 
         if (presenter[0] && presenter[0].id === sessionId && presenter[0].webRtcEndpoint) {
             console.info('Sending presenter candidate');
-            presenter.webRtcEndpoint.addIceCandidate(candidate);
+            presenter[0].webRtcEndpoint.addIceCandidate(candidate);
         } else if (presenter[0].viewers[sessionId] && presenter[0].viewers[sessionId].webRtcEndpoint) {
             console.info('Sending viewer candidate');
             presenter[0].viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
