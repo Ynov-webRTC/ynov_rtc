@@ -1,5 +1,29 @@
 /****** CHAT MODAL ******/
 
+/*Message venant de l'utilisateur'*/
+
+.from-me {
+  position: relative;
+  padding: 10px 20px;
+  word-wrap: break-word;
+  color: white;
+  border-radius: 25px;
+  background: #0b93f6;
+}
+
+/*Message venant de l'extérieur'*/
+
+.from-them {
+  position: relative;
+  float: left;
+  padding: 10px 20px;
+  color: black;
+  border-radius: 25px;
+  background: #e5e5ea;
+}
+
+/*CSS SideBar et Chat Window*/
+
 #sidebar-wrapper {
   position: fixed;
   z-index: 999;
@@ -27,6 +51,7 @@
 
 #menu-toggle {
   position: fixed;
+  z-index: 999;
   top: 0;
   right: 0;
   width: 50px;

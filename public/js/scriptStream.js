@@ -15,10 +15,10 @@ $(document).ready(function () {
         var currentDate = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
         $('.chat_messages').append('' +
 			'<li class="right clearfix">'
-			+ '<div class="chat-body clearfix">'
+			+ '<div class="chat-body clearfix from-me">'
 			+ '<div class="header">'
 			+ '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' + currentDate + '</small>'
-			+ '<strong class="pull-right primary-font">' + $('#inputUsername').val() +'</strong>'
+			+ '<strong class="pull-right primary-font" style="color: black">' + $('#inputUsername').val() +'</strong>'
 			+ '</div>'
 			+ emojione.shortnameToImage(msg)
 			+ '</div>'
