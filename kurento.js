@@ -18,12 +18,14 @@ function nextUniqueId() {
 
 router.get('/', function (req, res) {
     let ps = [];
-    _.forEach(presenters, function(p, key) {
+    _.forEach(presenters, function(p) {
         if(p && p.viewers) {
-            console.log(p.id);
+
             ps.push({
                 id: p.id,
-                viewersCount: p.viewers.length
+                viewersCount:  _.filter(p.viewers, function(v) {
+                    return v.id;
+                }).length
             });
         }
     });
