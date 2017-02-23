@@ -124,22 +124,26 @@ module.exports = function (wss, argv) {
 
         getKurentoClient(function (error, kurentoClient) {
             if (error) {
+                console.log("1");
                 stop(sessionId);
                 return callback(error);
             }
 
             if (presenter[0] === null) {
+                console.log("2");
                 stop(sessionId);
                 return callback(noPresenterMessage);
             }
 
             kurentoClient.create('MediaPipeline', function (error, pipeline) {
                 if (error) {
+                    console.log("3");
                     stop(sessionId);
                     return callback(error);
                 }
 
                 if (presenter[0] === null) {
+                    console.log("4");
                     stop(sessionId);
                     return callback(noPresenterMessage);
                 }
@@ -147,11 +151,13 @@ module.exports = function (wss, argv) {
                 presenter[0].pipeline = pipeline;
                 pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
                     if (error) {
+                        console.log("5");
                         stop(sessionId);
                         return callback(error);
                     }
 
                     if (presenter[0] === null) {
+                        console.log("6");
                         stop(sessionId);
                         return callback(noPresenterMessage);
                     }
@@ -175,6 +181,7 @@ module.exports = function (wss, argv) {
 
                     webRtcEndpoint.processOffer(sdpOffer, function (error, sdpAnswer) {
                         if (error) {
+                            console.log("7");
                             stop(sessionId);
                             return callback(error);
                         }
@@ -189,6 +196,7 @@ module.exports = function (wss, argv) {
 
                     webRtcEndpoint.gatherCandidates(function (error) {
                         if (error) {
+                            console.log("8");
                             stop(sessionId);
                             return callback(error);
                         }
@@ -202,12 +210,14 @@ module.exports = function (wss, argv) {
         clearCandidatesQueue(sessionId);
 
         if (presenter[0] === null) {
+            console.log("9");
             stop(sessionId);
             return callback(noPresenterMessage);
         }
 
         presenter[0].pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
             if (error) {
+                console.log("10");
                 stop(sessionId);
                 return callback(error);
             }
@@ -219,6 +229,7 @@ module.exports = function (wss, argv) {
             console.log("Starting viewer : id  :" + sessionId);
 
             if (presenter[0] === null) {
+                console.log("11");
                 stop(sessionId);
                 return callback(noPresenterMessage);
             }
@@ -240,6 +251,7 @@ module.exports = function (wss, argv) {
 
             webRtcEndpoint.processOffer(sdpOffer, function (error, sdpAnswer) {
                 if (error) {
+                    console.log("12");
                     stop(sessionId);
                     return callback(error);
                 }
@@ -250,10 +262,12 @@ module.exports = function (wss, argv) {
 
                 presenter[0].webRtcEndpoint.connect(webRtcEndpoint, function (error) {
                     if (error) {
+                        console.log("13");
                         stop(sessionId);
                         return callback(error);
                     }
                     if (presenter[0] === null) {
+                        console.log("14");
                         stop(sessionId);
                         return callback(noPresenterMessage);
                     }
@@ -261,6 +275,7 @@ module.exports = function (wss, argv) {
                     callback(null, sdpAnswer);
                     webRtcEndpoint.gatherCandidates(function (error) {
                         if (error) {
+                            console.log("15");
                             stop(sessionId);
                             return callback(error);
                         }
