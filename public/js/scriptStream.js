@@ -11,7 +11,16 @@ $(document).ready(function () {
         return false;
     });
     socket.on('chat message', function (msg) {
-        $('.chat_messages').append('<li>' + emojione.shortnameToImage(msg) + '</li>');
+        $('.chat_messages').append('' +
+			'<li class="right clearfix">'
+			+ '<div class="chat-body clearfix">'
+			+ '<div class="header">'
+			+ '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span></small>'
+			+ '<strong class="pull-right primary-font">' + $('#inputUsername').val() +'</strong>'
+			+ '</div>'
+			+ emojione.shortnameToImage(msg)
+			+ '</div>'
+			+ '</li>');
     });
 
 	/* $('#share_screen').on('click', function() {

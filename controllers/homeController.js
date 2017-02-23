@@ -23,7 +23,8 @@ router.get('/stream', auth.grantedAccess, function (req, res) {
         ],
         isConnected: auth.isConnected(req),
         messages: req.flash('success'),
-        errors: req.flash('error')
+        errors: req.flash('error'),
+        user: auth.getUser(req)
     });
 });
 
