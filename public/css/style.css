@@ -4,7 +4,7 @@
   position: fixed;
   z-index: 999;
   right: 0;
-  overflow-y: auto;
+  overflow-y: scroll;
   width: 250px;
   height: 90%;
   margin-right: -250px;
@@ -13,18 +13,6 @@
   -ms-transition: all .5s ease-in 0s;
   -o-transition: all .5s ease-in 0s;
   transition: all .5s ease-in 0s;
-}
-
-#menu-toggle {
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  margin: 100px 0 0 0;
-  padding: 0;
-  list-style: none;
 }
 
 #sidebar-wrapper.active {
@@ -37,8 +25,23 @@
   transition: all .5s ease-out 0s;
 }
 
-.toggle {
-  margin: 5px 5px 0 0;
+#menu-toggle {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  margin: 100px 0 0 0;
+  padding: 12px 0 0 0;
+  list-style: none;
+}
+
+.close {
+  width: 27px;
+  height: 27px;
+  margin: 0;
+  padding: 0;
+  color: red;
 }
 
 .chat_messages {
@@ -79,6 +82,15 @@
 .panel-body {
   overflow-y: scroll;
   height: 82%;
+}
+
+.chat_window {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  height: 90%;
 }
 
 .chat_window {
