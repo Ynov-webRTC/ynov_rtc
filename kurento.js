@@ -20,7 +20,7 @@ router.get('/', function (req, res) {
     for(p in presenters){
         pR.push(p.id);
     }
-    return res.json(JSON.stringify(pR));
+    return res.json(pR);
 });
 
 module.exports = {
