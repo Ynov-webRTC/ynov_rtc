@@ -22,6 +22,7 @@ router.get('/', function (req, res) {
             id: p.id,
             viewersCount: p.viewers.length
         });
+        console.log(p.viewers);
     }
     return res.json(ps);
 });
