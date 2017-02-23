@@ -83,7 +83,7 @@ module.exports = {
                         break;
 
                     case 'onIceCandidate':
-                        onIceCandidate(sessionId, message.candidate);
+                        onIceCandidate(sessionId, message.roomId, message.candidate);
                         break;
 
                     default:
@@ -298,15 +298,15 @@ module.exports = {
             }
         }
 
-        function onIceCandidate(sessionId, _candidate) {
+        function onIceCandidate(sessionId, roomId, _candidate) {
             let candidate = kurento.getComplexType('IceCandidate')(_candidate);
 
-            if (presenters[sessionId] && presenters[sessionId].id === sessionId && presenters[sessionId].webRtcEndpoint) {
+            if (presenters[roomId] && presenters[roomId].id === sessionId && presenters[roomId].webRtcEndpoint) {
                 console.info('Sending presenter candidate');
-                presenters[sessionId].webRtcEndpoint.addIceCandidate(candidate);
-            } else if (presenters[sessionId].viewers[sessionId] && presenters[sessionId].viewers[sessionId].webRtcEndpoint) {
+                presenters[roomId].webRtcEndpoint.addIceCandidate(candidate);
+            } else if (presenters[roomId].viewers[sessionId] && presenters[roomId].viewers[sessionId].webRtcEndpoint) {
                 console.info('Sending viewer candidate');
-                presenters[sessionId].viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
+                presenters[roomId].viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
             } else {
                 console.info('Queueing candidate');
                 if (!candidatesQueue[sessionId]) {

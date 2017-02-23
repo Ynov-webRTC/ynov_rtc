@@ -164,6 +164,7 @@ function onIceCandidate (candidate) {
 
     let message = {
         id: 'onIceCandidate',
+        roomId: 1,
         candidate: candidate
     };
     sendMessage(message);
