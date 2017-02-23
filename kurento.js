@@ -3,6 +3,7 @@
  */
 const kurento = require('kurento-client');
 const router = require('express').Router();
+const _ = require('lodash');
 let idCounter = 0;
 let candidatesQueue = {};
 let kurentoClient = null;
@@ -17,9 +18,8 @@ function nextUniqueId() {
 
 router.get('/', function (req, res) {
     let ps = [];
+    let presenters = _.omitBy(presenters, _.isEmpty);
     for(let p of presenters){
-        console.log(p);
-        console.log(p.viewers);
         if(p.viewers) {
             ps.push({
                 id: p.id,
