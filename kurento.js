@@ -16,8 +16,14 @@ function nextUniqueId() {
 }
 
 router.get('/', function (req, res) {
-    console.dir(presenters, {depth: null});
-    return res.json(presenters);
+    let ps = [];
+    for(let p in presenters){
+        ps.push({
+            id: p.id,
+            viewersCount: p.viewers.length
+        });
+    }
+    return res.json(ps);
 });
 
 module.exports = {
