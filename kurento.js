@@ -20,7 +20,8 @@ router.get('/', function (req, res) {
     let ps = [];
     _.forEach(presenters, function(p) {
         if(p && p.viewers) {
-
+            console.log(p.viewers);
+            console.log("===========");
             ps.push({
                 id: p.id,
                 viewersCount:  _.filter(p.viewers, function(v, index) {
