@@ -11,11 +11,13 @@ $(document).ready(function () {
         return false;
     });
     socket.on('chat message', function (msg) {
+        var date = new Date();
+        var currentDate = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
         $('.chat_messages').append('' +
 			'<li class="right clearfix">'
 			+ '<div class="chat-body clearfix">'
 			+ '<div class="header">'
-			+ '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span></small>'
+			+ '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' + currentDate + '</small>'
 			+ '<strong class="pull-right primary-font">' + $('#inputUsername').val() +'</strong>'
 			+ '</div>'
 			+ emojione.shortnameToImage(msg)
