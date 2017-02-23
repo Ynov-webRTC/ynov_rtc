@@ -18,12 +18,34 @@
                 <a id="terminate" href="#" class="btn btn-danger">
                     <span class="glyphicon glyphicon-stop"></span> Stop stream</a>
             </li>
+            <li class="list-group-item">
+                <a id="terminateShare" href="#" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-stop"></span> Stop share</a>
+            </li>
         </ul>
     </div>
     <div class="col-md-7">
-        <div id="videoBig" class="embed-responsive">
-            <video id="video" class="video_share_screen" autoplay poster="public/img/webrtc.png"></video>
+      <ul class="nav nav-tabs">
+        <li><a data-toggle="tab" href="#home">Video</a></li>
+        <li><a data-toggle="tab" href="#menu1">Share screen</a></li>
+
+      </ul>
+
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+          <h3>Video</h3>
+          <div id="videoBig" class="embed-responsive">
+              <video id="video" class="video_share_screen" autoplay poster="public/img/webrtc.png"></video>
+          </div>
         </div>
+        <div id="menu1" class="tab-pane fade">
+          <h3>Share screen</h3>
+          <div id="videoBig" class="embed-responsive">
+              <video id="videoShare" class="video_share_screen" autoplay poster="public/img/webrtc.png"></video>
+          </div>
+        </div>
+      </div>
+
     </div>
 </div>
 
