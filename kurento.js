@@ -18,7 +18,9 @@ function nextUniqueId() {
 
 router.get('/', function (req, res) {
     let ps = [];
+    console.log(presenters);
     let presenters = _.omitBy(presenters, _.isEmpty);
+    console.log(presenters);
     for(let p of presenters){
         if(p.viewers) {
             ps.push({
