@@ -288,8 +288,6 @@ module.exports = function (wss, argv) {
             viewers[sessionId].webRtcEndpoint.release();
             delete viewers[sessionId];
         }
-
-        clearCandidatesQueue(sessionId);
     }
 
     function onIceCandidate(sessionId, _candidate) {

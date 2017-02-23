@@ -1,16 +1,14 @@
-<!--<div class="container chat_window">
+<div class="container chat_window">
     <div class="row">
-        <div class="panel panel-primary">
-            <div class="panel-heading" id="accordion">
+        <div class="panel panel-primary" id="sidebar-wrapper">
+            <div class="panel-heading">
                 <span class="glyphicon glyphicon-comment"></span> Chat
-                <div class="btn-group pull-right">
-                    <a id="menu-toggle" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="glyphicon glyphicon-triangle-left"></i></a>
-                </div>
+                <a id="menu-close" href="#"><span class="glyphicon glyphicon-triangle-right"></span></a>
+                <a id="menu-toggle" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="glyphicon glyphicon-triangle-left"></i></a>
             </div>
             <div class="panel-collapse" id="collapseOne">
-            <a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="glyphicon glyphicon-remove"></i></a>
                 <div class="panel-body">
-                    <ul class="chat_messages">
+                    <ul class="sidebar-nav chat_messages">
                         <li class="right clearfix">
                             <div class="chat-body clearfix">
                                 <div class="header">
@@ -27,53 +25,27 @@
                         <div class="input-group">
                             <input id="message_chat" type="text" class="form-control input-sm" placeholder="Type your message here..." />
                             <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat">
-                                Send
-                            </button>
-                        </span>
+                                <button class="btn btn-warning btn-sm" id="btn-chat">
+                                    Send
+                                </button>
+                            </span>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>-->
-
-<a id="menu-toggle" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="glyphicon glyphicon-triangle-left"></i></a>
-<div id="sidebar-wrapper" class="active">
-    <ul class="sidebar-nav chat_messages">
-        <a id="menu-close" href="#" class="btn btn-default btn-lg pull-right toggle"><i class="glyphicon glyphicon-remove"></i></a>
-        <li class="right clearfix">
-            <div class="chat-body clearfix">
-                <div class="header">
-                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
-                    <strong class="pull-right primary-font">Nacim</strong>
-                </div>
-                <p>Coucou</p>
-            </div>
-        </li>
-    </ul>
-    <div class="panel-footer">
-        <form action="" id="formChat">
-            <div class="input-group">
-                <input id="message_chat" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                <span class="input-group-btn">
-                    <button class="btn btn-warning btn-sm" id="btn-chat"><i class="glyphicon glyphicon-send"></i>
-                        Send
-                    </button>
-                </span>
-            </div>
-        </form>
-    </div>
 </div>
 
 <script>
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
+        $("#menu-toggle").css('display','none');
+    });
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+        $("#menu-toggle").css('display','block');
     });
 </script>
