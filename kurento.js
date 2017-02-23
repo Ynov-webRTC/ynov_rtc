@@ -16,11 +16,8 @@ function nextUniqueId() {
 }
 
 router.get('/', function (req, res) {
-    let pR = [];
-    for(p in presenters){
-        pR.push(p.id);
-    }
-    return res.json(pR);
+    console.log(presenters)
+    return res.json(presenters);
 });
 
 module.exports = {
@@ -120,7 +117,7 @@ module.exports = {
 
         function startPresenter(sessionId, ws, sdpOffer, callback) {
 
-            presenters[sessionId] = {
+            presenters["" + sessionId] = {
                 id: sessionId,
                 pipeline: null,
                 webRtcEndpoint: null,
