@@ -20,7 +20,9 @@ router.get('/', function (req, res) {
     let ps = [];
     console.log(presenters);
     let presentersLodash = _.omitBy(presenters, _.isEmpty);
-    console.log(typeof presentersLodash);
+    if(!_.isArray(presentersLodash)) {
+        presentersLodash = [presentersLodash];
+    }
     for(let p of presentersLodash){
         if(p.viewers) {
             ps.push({
