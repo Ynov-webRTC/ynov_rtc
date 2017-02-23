@@ -5,8 +5,8 @@ const kurento = require('kurento-client');
 let idCounter = 0;
 let candidatesQueue = {};
 let kurentoClient = null;
-let presenter = null;
-let viewers = [];
+let presenter = [];
+
 const noPresenterMessage = 'No active presenter. Try again later...';
 
 function nextUniqueId() {
@@ -113,11 +113,14 @@ module.exports = function (wss, argv) {
             return callback('Another user is currently acting as presenter. Try again later ...');
         }
 
-        presenter = {
+        presenter.push({
             id: sessionId,
             pipeline: null,
-            webRtcEndpoint: null
-        };
+            webRtcEndpoint: null,
+            viewers: []
+        });
+
+        console.log("Starting presenter : id  :" + sessionId);
 
         getKurentoClient(function (error, kurentoClient) {
             if (error) {
@@ -125,7 +128,7 @@ module.exports = function (wss, argv) {
                 return callback(error);
             }
 
-            if (presenter === null) {
+            if (presenter[0] === null) {
                 stop(sessionId);
                 return callback(noPresenterMessage);
             }
@@ -136,24 +139,24 @@ module.exports = function (wss, argv) {
                     return callback(error);
                 }
 
-                if (presenter === null) {
+                if (presenter[0] === null) {
                     stop(sessionId);
                     return callback(noPresenterMessage);
                 }
 
-                presenter.pipeline = pipeline;
+                presenter[0].pipeline = pipeline;
                 pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
                     if (error) {
                         stop(sessionId);
                         return callback(error);
                     }
 
-                    if (presenter === null) {
+                    if (presenter[0] === null) {
                         stop(sessionId);
                         return callback(noPresenterMessage);
                     }
 
-                    presenter.webRtcEndpoint = webRtcEndpoint;
+                    presenter[0].webRtcEndpoint = webRtcEndpoint;
 
                     if (candidatesQueue[sessionId]) {
                         while (candidatesQueue[sessionId].length) {
@@ -198,22 +201,24 @@ module.exports = function (wss, argv) {
     function startViewer(sessionId, ws, sdpOffer, callback) {
         clearCandidatesQueue(sessionId);
 
-        if (presenter === null) {
+        if (presenter[0] === null) {
             stop(sessionId);
             return callback(noPresenterMessage);
         }
 
-        presenter.pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
+        presenter[0].pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
             if (error) {
                 stop(sessionId);
                 return callback(error);
             }
-            viewers[sessionId] = {
+            presenter[0].viewers[sessionId] = {
                 webRtcEndpoint: webRtcEndpoint,
                 ws: ws
             };
 
-            if (presenter === null) {
+            console.log("Starting viewer : id  :" + sessionId);
+
+            if (presenter[0] === null) {
                 stop(sessionId);
                 return callback(noPresenterMessage);
             }
@@ -238,17 +243,17 @@ module.exports = function (wss, argv) {
                     stop(sessionId);
                     return callback(error);
                 }
-                if (presenter === null) {
+                if (presenter[0] === null) {
                     stop(sessionId);
                     return callback(noPresenterMessage);
                 }
 
-                presenter.webRtcEndpoint.connect(webRtcEndpoint, function (error) {
+                presenter[0].webRtcEndpoint.connect(webRtcEndpoint, function (error) {
                     if (error) {
                         stop(sessionId);
                         return callback(error);
                     }
-                    if (presenter === null) {
+                    if (presenter[0] === null) {
                         stop(sessionId);
                         return callback(noPresenterMessage);
                     }
@@ -272,33 +277,33 @@ module.exports = function (wss, argv) {
     }
 
     function stop(sessionId) {
-        if (presenter !== null && presenter.id == sessionId) {
-            for (let i in viewers) {
-                let viewer = viewers[i];
+        if (presenter[0] !== null && presenter[0].id == sessionId) {
+            for (let i in presenter[0].viewers) {
+                let viewer = presenter[0].viewers[i];
                 if (viewer.ws) {
                     viewer.ws.send(JSON.stringify({
                         id: 'stopCommunication'
                     }));
                 }
             }
-            presenter.pipeline.release();
-            presenter = null;
-            viewers = [];
-        } else if (viewers[sessionId]) {
-            viewers[sessionId].webRtcEndpoint.release();
-            delete viewers[sessionId];
+            presenter[0].pipeline.release();
+            presenter[0] = null;
+            presenter[0].viewers = [];
+        } else if (presenter[0].viewers[sessionId]) {
+            presenter[0].viewers[sessionId].webRtcEndpoint.release();
+            delete presenter[0].viewers[sessionId];
         }
     }
 
     function onIceCandidate(sessionId, _candidate) {
         let candidate = kurento.getComplexType('IceCandidate')(_candidate);
 
-        if (presenter && presenter.id === sessionId && presenter.webRtcEndpoint) {
+        if (presenter[0] && presenter[0].id === sessionId && presenter[0].webRtcEndpoint) {
             console.info('Sending presenter candidate');
             presenter.webRtcEndpoint.addIceCandidate(candidate);
-        } else if (viewers[sessionId] && viewers[sessionId].webRtcEndpoint) {
+        } else if (presenter[0].viewers[sessionId] && presenter[0].viewers[sessionId].webRtcEndpoint) {
             console.info('Sending viewer candidate');
-            viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
+            presenter[0].viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
         } else {
             console.info('Queueing candidate');
             if (!candidatesQueue[sessionId]) {
