@@ -1,18 +1,18 @@
 /****** CHAT MODAL ******/
 
 #sidebar-wrapper {
-  margin-right: -250px;
-  right: 0;
-  width: 250px;
   position: fixed;
-  height: 100%;
+  z-index: 999;
+  right: 0;
   overflow-y: auto;
-  z-index: 999 ;
-  transition: all 0.5s ease-in 0s;
-  -webkit-transition: all 0.5s ease-in 0s;
-  -moz-transition: all 0.5s ease-in 0s;
-  -ms-transition: all 0.5s ease-in 0s;
-  -o-transition: all 0.5s ease-in 0s;
+  width: 250px;
+  height: 100%;
+  margin-right: -250px;
+  -webkit-transition: all .5s ease-in 0s;
+  -moz-transition: all .5s ease-in 0s;
+  -ms-transition: all .5s ease-in 0s;
+  -o-transition: all .5s ease-in 0s;
+  transition: all .5s ease-in 0s;
 }
 
 .sidebar-nav {
@@ -20,10 +20,10 @@
   top: 0;
   width: 250px;
   height: 100%;
-  list-style: none;
   margin: 100px 0 0 0;
   padding: 0;
-  background: #ffffff;
+  list-style: none;
+  background: #fff;
 }
 
 .sidebar-nav li {
@@ -32,29 +32,30 @@
 }
 
 .sidebar-nav li a {
-  color: #999999;
   display: block;
   text-decoration: none;
+  color: #999;
 }
 
 .sidebar-nav li a:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.2);
   text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,.2);
 }
 
-.sidebar-nav li a:active, .sidebar-nav li a:focus {
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
   text-decoration: none;
 }
 
 .sidebar-nav > .sidebar-brand {
-  height: 55px;
-  line-height: 55px;
   font-size: 18px;
+  line-height: 55px;
+  height: 55px;
 }
 
 .sidebar-nav > .sidebar-brand a {
-  color: #999999;
+  color: #999;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
@@ -63,25 +64,25 @@
 }
 
 #menu-toggle {
-  top: 0;
-  right: 0;
   position: fixed;
   z-index: 100;
+  top: 0;
+  right: 0;
   width: 50px;
   height: 50px;
-  list-style: none;
   margin: 100px 0 0 0;
   padding: 0;
+  list-style: none;
 }
 
 #sidebar-wrapper.active {
   right: 250px;
   width: 250px;
-  transition: all 0.5s ease-out 0s;
-  -webkit-transition: all 0.5s ease-out 0s;
-  -moz-transition: all 0.5s ease-out 0s;
-  -ms-transition: all 0.5s ease-out 0s;
-  -o-transition: all 0.5s ease-out 0s;
+  -webkit-transition: all .5s ease-out 0s;
+  -moz-transition: all .5s ease-out 0s;
+  -ms-transition: all .5s ease-out 0s;
+  -o-transition: all .5s ease-out 0s;
+  transition: all .5s ease-out 0s;
 }
 
 .toggle {
@@ -89,14 +90,14 @@
 }
 
 @media screen and (max-width: 1020px) {
-  .sidebar-nav{
+  .sidebar-nav {
     display: none;
   }
-  #menu-toggle{
+
+  #menu-toggle {
     display: none;
   }
 }
-
 /****** LOGIN MODAL ******/
 
 .loginmodal-container {
@@ -170,14 +171,3 @@ div.dragged {
 body {
   background-image: url('../img/sayagata-400px.png') !important;
 }
-
-.accountPage{
-  background-color: white;
-  padding-top: 30px;
-
-  border-radius: 5px;
-}
-.imageUser{
-  margin-bottom: 10px;
-}
-textarea { resize: vertical; }
