@@ -14,13 +14,14 @@ router.get('/getRooms', function (req, res) {
     let ps = [];
     console.log("===========");
     console.log(presenters['tata']);
-    for(p of presenters) {
+
+    for(let p in presenters) {
     //     _.forEach(presenters, function (p) {
-            console.log(p);
+            console.log(presenters[p]);
             ps.push({
-                id: p.id,
-                viewersCount: p.viewers.length
-            })
+                id: presenters[p].id,
+                viewersCount: presenters[p].viewers.length
+            });
         // });
     }
 
