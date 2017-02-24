@@ -138,35 +138,35 @@ module.exports = {
 
             getKurentoClient(function (error, kurentoClient) {
                 if (error) {
-                    stop(sessionId);
+                    stop(sessionId, sessionId);
                     return callback(error);
                 }
 
                 if (presenters[sessionId] === null) {
-                    stop(sessionId);
+                    stop(sessionId, sessionId);
                     return callback(noPresenterMessage);
                 }
 
                 kurentoClient.create('MediaPipeline', function (error, pipeline) {
                     if (error) {
-                        stop(sessionId);
+                        stop(sessionId, sessionId);
                         return callback(error);
                     }
 
                     if (presenters[sessionId] === null) {
-                        stop(sessionId);
+                        stop(sessionId, sessionId);
                         return callback(noPresenterMessage);
                     }
 
                     presenters[sessionId].pipeline = pipeline;
                     pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
                         if (error) {
-                            stop(sessionId);
+                            stop(sessionId, sessionId);
                             return callback(error);
                         }
 
                         if (presenters[sessionId] === null) {
-                            stop(sessionId);
+                            stop(sessionId, sessionId);
                             return callback(noPresenterMessage);
                         }
 
@@ -189,12 +189,12 @@ module.exports = {
 
                         webRtcEndpoint.processOffer(sdpOffer, function (error, sdpAnswer) {
                             if (error) {
-                                stop(sessionId);
+                                stop(sessionId, sessionId);
                                 return callback(error);
                             }
 
                             if (presenters === null) {
-                                stop(sessionId);
+                                stop(sessionId, sessionId);
                                 return callback(noPresenterMessage);
                             }
 
@@ -203,7 +203,7 @@ module.exports = {
 
                         webRtcEndpoint.gatherCandidates(function (error) {
                             if (error) {
-                                stop(sessionId);
+                                stop(sessionId, sessionId);
                                 return callback(error);
                             }
                         });
@@ -216,13 +216,13 @@ module.exports = {
             // clearCandidatesQueue(sessionId);
 
             if (presenters[roomId] === null) {
-                stop(sessionId);
+                stop(sessionId, roomId);
                 return callback(noPresenterMessage);
             }
 
             presenters[roomId].pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
                 if (error) {
-                    stop(sessionId);
+                    stop(sessionId, roomId);
                     return callback(error);
                 }
                 presenters[roomId].viewers[sessionId] = {
@@ -233,7 +233,7 @@ module.exports = {
                 console.log("Starting viewer : id  :" + sessionId);
 
                 if (presenters[roomId] === null) {
-                    stop(sessionId);
+                    stop(sessionId, roomId);
                     return callback(noPresenterMessage);
                 }
 
@@ -254,28 +254,28 @@ module.exports = {
 
                 webRtcEndpoint.processOffer(sdpOffer, function (error, sdpAnswer) {
                     if (error) {
-                        stop(sessionId);
+                        stop(sessionId, roomId);
                         return callback(error);
                     }
                     if (presenters[roomId] === null) {
-                        stop(sessionId);
+                        stop(sessionId, roomId);
                         return callback(noPresenterMessage);
                     }
 
                     presenters[roomId].webRtcEndpoint.connect(webRtcEndpoint, function (error) {
                         if (error) {
-                            stop(sessionId);
+                            stop(sessionId, roomId;
                             return callback(error);
                         }
                         if (presenters[roomId] === null) {
-                            stop(sessionId);
+                            stop(sessionId, roomId);
                             return callback(noPresenterMessage);
                         }
 
                         callback(null, sdpAnswer);
                         webRtcEndpoint.gatherCandidates(function (error) {
                             if (error) {
-                                stop(sessionId);
+                                stop(sessionId, roomId);
                                 return callback(error);
                             }
                         });
