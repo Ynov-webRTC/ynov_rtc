@@ -49,7 +49,17 @@ window.onload = function () {
 };
 
 window.onbeforeunload = function () {
-    ws.close(roomId);
+    if (webRtcPeer) {
+        let message = {
+            id: 'stop',
+            sessionId: $('#inputUsername').val(),
+            roomId: roomId
+        };
+
+        sendMessage(message);
+        dispose();
+        ws.close();
+    }
 };
 
 ws.onmessage = function (message) {
@@ -228,7 +238,6 @@ function stop () {
             roomId: roomId
         };
 
-        console.log("STOP --- ");
         sendMessage(message);
         dispose();
     }
