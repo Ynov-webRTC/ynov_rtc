@@ -227,6 +227,8 @@ function stop () {
             sessionId: $('#inputUsername').val(),
             roomId: roomId
         };
+
+        console.log("STOP --- ");
         sendMessage(message);
         dispose();
     }
