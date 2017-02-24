@@ -23,7 +23,8 @@ router.get('/getRooms', function (req, res) {
     //     }
     // });
     // return res.json(ps);
-    return res.json("COUCOU");
+    console.log(presenters);
+    return res.json(presenters);
 });
 
 module.exports = {
