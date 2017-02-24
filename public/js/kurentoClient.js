@@ -15,27 +15,36 @@
  *
  */
 
-const ws = new WebSocket('wss://' + location.host + '/kurento');
+const ws   = new WebSocket('wss://' + location.host + '/kurento');
+let roomId = null;
 let webRtcPeer, video, videoShare;
 
 window.onload = function () {
     video = document.getElementById('video');
     videoShare = document.getElementById('videoShare');
 
-    document.getElementById('call').addEventListener('click', function () {
+    $('#call').on('click', function () {
         presenter('webcam', video);
+        $(this).addClass('hidden');
+        $('#terminate').removeClass('hidden');
     });
-    document.getElementById('share_screen').addEventListener('click', function () {
+    $('#share_screen').on('click', function () {
         presenter('screen', videoShare);
+        $(this).addClass('hidden');
+        $('#terminateShare').removeClass('hidden');
     });
-    document.getElementById('viewer').addEventListener('click', function () {
+    $('#viewer').on('click', function () {
         viewer();
     });
-    document.getElementById('terminate').addEventListener('click', function () {
+    $('#terminate').on('click', function () {
         stop(video);
+        $(this).addClass('hidden');
+        $('#call').removeClass('hidden');
     });
-    document.getElementById('terminateShare').addEventListener('click', function () {
+    $('#terminateShare').on('click', function () {
         stop(videoShare);
+        $(this).addClass('hidden');
+        $('#share_screen').removeClass('hidden');
     });
 };
 
@@ -122,28 +131,67 @@ function onOfferPresenter (error, offerSdp) {
 
     let message = {
         id: 'presenter',
-        sdpOffer: offerSdp
+        sdpOffer: offerSdp,
+        sessionId: $('#inputUsername').val()
     };
+
+    roomId = $('#inputUsername').val();
     sendMessage(message);
 }
 
 function viewer () {
-    if (!webRtcPeer) {
-        showSpinner();
+    $.ajax({
+        url: "https://" + location.host + "/api/getRooms",
+        success:function(data) {
+            if(data.length > 0 ) {
+                let inputOptions = new Promise(function (resolve) {
+                    let inputs = {};
+                    for (let presenter of data) {
+                        inputs[presenter.id] = presenter.id + ", viewers : " + presenter.viewersCount;
+                    }
+                    resolve(inputs);
+                });
 
-        let options = {
-            remoteVideo: video,
-            onicecandidate: onIceCandidate
-        };
+                swal({
+                    title: 'Select a streamer',
+                    input: 'radio',
+                    inputOptions: inputOptions,
+                    inputValidator: function (result) {
+                        return new Promise(function (resolve, reject) {
+                            if (result) {
+                                resolve()
+                            } else {
+                                reject('You need to select a streamer !')
+                            }
+                        })
+                    }
+                }).then(function (roomChoice) {
+                    roomId = roomChoice;
+                    if (!webRtcPeer) {
+                        showSpinner();
 
-        webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, function (error) {
-            if (error) {
-                return onError(error);
+                        let options = {
+                            remoteVideo: video,
+                            onicecandidate: onIceCandidate
+                        };
+
+                        webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, function (error) {
+                            if (error) {
+                                return onError(error);
+                            }
+
+                            this.generateOffer(onOfferViewer);
+                        });
+                    }
+                })
             }
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
 
-            this.generateOffer(onOfferViewer);
-        });
-    }
+
 }
 
 function onOfferViewer (error, offerSdp) {
@@ -153,7 +201,9 @@ function onOfferViewer (error, offerSdp) {
 
     let message = {
         id: 'viewer',
-        sdpOffer: offerSdp
+        sdpOffer: offerSdp,
+        sessionId: $('#inputUsername').val(),
+        roomId: roomId
     };
     sendMessage(message);
 }
@@ -163,6 +213,8 @@ function onIceCandidate (candidate) {
 
     let message = {
         id: 'onIceCandidate',
+        sessionId: $('#inputUsername').val(),
+        roomId: roomId,
         candidate: candidate
     };
     sendMessage(message);
@@ -171,7 +223,9 @@ function onIceCandidate (candidate) {
 function stop () {
     if (webRtcPeer) {
         let message = {
-            id: 'stop'
+            id: 'stop',
+            sessionId: $('#inputUsername').val(),
+            roomId: roomId
         };
         sendMessage(message);
         dispose();
@@ -188,7 +242,7 @@ function dispose () {
 
 function sendMessage (message) {
     let jsonMessage = JSON.stringify(message);
-    console.log('Senging message: ' + jsonMessage);
+    console.log('Sending message: ' + jsonMessage);
     ws.send(jsonMessage);
 }
 
@@ -210,7 +264,7 @@ function onError (error) {
             title: 'Erreur!',
             html: '<html>Le partage d\'écran ne fonctionne pas sans le plugin que vous pouvez téléchargez ' +
             '<a href=\'https://chrome.google.com/webstore/detail/screen-capturing/ajhifddimkapgcifgcodmmfdlknahffk\'>' +
-            'ici</a>!</html>',
+            'ici</a> !</html>',
             type: 'error'
         });
     }

@@ -11,7 +11,20 @@ $(document).ready(function () {
         return false;
     });
     socket.on('chat message', function (msg) {
-        $('.chat_messages').append('<li>' + emojione.shortnameToImage(msg) + '</li>');
+        var date = new Date();
+        var currentDate = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+        $('.chat_messages').append(''
+			+ '<li>'
+			+ '<div class="chat-body clearfix from-me">'
+			+ '<div class="header">'
+            + '<span class="primary-font" style="color: black">' + $('#inputUsername').val() +'</span>'
+            + '<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' + currentDate + '</small>'
+            + '</div>'
+			+ '<div class="body">'
+            + emojione.shortnameToImage(msg)
+			+ '</div>'
+			+ '</div>'
+			+ '</li>');
     });
 
 	/* $('#share_screen').on('click', function() {

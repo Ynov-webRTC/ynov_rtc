@@ -9,5 +9,9 @@ module.exports = {
 
     isConnected: function (req) {
         return req.isAuthenticated();
+    },
+
+    getUser: function (req) {
+        return req.user;
     }
 };

@@ -27,6 +27,7 @@ module.exports = {
 		);
         return deferred.promise;
     },
+
     updateUser(user){
         let deferred = q.defer();
         User.findByIdAndUpdate(user._id,{$set:{name: user.name,lastname: user.lastname, bio: user.bio }}, function(err, user){
@@ -37,6 +38,19 @@ module.exports = {
             }
         });
         return deferred.promise;
-    }
+    },
 
+    getUserByUsername(username){
+        let deferred = q.defer();
+        User.findOne({username: username}).select('username bio').exec().then(function (user) {
+            if(user === null) {
+                deferred.reject("Utilisateur introuvable");
+            } else{
+                deferred.resolve(user);
+            }
+        }, function (err) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    }
 };
