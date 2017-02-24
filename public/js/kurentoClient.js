@@ -123,7 +123,7 @@ function onOfferPresenter (error, offerSdp) {
     let message = {
         id: 'presenter',
         sdpOffer: offerSdp,
-        roomId: $('#inputUsername').val()
+        sessionId: $('#inputUsername').val()
     };
     sendMessage(message);
 }
