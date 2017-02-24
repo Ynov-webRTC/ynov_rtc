@@ -22,7 +22,7 @@ router.post('/update', auth.grantedAccess, function (req, res) {
     userService.updateUser(user).then(function(user){
         req.flash('success', 'Modification réussi!');
         res.render('account', {
-            user: req.user,
+            user: user,
             isConnected: auth.isConnected(req),
             messages: req.flash('success'),
             errors: req.flash('error'),
@@ -34,5 +34,16 @@ router.post('/update', auth.grantedAccess, function (req, res) {
     })
 });
 
-
+router.get('/:name', auth.grantedAccess, function (req, res)  {
+    let username = req.params.name;
+    userService.getUserByUsername(username).then(function (user) {
+        res.render('profil', {
+            user: user,
+            isConnected: auth.isConnected(req)
+        })
+    }, function (err) {
+        req.flash('error', err);
+        res.redirect('/index');
+    })
+})
 module.exports = router;
