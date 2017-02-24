@@ -49,7 +49,7 @@ module.exports = {
 
             ws.on('message', function (_message) {
                 let message = JSON.parse(_message);
-                console.log('Connection ' + sessionId + ' received message ', message);
+                console.log('Connection ' + message.sessionId + ' received message ', message);
 
                 switch (message.id) {
                     case 'presenter':
