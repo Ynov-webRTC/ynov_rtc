@@ -11,21 +11,15 @@ let presenters = [];
 const noPresenterMessage = 'No active presenter. Try again later...';
 
 router.get('/getRooms', function (req, res) {
-    // let ps = [];
-    // _.forEach(presenters, function(p) {
-    //     if(p && p.viewers) {
-    //         ps.push({
-    //             id: p.id,
-    //             viewersCount:  _.filter(p.viewers, function(v) {
-    //                 return _.isObject(v);
-    //             }).length
-    //         });
-    //     }
-    // });
-    // return res.json(ps);
-    console.log(presenters);
-    //console.log(JSON.stringify(presenters));
-    return res.send(JSON.stringify(presenters));
+    let ps = [];
+    _.forEach(presenters, function(p) {
+        ps.push({
+            id: p.id,
+            viewersCount:  p.viewers.length
+        })
+    });
+    
+    return res.json(ps);
 });
 
 module.exports = {
