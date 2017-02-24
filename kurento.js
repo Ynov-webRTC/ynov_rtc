@@ -285,7 +285,7 @@ module.exports = {
         }
 
         function stop(sessionId, roomId) {
-            if (presenters[roomId] !== null && presenters[roomId].id === sessionId) {
+            if (presenters[roomId] && presenters[roomId].id === sessionId) {
                 for (let i in presenters[roomId].viewers) {
                     let viewer = presenters[roomId].viewers[i];
                     if (viewer.ws) {
@@ -296,7 +296,7 @@ module.exports = {
                 }
                 presenters[roomId].pipeline.release();
                 presenters[roomId] = null;
-            } else if (presenters[roomId].viewers[sessionId]) {
+            } else if (presenters[roomId] && presenters[roomId].viewers[sessionId]) {
                 presenters[roomId].viewers[sessionId].webRtcEndpoint.release();
                 delete presenters[roomId].viewers[sessionId];
             }
