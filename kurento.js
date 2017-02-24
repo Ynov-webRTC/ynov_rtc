@@ -310,7 +310,6 @@ module.exports = {
         }
 
         function onIceCandidate(sessionId, roomId, _candidate) {
-            console.log(presenters);
             let candidate = kurento.getComplexType('IceCandidate')(_candidate);
 
             if (presenters[roomId] && presenters[roomId].id === sessionId && presenters[roomId].webRtcEndpoint) {
