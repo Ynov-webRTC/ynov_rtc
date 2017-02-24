@@ -22,20 +22,28 @@ window.onload = function () {
     video = document.getElementById('video');
     videoShare = document.getElementById('videoShare');
 
-    document.getElementById('call').addEventListener('click', function () {
+    $('#call').on('click', function () {
         presenter('webcam', video);
+        $(this).addClass('hidden');
+        $('#terminate').removeClass('hidden');
     });
-    document.getElementById('share_screen').addEventListener('click', function () {
+    $('#share_screen').on('click', function () {
         presenter('screen', videoShare);
+        $(this).addClass('hidden');
+        $('#terminateShare').removeClass('hidden');
     });
-    document.getElementById('viewer').addEventListener('click', function () {
+    $('#viewer').on('click', function () {
         viewer();
     });
-    document.getElementById('terminate').addEventListener('click', function () {
+    $('#terminate').on('click', function () {
         stop(video);
+        $(this).addClass('hidden');
+        $('#call').removeClass('hidden');
     });
-    document.getElementById('terminateShare').addEventListener('click', function () {
+    $('#terminateShare').on('click', function () {
         stop(videoShare);
+        $(this).add('hidden');
+        $('#share_screen').removeClass('hidden');
     });
 };
 
