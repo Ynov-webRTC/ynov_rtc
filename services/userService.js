@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const q = require('q');
-const chalk = require('chalk');
+//const chalk = require('chalk');
 
 module.exports = {
 
@@ -39,17 +39,14 @@ module.exports = {
         });
         return deferred.promise;
     },
-
-    getUserByUsername(username){
+    upload(idUser,path){
         let deferred = q.defer();
-        User.findOne({username: username}).select('username bio').exec().then(function (user) {
-            if(user === null) {
-                deferred.reject("Utilisateur introuvable");
-            } else{
+        User.findByIdAndUpdate(idUser,{$set:{avatar: path}},function(err, user){
+            if(err){
+                deferred.reject("Impossible d'ajouter l'image")
+            }else{
                 deferred.resolve(user);
             }
-        }, function (err) {
-            deferred.reject(err);
         });
         return deferred.promise;
     }
