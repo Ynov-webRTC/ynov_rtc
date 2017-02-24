@@ -56,7 +56,7 @@ module.exports = {
 
                 switch (message.id) {
                     case 'presenter':
-                        startPresenter(sessionId, ws, message.sdpOffer, function (error, sdpAnswer) {
+                        startPresenter(message.sessionId, ws, message.sdpOffer, function (error, sdpAnswer) {
                             if (error) {
                                 return ws.send(JSON.stringify({
                                     id: 'presenterResponse',
