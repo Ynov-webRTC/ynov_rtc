@@ -264,7 +264,7 @@ module.exports = {
 
                     presenters[roomId].webRtcEndpoint.connect(webRtcEndpoint, function (error) {
                         if (error) {
-                            stop(sessionId, roomId;
+                            stop(sessionId, roomId);
                             return callback(error);
                         }
                         if (presenters[roomId] === null) {
