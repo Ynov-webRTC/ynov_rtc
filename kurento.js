@@ -3,48 +3,60 @@
  */
 const kurento = require('kurento-client');
 const router = require('express').Router();
-let idCounter = 0;
+const _ = require('lodash');
 let candidatesQueue = {};
 let kurentoClient = null;
-let presenter = null;
-let viewers = [];
+let presenters = [];
+
 const noPresenterMessage = 'No active presenter. Try again later...';
 
-router.get('/', function (req, res) {
-    return res.json(presenter);
+router.get('/getRooms', function (req, res) {
+    let ps = [];
+
+    for (let p in presenters){
+        if (presenters.hasOwnProperty(p)) {
+            let viewersCount = 0;
+            for (let v in presenters[p].viewers) {
+                if (presenters[p].viewers.hasOwnProperty(v)) {
+                    viewersCount ++;
+                }
+            }
+            ps.push({
+                id: presenters[p].id,
+                viewersCount: viewersCount
+            });
+        }
+    }
+
+    return res.json(ps);
 });
 
-function nextUniqueId() {
-    idCounter++;
-    return idCounter.toString();
-}
-
 module.exports = {
-    router: router,
 
-    kurento: function (wss, argv) {
+    router : router,
 
+    kurento : function (wss, argv) {
         wss.on('connection', function (ws) {
-            let sessionId = nextUniqueId();
-            console.log('Connection received with sessionId ' + sessionId);
-
             ws.on('error', function (error) {
                 console.log('Connection ' + sessionId + ' error ' + error);
                 stop(sessionId);
             });
 
-            ws.on('close', function () {
-                console.log('Connection ' + sessionId + ' closed');
-                stop(sessionId);
+            ws.on('close', function (_message) {
+                console.log("---CLOSE---");
+                console.log(_message);
+                let message = JSON.parse(_message);
+                console.log('Connection ' + message.sessionId + ' closed');
+                stop(message.sessionId);
             });
 
             ws.on('message', function (_message) {
                 let message = JSON.parse(_message);
-                console.log('Connection ' + sessionId + ' received message ', message);
+                console.log('Connection ' + message.sessionId + ' received message ', message);
 
                 switch (message.id) {
                     case 'presenter':
-                        startPresenter(sessionId, ws, message.sdpOffer, function (error, sdpAnswer) {
+                        startPresenter(message.sessionId, ws, message.sdpOffer, function (error, sdpAnswer) {
                             if (error) {
                                 return ws.send(JSON.stringify({
                                     id: 'presenterResponse',
@@ -61,7 +73,7 @@ module.exports = {
                         break;
 
                     case 'viewer':
-                        startViewer(sessionId, ws, message.sdpOffer, function (error, sdpAnswer) {
+                        startViewer(message.sessionId, ws, message.sdpOffer, message.roomId, function (error, sdpAnswer) {
                             if (error) {
                                 return ws.send(JSON.stringify({
                                     id: 'viewerResponse',
@@ -79,11 +91,11 @@ module.exports = {
                         break;
 
                     case 'stop':
-                        stop(sessionId);
+                        stop(message.sessionId, message.roomId);
                         break;
 
                     case 'onIceCandidate':
-                        onIceCandidate(sessionId, message.candidate);
+                        onIceCandidate(message.sessionId, message.roomId, message.candidate);
                         break;
 
                     default:
@@ -115,18 +127,14 @@ module.exports = {
         }
 
         function startPresenter(sessionId, ws, sdpOffer, callback) {
-            clearCandidatesQueue(sessionId);
-
-            if (presenter !== null) {
-                stop(sessionId);
-                return callback('Another user is currently acting as presenter. Try again later ...');
-            }
-
-            presenter = {
+            presenters[sessionId] = {
                 id: sessionId,
                 pipeline: null,
-                webRtcEndpoint: null
+                webRtcEndpoint: null,
+                viewers: []
             };
+
+            console.log("Starting presenter : id  :" + sessionId);
 
             getKurentoClient(function (error, kurentoClient) {
                 if (error) {
@@ -134,7 +142,7 @@ module.exports = {
                     return callback(error);
                 }
 
-                if (presenter === null) {
+                if (presenters[sessionId] === null) {
                     stop(sessionId);
                     return callback(noPresenterMessage);
                 }
@@ -145,24 +153,24 @@ module.exports = {
                         return callback(error);
                     }
 
-                    if (presenter === null) {
+                    if (presenters[sessionId] === null) {
                         stop(sessionId);
                         return callback(noPresenterMessage);
                     }
 
-                    presenter.pipeline = pipeline;
+                    presenters[sessionId].pipeline = pipeline;
                     pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
                         if (error) {
                             stop(sessionId);
                             return callback(error);
                         }
 
-                        if (presenter === null) {
+                        if (presenters[sessionId] === null) {
                             stop(sessionId);
                             return callback(noPresenterMessage);
                         }
 
-                        presenter.webRtcEndpoint = webRtcEndpoint;
+                        presenters[sessionId].webRtcEndpoint = webRtcEndpoint;
 
                         if (candidatesQueue[sessionId]) {
                             while (candidatesQueue[sessionId].length) {
@@ -185,7 +193,7 @@ module.exports = {
                                 return callback(error);
                             }
 
-                            if (presenter === null) {
+                            if (presenters === null) {
                                 stop(sessionId);
                                 return callback(noPresenterMessage);
                             }
@@ -204,25 +212,27 @@ module.exports = {
             });
         }
 
-        function startViewer(sessionId, ws, sdpOffer, callback) {
-            clearCandidatesQueue(sessionId);
+        function startViewer(sessionId, ws, sdpOffer, roomId, callback) {
+            // clearCandidatesQueue(sessionId);
 
-            if (presenter === null) {
+            if (presenters[roomId] === null) {
                 stop(sessionId);
                 return callback(noPresenterMessage);
             }
 
-            presenter.pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
+            presenters[roomId].pipeline.create('WebRtcEndpoint', function (error, webRtcEndpoint) {
                 if (error) {
                     stop(sessionId);
                     return callback(error);
                 }
-                viewers[sessionId] = {
+                presenters[roomId].viewers[sessionId] = {
                     webRtcEndpoint: webRtcEndpoint,
                     ws: ws
                 };
 
-                if (presenter === null) {
+                console.log("Starting viewer : id  :" + sessionId);
+
+                if (presenters[roomId] === null) {
                     stop(sessionId);
                     return callback(noPresenterMessage);
                 }
@@ -247,17 +257,17 @@ module.exports = {
                         stop(sessionId);
                         return callback(error);
                     }
-                    if (presenter === null) {
+                    if (presenters[roomId] === null) {
                         stop(sessionId);
                         return callback(noPresenterMessage);
                     }
 
-                    presenter.webRtcEndpoint.connect(webRtcEndpoint, function (error) {
+                    presenters[roomId].webRtcEndpoint.connect(webRtcEndpoint, function (error) {
                         if (error) {
                             stop(sessionId);
                             return callback(error);
                         }
-                        if (presenter === null) {
+                        if (presenters[roomId] === null) {
                             stop(sessionId);
                             return callback(noPresenterMessage);
                         }
@@ -274,40 +284,33 @@ module.exports = {
             });
         }
 
-        function clearCandidatesQueue(sessionId) {
-            if (candidatesQueue[sessionId]) {
-                delete candidatesQueue[sessionId];
-            }
-        }
-
-        function stop(sessionId) {
-            if (presenter !== null && presenter.id == sessionId) {
-                for (let i in viewers) {
-                    let viewer = viewers[i];
+        function stop(sessionId, roomId) {
+            if (presenters[roomId] !== null && presenters[roomId].id === sessionId) {
+                for (let i in presenters[roomId].viewers) {
+                    let viewer = presenters[roomId].viewers[i];
                     if (viewer.ws) {
                         viewer.ws.send(JSON.stringify({
                             id: 'stopCommunication'
                         }));
                     }
                 }
-                presenter.pipeline.release();
-                presenter = null;
-                viewers = [];
-            } else if (viewers[sessionId]) {
-                viewers[sessionId].webRtcEndpoint.release();
-                delete viewers[sessionId];
+                presenters[roomId].pipeline.release();
+                presenters[roomId] = null;
+            } else if (presenters[roomId].viewers[sessionId]) {
+                presenters[roomId].viewers[sessionId].webRtcEndpoint.release();
+                delete presenters[roomId].viewers[sessionId];
             }
         }
 
-        function onIceCandidate(sessionId, _candidate) {
+        function onIceCandidate(sessionId, roomId, _candidate) {
             let candidate = kurento.getComplexType('IceCandidate')(_candidate);
 
-            if (presenter && presenter.id === sessionId && presenter.webRtcEndpoint) {
+            if (presenters[roomId] && presenters[roomId].id === sessionId && presenters[roomId].webRtcEndpoint) {
                 console.info('Sending presenter candidate');
-                presenter.webRtcEndpoint.addIceCandidate(candidate);
-            } else if (viewers[sessionId] && viewers[sessionId].webRtcEndpoint) {
+                presenters[roomId].webRtcEndpoint.addIceCandidate(candidate);
+            } else if (presenters[roomId].viewers[sessionId] && presenters[roomId].viewers[sessionId].webRtcEndpoint) {
                 console.info('Sending viewer candidate');
-                viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
+                presenters[roomId].viewers[sessionId].webRtcEndpoint.addIceCandidate(candidate);
             } else {
                 console.info('Queueing candidate');
                 if (!candidatesQueue[sessionId]) {
