@@ -15,7 +15,8 @@
  *
  */
 
-const ws = new WebSocket('wss://' + location.host + '/kurento');
+const ws   = new WebSocket('wss://' + location.host + '/kurento');
+let roomId = null;
 let webRtcPeer, video, videoShare;
 
 window.onload = function () {
@@ -154,11 +155,24 @@ function viewer () {
                             }
                         })
                     }
-                }).then(function (result) {
-                    swal({
-                        type: 'success',
-                        html: 'You selected: ' + result
-                    })
+                }).then(function (roomChoice) {
+                    roomId = roomChoice;
+                    if (!webRtcPeer) {
+                        showSpinner();
+
+                        let options = {
+                            remoteVideo: video,
+                            onicecandidate: onIceCandidate
+                        };
+
+                        webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, function (error) {
+                            if (error) {
+                                return onError(error);
+                            }
+
+                            this.generateOffer(onOfferViewer);
+                        });
+                    }
                 })
             }
         },
@@ -167,22 +181,7 @@ function viewer () {
         }
     });
 
-    // if (!webRtcPeer) {
-    //     showSpinner();
-    //
-    //     let options = {
-    //         remoteVideo: video,
-    //         onicecandidate: onIceCandidate
-    //     };
-    //
-    //     webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, function (error) {
-    //         if (error) {
-    //             return onError(error);
-    //         }
-    //
-    //         this.generateOffer(onOfferViewer);
-    //     });
-    // }
+
 }
 
 function onOfferViewer (error, offerSdp) {
@@ -194,7 +193,7 @@ function onOfferViewer (error, offerSdp) {
         id: 'viewer',
         sdpOffer: offerSdp,
         sessionId: $('#inputUsername').val(),
-        roomId: 'tata'
+        roomId: roomId
     };
     sendMessage(message);
 }
@@ -205,7 +204,7 @@ function onIceCandidate (candidate) {
     let message = {
         id: 'onIceCandidate',
         sessionId: $('#inputUsername').val(),
-        roomId: 'tata',
+        roomId: roomId,
         candidate: candidate
     };
     sendMessage(message);
