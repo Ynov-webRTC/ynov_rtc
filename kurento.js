@@ -15,7 +15,7 @@ router.get('/getRooms', function (req, res) {
     console.log(presenters);
     for(p of presenters) {
     //     _.forEach(presenters, function (p) {
-            console.log(ps);
+            console.log(p);
             ps.push({
                 id: p.id,
                 viewersCount: p.viewers.length
