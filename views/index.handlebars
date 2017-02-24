@@ -1,1 +1,108 @@
-<h2 class="text-center">Welcome to WebRTC</h2>
+  <h2 class="title">Bienvenue sur WebRTC</h2>
+    <div>     
+        <div id="zone1"> 
+          <div id="margezone">
+              <h4 class"projectname">Nom du projet</h4>               
+                  <p class="presentation">
+                      Mise en place d’une plateforme permettant de créer son serveur de Stream facilement sur un mode open source, pouvoir streamer en quelques clics.
+                  </p>                
+              <h6 class="tool">Outils utilisés :</h6>
+                  <ul class="listtool">
+                      <li>Web RTC</li>
+                      <li>Kurento</li>
+                      <li>Docker</li>
+                  </ul>
+          </div>
+        </div>         
+
+        <div id="imgproject">
+              <a id="imgRTC2" onclick="ShowHide('contentHide', this);" href="javascript:;"><img id="imgRTC" alt="RTC" src="../../public/img/webrtc2.png" class="img-responsive"></a>
+              <a id="imgkurento2" onclick="ShowHide2('contentHide2', this);" href="javascript:;"><img id="imgkurento"alt="Kurento" src="../../public/img/kurento2.png" class="img-responsive"></a>    
+              <a id="imgdocker2" onclick="ShowHide3('contentHide3', this);" href="javascript:;"><img id="imgdocker" alt="docker" src="../../public/img/docker.png" class="img-responsive"></a>
+              
+
+           <div >
+              <p id="contentHide" style="display: none;">Web RTC, qui signifie Web Real-Time Communications (Communications Web en temps réel), est un projet open source qui permet de communiquer en temps réel sans plugin via une API JavaScript. Ce système facilite les applications de navigateur à navigateur pour les appels vocaux, le chat vidéo et le partage de fichiers.</p>
+
+              <p id="contentHide2" style="display: none;">Kurento est un serveur de médias Web RTC et un ensemble d'API client qui simplifie le développement d'applications vidéo avancées pour les plates-formes WWW et smartphone. Les fonctionnalités de Kurento Media Server incluent les communications de groupe, l'enregistrement, le mixage, la diffusion et le routage des flux audiovisuels.
+              Comme fonctionnalité différentielle, Kurento Media Server fournit également des capacités avancées de traitement des médias impliquant la vision par ordinateur, l'indexation vidéo, la réalité augmentée et l'analyse de la parole. L'architecture modulaire de Kurento simplifie l'intégration d'algorithmes de traitement de médias tiers (reconnaissance de la parole, analyse des sentiments, reconnaissance de visage, etc.), qui peuvent être utilisés de manière transparente par les développeurs d'applications comme le reste des fonctionnalités intégrées de Kurento.</p>
+
+              <p id="contentHide3" style="display: none;">  Web RTC, qui signifie Web Real-Time Communications (Communications Web en temps réel), est un projet open source qui permet de communiquer en temps réel sans plugin via une API JavaScript. Ce système facilite les applications de navigateur à navigateur pour les appels vocaux, le chat vidéo et le partage de fichiers.</p>
+               
+           </div>
+           
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+
+/*
+  function MontrerCacher(div,idlien) {
+$("#"+div).slideToggle();
+}
+
+  function MontrerCacher2(div,idlien) {
+$("#"+div).slideToggle();
+}
+
+  function MontrerCacher3(div,idlien) {
+$("#"+div).slideToggle();
+}
+*/
+
+$("#imgRTC2").click(function(e) {
+        e.preventDefault();        
+        $("#contentHide").css('display','block');
+        $("#contentHide2").css('display','none');
+        $("#contentHide3").css('display','none');
+    });
+
+$("#imgkurento2").click(function(e) {
+        e.preventDefault();        
+        $("#contentHide2").css('display','block');
+        $("#contentHide").css('display','none');
+        $("#contentHide3").css('display','none');
+    });
+
+$("#imgdocker2").click(function(e) {
+        e.preventDefault();        
+        $("#contentHide3").css('display','block');
+        $("#contentHide").css('display','none');
+        $("#contentHide2").css('display','none');
+    });
+
+</script>
+
+
+
+
+<div class="col-md-10 ">  
+    <div class="row">
+        <div class="col-md-9 index">
+            <form action="/index" method="post">
+              <div>
+                   <label for="name" class="control-label">Name :</label>       
+                   <input type="text" class="form-control" id="name" name="name" placeholder="Name" data-error="This field is required" required>
+              </div>
+               <div >
+                    <label for="email">Email :</label>
+                   <input type="email" class="form-control" id="email" name="mail" placeholder="Email" data-error="This field is required" required>
+               
+               </div>
+               <div>
+                         <label for="message">Message :</label>
+                         <input type="message" class="form-control" id="message" name="message" placeholder="Message" data-error="This field is required" required>
+                      
+                 </div>
+            
+            <div class="button">
+                       <button type="submit">Send your message</button>
+                  </div>
+            </form>
+        </div>   
+    </div>
+</div>
+
+
+
