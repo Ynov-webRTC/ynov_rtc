@@ -92,7 +92,7 @@ module.exports = {
                         break;
 
                     case 'onIceCandidate':
-                        onIceCandidate(sessionId, message.roomId, message.candidate);
+                        onIceCandidate(message.sessionId, message.roomId, message.candidate);
                         break;
 
                     default:

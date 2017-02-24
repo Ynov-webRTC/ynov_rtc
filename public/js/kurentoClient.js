@@ -155,6 +155,7 @@ function onOfferViewer (error, offerSdp) {
     let message = {
         id: 'viewer',
         sdpOffer: offerSdp,
+        sessionId: $('#inputUsername').val(),
         roomId: 'tata'
     };
     sendMessage(message);
@@ -165,6 +166,7 @@ function onIceCandidate (candidate) {
 
     let message = {
         id: 'onIceCandidate',
+        sessionId: $('#inputUsername').val(),
         roomId: 'tata',
         candidate: candidate
     };
