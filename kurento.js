@@ -37,9 +37,6 @@ module.exports = {
 
     kurento : function (wss, argv) {
         wss.on('connection', function (ws) {
-            let sessionId = nextUniqueId();
-            console.log('Connection received with sessionId ' + sessionId);
-
             ws.on('error', function (error) {
                 console.log('Connection ' + sessionId + ' error ' + error);
                 stop(sessionId);
@@ -73,7 +70,7 @@ module.exports = {
                         break;
 
                     case 'viewer':
-                        startViewer(sessionId, ws, message.sdpOffer, message.roomId, function (error, sdpAnswer) {
+                        startViewer(message.sessionId, ws, message.sdpOffer, message.roomId, function (error, sdpAnswer) {
                             if (error) {
                                 return ws.send(JSON.stringify({
                                     id: 'viewerResponse',

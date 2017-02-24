@@ -165,7 +165,7 @@ function onIceCandidate (candidate) {
 
     let message = {
         id: 'onIceCandidate',
-        roomId: $('#inputUsername').val(),
+        roomId: 'tata',
         candidate: candidate
     };
     sendMessage(message);
