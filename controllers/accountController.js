@@ -4,7 +4,7 @@ const router = require('express').Router();
 const auth = require('../services/auth');
 const userService = require('../services/userService');
 
-router.get('/', function (req, res) {
+router.get('/', auth.grantedAccess, function (req, res) {
     res.render('account', {
         user: req.user,
         isConnected: auth.isConnected(req),
