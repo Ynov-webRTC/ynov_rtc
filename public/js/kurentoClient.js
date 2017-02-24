@@ -49,7 +49,17 @@ window.onload = function () {
 };
 
 window.onbeforeunload = function () {
-    ws.close();
+    if (webRtcPeer) {
+        // let message = {
+        //     id: 'stop',
+        //     sessionId: $('#inputUsername').val(),
+        //     roomId: roomId
+        // };
+        //
+        // sendMessage(message);
+        // dispose();
+        ws.close();
+    }
 };
 
 ws.onmessage = function (message) {
@@ -227,6 +237,7 @@ function stop () {
             sessionId: $('#inputUsername').val(),
             roomId: roomId
         };
+
         sendMessage(message);
         dispose();
     }

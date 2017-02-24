@@ -13,7 +13,7 @@ module.exports = function (app) {
     app.use(flash());
     app.use(session({
         secret: 'ynovrtcwebgroupe',
-        resave: true,
+        resave: false,
         saveUninitialized: true
     }));
 
