@@ -13,14 +13,16 @@ $(document).ready(function () {
     socket.on('chat message', function (msg) {
         var date = new Date();
         var currentDate = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
-        $('.chat_messages').append('' +
-			'<li class="right clearfix">'
+        $('.chat_messages').append(''
+			+ '<li>'
 			+ '<div class="chat-body clearfix from-me">'
 			+ '<div class="header">'
-			+ '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' + currentDate + '</small>'
-			+ '<strong class="pull-right primary-font" style="color: black">' + $('#inputUsername').val() +'</strong>'
+            + '<span class="primary-font" style="color: black">' + $('#inputUsername').val() +'</span>'
+            + '<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' + currentDate + '</small>'
+            + '</div>'
+			+ '<div class="body">'
+            + emojione.shortnameToImage(msg)
 			+ '</div>'
-			+ emojione.shortnameToImage(msg)
 			+ '</div>'
 			+ '</li>');
     });
