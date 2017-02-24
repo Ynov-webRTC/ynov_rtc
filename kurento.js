@@ -288,6 +288,7 @@ module.exports = {
         }
 
         function stop(sessionId, roomId) {
+            console.log(presenters);
             if (presenters[roomId] !== null && presenters[roomId].id == sessionId) {
                 for (let i in presenters[roomId].viewers) {
                     let viewer = presenters[roomId].viewers[i];
