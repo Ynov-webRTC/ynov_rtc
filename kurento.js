@@ -303,7 +303,6 @@ module.exports = {
                 }
                 presenters[roomId].pipeline.release();
                 presenters[roomId] = null;
-                presenters[roomId].viewers = [];
             } else if (presenters[roomId].viewers[sessionId]) {
                 presenters[roomId].viewers[sessionId].webRtcEndpoint.release();
                 delete presenters[roomId].viewers[sessionId];
