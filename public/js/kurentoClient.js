@@ -133,6 +133,33 @@ function viewer () {
         url:"https://edwinnss.fr:8443/api/getRooms",
         success:function(data) {
             console.log(data);
+            var inputOptions = new Promise(function (resolve) {
+                let inputs = {};
+                for(let presenter of data){
+                    input[presenter.id] = presenter.id + ", viewers : " + presenter.viewersCount;
+                }
+                    resolve(inputs);
+            });
+
+            swal({
+                title: 'Select color',
+                input: 'radio',
+                inputOptions: inputOptions,
+                inputValidator: function (result) {
+                    return new Promise(function (resolve, reject) {
+                        if (result) {
+                            resolve()
+                        } else {
+                            reject('You need to select a streamer !')
+                        }
+                    })
+                }
+            }).then(function (result) {
+                swal({
+                    type: 'success',
+                    html: 'You selected: ' + result
+                })
+            })
         },
         error: function (error) {
             console.log(error);

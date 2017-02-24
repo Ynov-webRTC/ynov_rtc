@@ -39,9 +39,10 @@ module.exports = {
                 stop(sessionId);
             });
 
-            ws.on('close', function () {
-                console.log('Connection ' + sessionId + ' closed');
-                stop(sessionId);
+            ws.on('close', function (_message) {
+                let message = JSON.parse(_message);
+                console.log('Connection ' + message.sessionId + ' closed');
+                stop(message.sessionId);
             });
 
             ws.on('message', function (_message) {
