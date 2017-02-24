@@ -91,7 +91,7 @@ module.exports = {
                         break;
 
                     case 'stop':
-                        stop(message.sessionId);
+                        stop(message.sessionId, message.roomId);
                         break;
 
                     case 'onIceCandidate':
@@ -291,7 +291,7 @@ module.exports = {
         }
 
         function stop(sessionId, roomId) {
-            console.log(presenters);
+            console.log(roomId);
             if (presenters[roomId] !== null && presenters[roomId].id == sessionId) {
                 for (let i in presenters[roomId].viewers) {
                     let viewer = presenters[roomId].viewers[i];
