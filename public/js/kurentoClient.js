@@ -130,10 +130,13 @@ function onOfferPresenter (error, offerSdp) {
 
 function viewer () {
     $.ajax({
-        url: "https://localhost:8443/api/getRooms"
-    })
-    .done(function (response) {
-        console.log(response);
+        url:"https://edwinnss.fr:8443/api/getRooms",
+        success:function(data) {
+            console.log(data);
+        },
+        error: function (error) {
+            console.log(error);
+        }
     });
 
     // if (!webRtcPeer) {
