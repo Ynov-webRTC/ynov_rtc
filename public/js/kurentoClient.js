@@ -176,7 +176,8 @@ function onIceCandidate (candidate) {
 function stop () {
     if (webRtcPeer) {
         let message = {
-            id: 'stop'
+            id: 'stop',
+            sessionId: $('#inputUsername').val()
         };
         sendMessage(message);
         dispose();

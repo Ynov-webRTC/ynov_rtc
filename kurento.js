@@ -88,7 +88,7 @@ module.exports = {
                         break;
 
                     case 'stop':
-                        stop(sessionId);
+                        stop(message.sessionId);
                         break;
 
                     case 'onIceCandidate':
