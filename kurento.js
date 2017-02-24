@@ -39,6 +39,7 @@ module.exports = {
             });
 
             ws.on('close', function (_message) {
+                console.log(_message);
                 let message = JSON.parse(_message);
                 console.log('Connection ' + message.sessionId + ' closed');
                 stop(message.sessionId);
