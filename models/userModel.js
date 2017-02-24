@@ -7,13 +7,20 @@ const userSchema = mongoose.Schema({
         type: String
     },
     name: {
-        type: String
+        type: String,
+        default: ""
     },
     lastname: {
-        type: String
+        type: String,
+        default: "",
     },
     bio: {
-        type: String
+        type: String,
+        default: "",
+    },
+    avatar: {
+        type: String,
+        default: ""
     },
     password: {
         type: String
