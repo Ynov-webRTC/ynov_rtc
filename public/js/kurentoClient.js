@@ -136,7 +136,7 @@ function viewer () {
                 let inputOptions = new Promise(function (resolve) {
                     let inputs = {};
                     for (let presenter of data) {
-                        input[presenter.id] = presenter.id + ", viewers : " + presenter.viewersCount;
+                        inputs[presenter.id] = presenter.id + ", viewers : " + presenter.viewersCount;
                     }
                     resolve(inputs);
                 });
