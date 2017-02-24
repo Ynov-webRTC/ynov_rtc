@@ -25,7 +25,7 @@ router.get('/getRooms', function (req, res) {
     // return res.json(ps);
     console.log(presenters);
     //console.log(JSON.stringify(presenters));
-    return res.json(presenters);
+    return res.send(JSON.stringify(presenters));
 });
 
 module.exports = {
