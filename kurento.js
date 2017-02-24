@@ -16,7 +16,7 @@ router.get('/getRooms', function (req, res) {
 
     for (let p in presenters){
         console.log(p);
-        if (target.hasOwnProperty(p)) {
+        if (presenters.hasOwnProperty(p)) {
             console.log(presenters[p]);
             ps.push({
                 id: presenters[p].id,
