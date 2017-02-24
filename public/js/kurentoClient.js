@@ -133,7 +133,7 @@ function onOfferPresenter (error, offerSdp) {
 
 function viewer () {
     $.ajax({
-        url:"https://localhost:8443/api/getRooms",
+        url: location.host + "/api/getRooms",
         success:function(data) {
             if(data.length > 0 ) {
                 let inputOptions = new Promise(function (resolve) {
