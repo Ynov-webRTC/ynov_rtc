@@ -153,6 +153,131 @@
   text-align: center;
 }
 
+body {
+  background: url('../img/background.jpg')center fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.title {
+  padding-bottom: 25px;
+  text-align: center;
+  color: white;
+}
+
+.projetname {
+  color: white;
+}
+
+.presentation {
+  margin-right: 50px;
+  color: white;
+}
+
+.margezone {
+  padding-left: 50px;
+}
+
+#zone1 {
+  margin-bottom: 50px;
+  padding-top: 15px;
+  padding-left: 50px;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: rgba(0,0,0,.6);
+  box-shadow: 5px 5px 5px #000;
+}
+
+.projectname {
+  color: white;
+}
+
+#imgproject {
+  margin-bottom: 200px;
+}
+
+#imgRTC {
+  display: inline-block;
+  width: 211px;
+  height: 300px;
+  margin-right: 150px;
+  margin-left: 80px;
+  padding-bottom: 20px;
+}
+
+#imgkurento {
+  display: inline-block;
+  width: 201px;
+  height: 300px;
+  margin-top: 10px;
+  margin-right: 150px;
+  padding-bottom: 20px;
+}
+
+#imgdocker {
+  display: inline-block;
+  margin-top: 10px;
+  padding-bottom: 20px;
+}
+
+#contentHide {
+  margin-left: 15px;
+  padding-top: 15px;
+  padding-top: 50px;
+  padding-right: 50px;
+  padding-bottom: 100px;
+  padding-left: 50px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: rgba(0,0,0,.6);
+  box-shadow: 5px 5px 5px #000;
+}
+
+#contentHide2 {
+  margin-left: 15px;
+  padding-top: 15px;
+  padding-top: 50px;
+  padding-right: 50px;
+  padding-bottom: 100px;
+  padding-left: 50px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: rgba(0,0,0,.6);
+  box-shadow: 5px 5px 5px #000;
+}
+
+#contentHide3 {
+  margin-left: 15px;
+  padding-top: 15px;
+  padding-top: 50px;
+  padding-right: 50px;
+  padding-bottom: 100px;
+  padding-left: 50px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: rgba(0,0,0,.6);
+  box-shadow: 5px 5px 5px #000;
+}
+
+h4 {
+  color: white;
+}
+
+h6 {
+  color: white;
+}
+
+li {
+  color: white;
+}
+
+.listtool {
+  margin-bottom: 30px;
+}
+
 @CHARSET 'UTF-8';
 
 video,
@@ -205,10 +330,9 @@ div.dragged {
   cursor: all-scroll !important;
   border-color: blue !important;
 }
-
-body {
+/*body {
   background-image: url('../img/sayagata-400px.png') !important;
-}
+}*/
 
 .accountPage{
   background-color: white;
