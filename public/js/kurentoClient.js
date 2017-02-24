@@ -126,6 +126,8 @@ function onOfferPresenter (error, offerSdp) {
         sdpOffer: offerSdp,
         sessionId: $('#inputUsername').val()
     };
+
+    roomId = $('#inputUsername').val();
     sendMessage(message);
 }
 
