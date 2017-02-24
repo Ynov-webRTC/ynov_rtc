@@ -12,7 +12,6 @@ const noPresenterMessage = 'No active presenter. Try again later...';
 
 router.get('/getRooms', function (req, res) {
     let ps = [];
-    console.log("===========");
 
     for (let p in presenters){
         console.log(p);
