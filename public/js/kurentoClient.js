@@ -216,7 +216,8 @@ function stop () {
     if (webRtcPeer) {
         let message = {
             id: 'stop',
-            sessionId: $('#inputUsername').val()
+            sessionId: $('#inputUsername').val(),
+            roomId: roomId
         };
         sendMessage(message);
         dispose();
