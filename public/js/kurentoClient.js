@@ -154,7 +154,7 @@ function onOfferViewer (error, offerSdp) {
     let message = {
         id: 'viewer',
         sdpOffer: offerSdp,
-        roomId: 1
+        roomId: 'tata'
     };
     sendMessage(message);
 }
