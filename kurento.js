@@ -13,12 +13,13 @@ const noPresenterMessage = 'No active presenter. Try again later...';
 router.get('/getRooms', function (req, res) {
     let ps = [];
     _.forEach(presenters, function(p) {
+        console.log(ps);
         ps.push({
             id: p.id,
             viewersCount:  p.viewers.length
         })
     });
-    
+
     return res.json(ps);
 });
 
