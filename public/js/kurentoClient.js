@@ -129,22 +129,29 @@ function onOfferPresenter (error, offerSdp) {
 }
 
 function viewer () {
-    if (!webRtcPeer) {
-        showSpinner();
+    $.ajax({
+        url: "https://localhost:8443/api/getRooms"
+    })
+    .done(function (response) {
+        console.log(response);
+    });
 
-        let options = {
-            remoteVideo: video,
-            onicecandidate: onIceCandidate
-        };
-
-        webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, function (error) {
-            if (error) {
-                return onError(error);
-            }
-
-            this.generateOffer(onOfferViewer);
-        });
-    }
+    // if (!webRtcPeer) {
+    //     showSpinner();
+    //
+    //     let options = {
+    //         remoteVideo: video,
+    //         onicecandidate: onIceCandidate
+    //     };
+    //
+    //     webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options, function (error) {
+    //         if (error) {
+    //             return onError(error);
+    //         }
+    //
+    //         this.generateOffer(onOfferViewer);
+    //     });
+    // }
 }
 
 function onOfferViewer (error, offerSdp) {

@@ -4,31 +4,26 @@
 const kurento = require('kurento-client');
 const router = require('express').Router();
 const _ = require('lodash');
-let idCounter = 0;
 let candidatesQueue = {};
 let kurentoClient = null;
 let presenters = [];
 
 const noPresenterMessage = 'No active presenter. Try again later...';
 
-function nextUniqueId() {
-    idCounter++;
-    return idCounter.toString();
-}
-
-router.get('/', function (req, res) {
-    let ps = [];
-    _.forEach(presenters, function(p) {
-        if(p && p.viewers) {
-            ps.push({
-                id: p.id,
-                viewersCount:  _.filter(p.viewers, function(v) {
-                    return _.isObject(v);
-                }).length
-            });
-        }
-    });
-    return res.json(ps);
+router.get('/getRooms', function (req, res) {
+    // let ps = [];
+    // _.forEach(presenters, function(p) {
+    //     if(p && p.viewers) {
+    //         ps.push({
+    //             id: p.id,
+    //             viewersCount:  _.filter(p.viewers, function(v) {
+    //                 return _.isObject(v);
+    //             }).length
+    //         });
+    //     }
+    // });
+    // return res.json(ps);
+    return res.json(presenters);
 });
 
 module.exports = {
