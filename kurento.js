@@ -14,12 +14,16 @@ router.get('/getRooms', function (req, res) {
     let ps = [];
 
     for (let p in presenters){
-        console.log(p);
         if (presenters.hasOwnProperty(p)) {
-            console.log(presenters[p]);
+            let viewersCount = 0;
+            for (let v in presenters[p].viewers) {
+                if (presenters[p].viewers.hasOwnProperty(v)) {
+                    viewersCount ++;
+                }
+            }
             ps.push({
                 id: presenters[p].id,
-                viewersCount: presenters[p].viewers.length
+                viewersCount: viewersCount
             });
         }
     }
