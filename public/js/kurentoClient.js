@@ -49,7 +49,7 @@ window.onload = function () {
 };
 
 window.onbeforeunload = function () {
-    ws.close();
+    ws.close(roomId);
 };
 
 ws.onmessage = function (message) {
@@ -227,6 +227,8 @@ function stop () {
             sessionId: $('#inputUsername').val(),
             roomId: roomId
         };
+
+        console.log("STOP --- ");
         sendMessage(message);
         dispose();
     }
