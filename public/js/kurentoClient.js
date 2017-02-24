@@ -50,14 +50,14 @@ window.onload = function () {
 
 window.onbeforeunload = function () {
     if (webRtcPeer) {
-        let message = {
-            id: 'stop',
-            sessionId: $('#inputUsername').val(),
-            roomId: roomId
-        };
-
-        sendMessage(message);
-        dispose();
+        // let message = {
+        //     id: 'stop',
+        //     sessionId: $('#inputUsername').val(),
+        //     roomId: roomId
+        // };
+        //
+        // sendMessage(message);
+        // dispose();
         ws.close();
     }
 };
