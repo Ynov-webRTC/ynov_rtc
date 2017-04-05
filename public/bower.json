@@ -24,6 +24,7 @@
     "kurento-utils": "6.6.0",
     "bootstrap-validator": "^0.11.9",
     "emojione": "^2.2.7",
-    "sweetalert2": "^6.4.2"
+    "sweetalert2": "^6.4.2",
+    "Croppie": "croppie#^2.4.1"
   }
 }
