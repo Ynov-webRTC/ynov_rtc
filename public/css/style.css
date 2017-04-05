@@ -25,6 +25,13 @@
   background: #e5e5ea;
 }
 
+.user_from-them {
+  position: relative;
+  padding-left: 20px;
+  color: black;
+  size: 8px;
+}
+
 /*CSS SideBar et Chat Window*/
 
 #sidebar-wrapper {
@@ -161,13 +168,14 @@ body {
 }
 
 .title {
+  margin-top: 100px;
   padding-bottom: 25px;
   text-align: center;
-  color: white;
+  color: black;
 }
 
 .projetname {
-  color: white;
+  color: black;
 }
 
 .presentation {
@@ -226,7 +234,7 @@ body {
   padding-top: 15px;
   padding-top: 50px;
   padding-right: 50px;
-  padding-bottom: 100px;
+  padding-bottom: 40px;
   padding-left: 50px;
   color: white;
   border: 1px solid white;
@@ -240,7 +248,7 @@ body {
   padding-top: 15px;
   padding-top: 50px;
   padding-right: 50px;
-  padding-bottom: 100px;
+  padding-bottom: 40px;
   padding-left: 50px;
   color: white;
   border: 1px solid white;
@@ -254,7 +262,7 @@ body {
   padding-top: 15px;
   padding-top: 50px;
   padding-right: 50px;
-  padding-bottom: 100px;
+  padding-bottom: 40px;
   padding-left: 50px;
   color: white;
   border: 1px solid white;
@@ -277,6 +285,10 @@ li {
 
 .listtool {
   margin-bottom: 30px;
+}
+
+#success_message {
+  display: none;
 }
 
 @CHARSET 'UTF-8';
@@ -331,9 +343,61 @@ div.dragged {
   cursor: all-scroll !important;
   border-color: blue !important;
 }
-/*body {
-  background-image: url('../img/sayagata-400px.png') !important;
-}*/
+/*#nav {
+
+    position: fixed;
+    width: 100%;
+    list-style-type: none;       
+    margin-top: -1em;
+    padding-left: 50px;
+    padding-top: 15px;
+    padding-right: 10px;
+    background: rgba(0,0,0,0.4);
+}
+
+.navbar-brand{
+	float: left;
+	color: black;
+}
+
+.accueil a:hover{
+	color: white;
+	 background: rgba(255,255,255,0.3);
+}
+
+#nav1 {
+	padding-top: 7px;
+    float: right;
+
+}
+
+
+
+li a{
+    display: block;
+    color: black;
+    text-align: right;
+    padding: 14px 16px;
+    text-decoration: none; 
+}
+
+li:hover{
+	color: white;
+}
+
+li a:hover {
+    background: rgba(255,255,255,0.3);
+    color: white;
+    text-decoration: none;
+ 
+}
+
+li a:focus {
+    text-decoration: none;
+    color: black;
+}
+
+*/
 #modal {
   z-index: 100;
   width: 400px;

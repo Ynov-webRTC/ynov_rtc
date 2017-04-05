@@ -1,4 +1,55 @@
-/*body {
-  background-image: url('../img/sayagata-400px.png') !important;
-}*/
+/*#nav {
 
+    position: fixed;
+    width: 100%;
+    list-style-type: none;       
+    margin-top: -1em;
+    padding-left: 50px;
+    padding-top: 15px;
+    padding-right: 10px;
+    background: rgba(0,0,0,0.4);
+}
+
+.navbar-brand{
+	float: left;
+	color: black;
+}
+
+.accueil a:hover{
+	color: white;
+	 background: rgba(255,255,255,0.3);
+}
+
+#nav1 {
+	padding-top: 7px;
+    float: right;
+
+}
+
+
+
+li a{
+    display: block;
+    color: black;
+    text-align: right;
+    padding: 14px 16px;
+    text-decoration: none; 
+}
+
+li:hover{
+	color: white;
+}
+
+li a:hover {
+    background: rgba(255,255,255,0.3);
+    color: white;
+    text-decoration: none;
+ 
+}
+
+li a:focus {
+    text-decoration: none;
+    color: black;
+}
+
+*/

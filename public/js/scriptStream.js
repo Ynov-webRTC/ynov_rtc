@@ -33,16 +33,15 @@ $(document).ready(function () {
     socket.on('own_message', function (myObject) {
         myObject = JSON.parse(myObject);
         let date = new Date();
-        let currentDate = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+        let currentDate = date.getHours()+":"+date.getMinutes()
         $('.chat_messages').append(''
 			+ '<li>'
+            + '<small class="pull-right text-muted" style="color:black;"><span>At </span>' + currentDate + '</small><br/>'
 			+ '<div class="chat-body clearfix from-me">'
 			+ '<div class="header">'
-            + '<span class="primary-font" style="color: black">' + myObject.user +'</span>'
-            + '<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' + currentDate + '</small>'
             + '</div>'
 			+ '<div class="body">'
-            + emojione.shortnameToImage(myObject.message)
+            + '<span style="color:white;">' + emojione.shortnameToImage(myObject.message) + '</span>'
 			+ '</div>'
 			+ '</div>'
 			+ '</li>');
@@ -51,16 +50,15 @@ $(document).ready(function () {
     socket.on('other_message', function (myObject) {
         myObject = JSON.parse(myObject);
         let date = new Date();
-        let currentDate = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()
+        let currentDate = date.getHours()+":"+date.getMinutes()
         $('.chat_messages').append(''
             + '<li>'
+            + '<span class="primary-font user_from-them">' + myObject.user +'</span><small class="pull-right text-muted" style="color: black;"><span>At </span>' + currentDate + '</small>'
             + '<div class="chat-body clearfix from-them">'
             + '<div class="header">'
-            + '<span class="primary-font" style="color: black">' + myObject.user +'</span>'
-            + '<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' + currentDate + '</small>'
             + '</div>'
             + '<div class="body">'
-            + emojione.shortnameToImage(myObject.message)
+            + '<span style="color:black;">' + emojione.shortnameToImage(myObject.message) + '</span>'
             + '</div>'
             + '</div>'
             + '</li>');

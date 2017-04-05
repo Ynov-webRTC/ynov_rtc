@@ -13,8 +13,8 @@ const app = express();
 
 const argv = minimist(process.argv.slice(2), {
     default: {
-        as_uri: 'https://edwinnss.fr:8443/',
-        ws_uri: 'ws://edwinnss.fr:8888/kurento'
+        as_uri: 'https://localhost:8443/',
+        ws_uri: 'ws://localhost:8888/kurento'
     }
 });
 

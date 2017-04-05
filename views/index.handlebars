@@ -8,9 +8,9 @@
                   </p>                
               <h6 class="tool">Outils utilisés :</h6>
                   <ul class="listtool">
-                      <li>Web RTC</li>
-                      <li>Kurento</li>
-                      <li>Docker</li>
+                      <li class="li1">Web RTC</li>
+                      <li class="li2">Kurento</li>
+                      <li class="li3">Docker</li>                    
                   </ul>
           </div>
         </div>         
@@ -27,7 +27,7 @@
               <p id="contentHide2" style="display: none;">Kurento est un serveur de médias Web RTC et un ensemble d'API client qui simplifie le développement d'applications vidéo avancées pour les plates-formes WWW et smartphone. Les fonctionnalités de Kurento Media Server incluent les communications de groupe, l'enregistrement, le mixage, la diffusion et le routage des flux audiovisuels.
               Comme fonctionnalité différentielle, Kurento Media Server fournit également des capacités avancées de traitement des médias impliquant la vision par ordinateur, l'indexation vidéo, la réalité augmentée et l'analyse de la parole. L'architecture modulaire de Kurento simplifie l'intégration d'algorithmes de traitement de médias tiers (reconnaissance de la parole, analyse des sentiments, reconnaissance de visage, etc.), qui peuvent être utilisés de manière transparente par les développeurs d'applications comme le reste des fonctionnalités intégrées de Kurento.</p>
 
-              <p id="contentHide3" style="display: none;">  Web RTC, qui signifie Web Real-Time Communications (Communications Web en temps réel), est un projet open source qui permet de communiquer en temps réel sans plugin via une API JavaScript. Ce système facilite les applications de navigateur à navigateur pour les appels vocaux, le chat vidéo et le partage de fichiers.</p>
+              <p id="contentHide3" style="display: none;"> Docker est un logiciel libre qui automatise le déploiement d'applications dans des conteneurs logiciels. Selon la firme de recherche sur l'industrie 451 Research, « Docker est un outil qui peut empaqueter une application et ses dépendances dans un conteneur isolé, qui pourra être exécuté sur n'importe quel serveur Linux ». Ceci permet d'étendre la flexibilité et la portabilité d’exécution d'une application, que ce soit sur la machine locale, un cloud privé ou public, une machine nue, etc</p>
                
            </div>
            
@@ -37,19 +37,6 @@
 
 <script type="text/javascript">
 
-/*
-  function MontrerCacher(div,idlien) {
-$("#"+div).slideToggle();
-}
-
-  function MontrerCacher2(div,idlien) {
-$("#"+div).slideToggle();
-}
-
-  function MontrerCacher3(div,idlien) {
-$("#"+div).slideToggle();
-}
-*/
 
 $("#imgRTC2").click(function(e) {
         e.preventDefault();        
@@ -77,32 +64,244 @@ $("#imgdocker2").click(function(e) {
 
 
 
-<div class="col-md-10 ">  
-    <div class="row">
-        <div class="col-md-9 index">
-            <form action="/index" method="post">
-              <div>
-                   <label for="name" class="control-label">Name :</label>       
-                   <input type="text" class="form-control" id="name" name="name" placeholder="Name" data-error="This field is required" required>
-              </div>
-               <div >
-                    <label for="email">Email :</label>
-                   <input type="email" class="form-control" id="email" name="mail" placeholder="Email" data-error="This field is required" required>
-               
-               </div>
-               <div>
-                         <label for="message">Message :</label>
-                         <input type="message" class="form-control" id="message" name="message" placeholder="Message" data-error="This field is required" required>
-                      
-                 </div>
-            
-            <div class="button">
-                       <button type="submit">Send your message</button>
-                  </div>
-            </form>
-        </div>   
+<div class="container">
+
+    <form class="well form-horizontal" action=" " method="post"  id="contact_form">
+<fieldset>
+
+
+<legend>Contact</legend>
+
+
+
+    <div class="form-group">
+      <label class="col-md-4 control-label">Prénom</label>  
+      <div class="col-md-4 inputGroupContainer">
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input  name="first_name" placeholder="First Name" class="form-control"  type="text">
+        </div>
+      </div>
     </div>
+
+
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" >Nom</label> 
+        <div class="col-md-4 inputGroupContainer">
+        <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input name="last_name" placeholder="Last Name" class="form-control"  type="text">
+        </div>
+      </div>
+    </div>
+
+
+             <div class="form-group">
+        <label class="col-md-4 control-label">E-Mail</label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+        <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="col-md-4 control-label">Téléphone #</label>  
+          <div class="col-md-4 inputGroupContainer">
+          <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <input name="phone" placeholder="(845)555-1212" class="form-control" type="text">
+          </div>
+        </div>
+      </div>
+
+
+
+<div class="form-group"> 
+  <label class="col-md-4 control-label">Pays</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+    <select name="state" class="form-control selectpicker" >
+      <option value=" " >Selectionner votre pays</option>
+      <option>Alabama</option>
+      <option>Alaska</option>
+      <option >Arizona</option>
+      <option >Arkansas</option>
+      <option >California</option>
+      <option >Colorado</option>
+      <option >Connecticut</option>
+      <option >Delaware</option>
+      <option >District of Columbia</option>
+      <option> Florida</option>
+      <option >Georgia</option>
+      <option >Hawaii</option>
+      <option >daho</option>
+      <option >Illinois</option>
+      <option >Indiana</option>
+      <option >Iowa</option>
+      <option> Kansas</option>
+      <option >Kentucky</option>
+      <option >Louisiana</option>
+      <option>Maine</option>
+      <option >Maryland</option>
+      <option> Mass</option>
+      <option >Michigan</option>
+      <option >Minnesota</option>
+      <option>Mississippi</option>
+      <option>Missouri</option>
+      <option>Montana</option>
+      <option>Nebraska</option>
+      <option>Nevada</option>
+      <option>New Hampshire</option>
+      <option>New Jersey</option>
+      <option>New Mexico</option>
+      <option>New York</option>
+      <option>North Carolina</option>
+      <option>North Dakota</option>
+      <option>Ohio</option>
+      <option>Oklahoma</option>
+      <option>Oregon</option>
+      <option>Pennsylvania</option>
+      <option>Rhode Island</option>
+      <option>South Carolina</option>
+      <option>South Dakota</option>
+      <option>Tennessee</option>
+      <option>Texas</option>
+      <option> Uttah</option>
+      <option>Vermont</option>
+      <option>Virginia</option>
+      <option >Washington</option>
+      <option >West Virginia</option>
+      <option>Wisconsin</option>
+      <option >Wyoming</option>
+    </select>
+  </div>
+</div>
+</div>
+  
+<div class="form-group">
+  <label class="col-md-4 control-label">Message</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+          <textarea class="form-control" name="comment" placeholder="Message"></textarea>
+  </div>
+  </div>
 </div>
 
 
+<div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Merci de nous avoir contacté, nous vous ferons un retour au plus vite.</div>
 
+
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+    <button type="submit" class="btn btn-warning" >Envoyer <span class="glyphicon glyphicon-send"></span></button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#contact_form').bootstrapValidator({
+       
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            first_name: {
+                validators: {
+                        stringLength: {
+                        min: 2,
+                    },
+                        notEmpty: {
+                        message: 'Merci de renseigner votre prénom'
+                    }
+                }
+            },
+             last_name: {
+                validators: {
+                     stringLength: {
+                        min: 2,
+                    },
+                    notEmpty: {
+                        message: 'Merci de renseigner votre nom'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'Merci de renseigner votre Email'
+                    },
+                    emailAddress: {
+                        message: 'Merci de renseigner votre Email'
+                    }
+                }
+            },
+            phone: {
+                validators: {
+                    notEmpty: {
+                        message: 'Merci de rentrer votre numéro téléphone'
+                    },
+                    phone: {
+                        country: 'US',
+                        message: 'Merci de rentrer votre numéro téléphone'
+                    }
+                }
+            },
+       
+            state: {
+                validators: {
+                    notEmpty: {
+                        message: 'Selectionner votre pays'
+                    }
+                }
+            },
+            zip: {
+        
+            comment: {
+                validators: {
+                      stringLength: {
+                        min: 10,
+                        max: 400,
+                        message:'Merci d\'entrer entre 10 et 400 caractère'
+                    },
+                    notEmpty: {
+                        message: 'Merci d\'entrer entre 10 et 400 caractère'
+                    }
+                    }
+                }
+            }
+        })
+        .on('success.form.bv', function(e) {
+            $('#success_message').slideDown({ opacity: "show" }, "slow") 
+                $('#contact_form').data('bootstrapValidator').resetForm();
+
+         
+            e.preventDefault();
+
+            var $form = $(e.target);
+
+         
+            var bv = $form.data('bootstrapValidator');
+
+           
+            $.post($form.attr('action'), $form.serialize(), function(result) {
+                console.log(result);
+            }, 'json');
+        });
+});
+
+</script>

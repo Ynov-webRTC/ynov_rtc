@@ -23,6 +23,13 @@
     width: 75%;
 }
 
+.user_from-them{
+    color: black;
+    size: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
 /*CSS SideBar et Chat Window*/
 #sidebar-wrapper {
     margin-right: -250px;
