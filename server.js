@@ -41,9 +41,14 @@ mongoose.connect('mongodb://localhost/rtc', function (err) {
 });
 
 io.on('connection', function (socket) {
-    socket.on('chat message', function (msg) {
+    socket.on('own_message', function (msg) {
         if (msg && msg.length > 0) {
-            io.emit('chat message', msg);
+            socket.emit('own_message', msg);
+        }
+    });
+    socket.on('other_message', function (msg) {
+        if (msg && msg.length > 0) {
+            socket.broadcast.emit('other_message', msg);
         }
     });
 });
