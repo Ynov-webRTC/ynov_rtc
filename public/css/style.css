@@ -139,7 +139,13 @@
 /****** LOGIN MODAL ******/
 
 .loginmodal-container {
-  ²²²
+  overflow: hidden;
+  width: 100% !important;
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 2px;
+  background-color: #f7f7f7
 }
 
 .loginmodal-container h1 {
@@ -382,5 +388,5 @@ textarea { resize: vertical; }
 .imageUser img {
   width: auto;
   height: 100%;
-  
+
 }
