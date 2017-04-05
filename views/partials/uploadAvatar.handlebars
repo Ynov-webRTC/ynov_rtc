@@ -1,0 +1,41 @@
+<div class="modal fade" id="upload-modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="accountmodal-container">
+            <form action="/account/uploadavatar" method="post" id="formAvatar" enctype="multipart/form-data">
+             <div class="row rowUpload">
+                 <div class="text-center">
+                     <div class="btn btn-default">
+                         <label for="file-upload" class="custom-file-upload">
+                             <i class="fa fa-cloud-upload"></i> Upload
+                         </label>
+                     </div>
+                 </div>
+             </div>
+             <div class="row">
+                 <input id="file-upload" name="avatar" type="file" onchange="loadFile(event)"/>
+                 <div class="imageUser">
+                     <img id="output" />
+                 </div>
+             </div>
+             <div class="row">
+                 <div class="text-center">
+                     <input type="submit" id="avatarSubmit" class="btn btn-default"  value="ok">
+                     <a href="/account" class="btn btn-default">Exit</a>
+                 </div>
+             </div>
+          </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+  var loadFile = function(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('output');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  };
+</script>

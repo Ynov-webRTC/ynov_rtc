@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
     },
     avatar: {
         type: String,
-        default: ""
+        default: "public/img/avatar/avatar_defaut.png"
     },
     password: {
         type: String

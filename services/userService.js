@@ -49,5 +49,32 @@ module.exports = {
             }
         });
         return deferred.promise;
+    },
+    getUserByUsername(username){
+        let deferred = q.defer();
+        User.findOne({username: username}).select('username bio').exec().then(function (user) {
+            if(user === null) {
+                deferred.reject("Utilisateur introuvable");
+            } else{
+                deferred.resolve(user);
+            }
+        }, function (err) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    },
+    getUserById(id){
+        let deferred = q.defer();
+        User.findOne({_id: id}).exec().then(function (user) {
+            if(user === null) {
+                deferred.reject("Utilisateur introuvable");
+            } else{
+                deferred.resolve(user);
+            }
+        }, function (err) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
     }
+
 };

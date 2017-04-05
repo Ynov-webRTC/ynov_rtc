@@ -145,7 +145,7 @@
   margin: 0 auto;
   padding: 30px;
   border-radius: 2px;
-  background-color: #f7f7f7;
+  background-color: #f7f7f7
 }
 
 .loginmodal-container h1 {
@@ -380,4 +380,40 @@ li a:hover {
 li a:focus {
   text-decoration: none;
   color: black;
+}
+
+
+.accountmodal-container{
+
+    width: 100% !important;
+    max-width: 800px;
+
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 2px;
+    background-color: #f7f7f7;
+}
+
+
+
+.croppie-container .cr-boundary{
+    width: 50% !important;
+    height: 50% !important;
+}
+
+.imageUser {
+  margin-left: auto;
+  margin-right: auto;
+
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.imageUser img {
+  width: auto;
+  height: 100%;
+
 }

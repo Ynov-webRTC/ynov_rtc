@@ -5,14 +5,19 @@ const auth = require('../services/auth');
 const userService = require('../services/userService');
 const upload = require('../services/upload');
 
-router.get('/', function (req, res) {
-    console.log(req.user);
-    res.render('account', {
-        user: req.user,
-        isConnected: auth.isConnected(req),
-        messages: req.flash('success'),
-        errors: req.flash('error'),
-        scripts: ['/public/js/scriptAccount.js']
+router.get('/', auth.grantedAccess, function (req, res) {
+
+    userService.getUserById(req.user._id).then(function(user){
+        res.render('account', {
+            user: user,
+            isConnected: auth.isConnected(req),
+            messages: req.flash('success'),
+            errors: req.flash('error'),
+            scripts: ['/public/js/scriptAccount.js']
+        });
+    },function(error){
+        req.flash('error', error);
+        res.redirect('/');
     });
 });
 
@@ -33,15 +38,19 @@ router.post('/update', auth.grantedAccess, function (req, res) {
 router.post('/uploadavatar', auth.grantedAccess, function (req,res) {
     upload(req, res, function () {
         let idUser = req.user._id;
-        let path = req.file.path;
-        userService.upload(idUser,path).then(function(){
-            req.flash('success', 'Modification réussi!');
+        if(req.file){
+            let path = req.file.path;
+            userService.upload(idUser,path).then(function(){
+                req.flash('success', 'Modification réussi!');
+                res.redirect('/account');
+            },function (error) {
+                req.flash('error', error);
+                res.redirect('/account');
+            });
+        }else {
+            req.flash('error', "Pas d'image selectioner!");
             res.redirect('/account');
-        },function (error) {
-            req.flash('error', error);
-            res.redirect('/account');
-        });
-
+        }
     });
 });
 
@@ -57,5 +66,6 @@ router.get('/:name', auth.grantedAccess, function (req, res)  {
         res.redirect('/index');
     })
 })
+
 
 module.exports = router;
