@@ -125,5 +125,7 @@ li {
 	margin-bottom: 30px;	
 }
 
-
+#success_message{
+ display: none;
+}
 

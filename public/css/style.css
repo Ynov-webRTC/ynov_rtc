@@ -279,6 +279,10 @@ li {
   margin-bottom: 30px;
 }
 
+#success_message {
+  display: none;
+}
+
 @CHARSET 'UTF-8';
 
 video,
