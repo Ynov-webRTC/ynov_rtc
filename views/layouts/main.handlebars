@@ -31,7 +31,8 @@
 
     <title>Projet Ynov</title>
 </head>
-<body>           
+<body>
+
      <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -43,29 +44,31 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">Projet WebRTC</a>
-            
-
-          <ul class="nav navbar-nav navbar-right" >
-                    {{#if isConnected}}
-                        <li>
-                            <a href="/stream">Stream</a>
-                        </li>
-                        <li>
-                            <a href="/account">Account</a>
-                        </li>
-                        <li>
-                            <a href="/login/logout">Logout</a>
-                        </li>
-                    {{else}}
-                        <li>
-                            <a href="/login/signup">Signup</a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-                        </li>
-                    {{/if}}
-                </ul>
             </div>
+            <div id="navbar" class="navbar-collapse collapse in" aria-expended="true">
+                <ul class="nav navbar-nav navbar-right" >
+                  {{#if isConnected}}
+                      <li>
+                          <a href="/stream">Stream</a>
+                      </li>
+                      <li>
+                          <a href="/account">Account</a>
+                      </li>
+                      <li>
+                          <a href="/login/logout">Logout</a>
+                      </li>
+                  {{else}}
+                      <li>
+                          <a href="/login/signup">Signup</a>
+                      </li>
+                      <li>
+                          <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                      </li>
+                  {{/if}}
+              </ul>
+            </div>
+
+
         </div>
     </nav>
 
