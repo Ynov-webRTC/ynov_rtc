@@ -8,6 +8,8 @@
     background: #0B93F6;
     border-radius: 25px;
     word-wrap: break-word;
+    width: 75%;
+    margin-left: 25%;
 }
 
 /*Message venant de l'extérieur'*/
@@ -18,6 +20,14 @@
     background: #E5E5EA;
     border-radius: 25px;
     word-wrap: break-word;
+    width: 75%;
+}
+
+.user_from-them{
+    color: black;
+    size: 8px;
+    position: relative;
+    padding-left: 20px;
 }
 
 /*CSS SideBar et Chat Window*/
@@ -73,9 +83,7 @@
 }
 
 .chat_messages li {
-    margin-bottom: 10px;
     padding-bottom: 5px;
-    border-bottom: 1px dotted #b3a9a9;
 }
 
 .chat_messages li.left .chat-body {
