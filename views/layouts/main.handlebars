@@ -33,58 +33,43 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-default navbar-static-top">
+       <div class="container-fluid">
+           <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                       data-target="#bs-example-navbar-collapse-1">
+                   <span class="sr-only">Toggle navigation</span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="/">Projet WebRTC</a>
+           </div>
 
-                    <ul id="nav" >
-                        <div class="accueil"><a class="navbar-brand" href="/">Projet WebRTC</a></div>
-                        {{#if isConnected}}
-                        <li id="nav1"><a href="/stream">Stream</a></li>
-
-                        <li id="nav1"><a href="/account">Account</a></li>
-                        <li id="nav1"><a href="/login/logout">Logout</a></li>
-                           {{else}}
-                        <li id="nav1"><a href="/login/signup">Signup</a></li>
-                        <li id="nav1"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>
-                        {{/if}}
-                    </ul>
-     <!--<nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Projet WebRTC</a>
-            </div>
- 
-
-              <div > class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"
-
-          <ul class="nav navbar-nav navbar-right" >
-                    {{#if isConnected}}
-                        <li>
-                            <a href="/stream">Stream</a>
-                        </li>
-                        <li>
-                            <a href="/account">Account</a>
-                        </li>
-                        <li>
-                            <a href="/login/logout">Logout</a>
-                        </li>
-                    {{else}}
-                        <li>
-                            <a href="/login/signup">Signup</a>
-                        </li>
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-                        </li>
-                    {{/if}}
-                </ul>
-            </div>
-        </div>
-    </nav>-->
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav navbar-right">
+                   {{#if isConnected}}
+                       <li>
+                           <a href="/stream">Stream</a>
+                       </li>
+                       <li>
+                           <a href="/account">Account</a>
+                       </li>
+                       <li>
+                           <a href="/login/logout">Logout</a>
+                       </li>
+                   {{else}}
+                       <li>
+                           <a href="/login/signup">Signup</a>
+                       </li>
+                       <li>
+                           <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+                       </li>
+                   {{/if}}
+               </ul>
+           </div>
+       </div>
+   </nav>
 
     {{#if messages}}
         <div class="container">

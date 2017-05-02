@@ -4,6 +4,8 @@
 
 .from-me {
   position: relative;
+  width: 75%;
+  margin-left: 25%;
   padding: 10px 20px;
   word-wrap: break-word;
   color: white;
@@ -15,11 +17,19 @@
 
 .from-them {
   position: relative;
+  width: 75%;
   padding: 10px 20px;
   word-wrap: break-word;
   color: black;
   border-radius: 25px;
   background: #e5e5ea;
+}
+
+.user_from-them {
+  position: relative;
+  padding-left: 20px;
+  color: black;
+  size: 8px;
 }
 
 /*CSS SideBar et Chat Window*/
@@ -76,9 +86,7 @@
 }
 
 .chat_messages li {
-  margin-bottom: 10px;
   padding-bottom: 5px;
-  border-bottom: 1px dotted #b3a9a9;
 }
 
 .chat_messages li.left .chat-body {
@@ -145,7 +153,7 @@
   margin: 0 auto;
   padding: 30px;
   border-radius: 2px;
-  background-color: #f7f7f7
+  background-color: #f7f7f7;
 }
 
 .loginmodal-container h1 {
@@ -279,6 +287,10 @@ li {
   margin-bottom: 30px;
 }
 
+#success_message {
+  display: none;
+}
+
 @CHARSET 'UTF-8';
 
 video,
@@ -331,89 +343,109 @@ div.dragged {
   cursor: all-scroll !important;
   border-color: blue !important;
 }
+/*#nav {
 
-#nav {
-  position: fixed;
-  width: 100%;
-  margin-top: -1em;
-  padding-top: 15px;
-  padding-right: 10px;
-  padding-left: 50px;
-  list-style-type: none;
-  background: rgba(0,0,0,.4);
+    position: fixed;
+    width: 100%;
+    list-style-type: none;       
+    margin-top: -1em;
+    padding-left: 50px;
+    padding-top: 15px;
+    padding-right: 10px;
+    background: rgba(0,0,0,0.4);
 }
 
-.navbar-brand {
-  float: left;
-  color: black;
+.navbar-brand{
+	float: left;
+	color: black;
 }
 
-.accueil a:hover {
-  color: white;
-  background: rgba(255,255,255,.3);
+.accueil a:hover{
+	color: white;
+	 background: rgba(255,255,255,0.3);
 }
 
 #nav1 {
-  float: right;
-  padding-top: 7px;
+	padding-top: 7px;
+    float: right;
+
 }
 
-li a {
-  display: block;
-  padding: 14px 16px;
-  text-align: right;
-  text-decoration: none;
-  color: black;
+
+
+li a{
+    display: block;
+    color: black;
+    text-align: right;
+    padding: 14px 16px;
+    text-decoration: none; 
 }
 
-li:hover {
-  color: white;
+li:hover{
+	color: white;
 }
 
 li a:hover {
-  height: 100%;
-  text-decoration: none;
-  color: white;
-  background: rgba(255,255,255,.3);
+    background: rgba(255,255,255,0.3);
+    color: white;
+    text-decoration: none;
+ 
 }
 
 li a:focus {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
+*/
+#modal {
+  z-index: 100;
+  width: 400px;
+  height: 500px;
+  text-align: center;
+  border: 1px solid #ccc;
+  background: white;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  -moz-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
+}
 
-.accountmodal-container{
-
-    width: 100% !important;
-    max-width: 800px;
-
+/*.button {
+    position: relative;
+    background-color: purple;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    cursor: pointer;
     margin: 0 auto;
-    padding: 30px;
-    border-radius: 2px;
-    background-color: #f7f7f7;
+    width: 200px;
+    margin-bottom: 10px;
+  text-transform: uppercase;
+
+  &.actionCancel {
+    background-color: #ddd;
+    color: purple;
+  }
+  &.actionDone {
+    display: none;
+  }
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+}*/
+
+.output {
+  width: 100px !important;
+  height: auto;
 }
 
-
-
-.croppie-container .cr-boundary{
-    width: 50% !important;
-    height: 50% !important;
-}
-
-.imageUser {
-  margin-left: auto;
-  margin-right: auto;
-
-  position: relative;
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-.imageUser img {
-  width: auto;
-  height: 100%;
-
+.rowUpload {
+  margin: 10px;
 }

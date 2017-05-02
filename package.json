@@ -36,7 +36,7 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.2",
     "eslint-plugin-standard": "^2.0.1",
-    "gulp": "latest",
+    "gulp": "^3.9.1",
     "gulp-concat-css": "latest",
     "gulp-cssbeautify": "latest",
     "gulp-csscomb": "latest",
