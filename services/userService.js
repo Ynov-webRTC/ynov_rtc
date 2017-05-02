@@ -52,7 +52,7 @@ module.exports = {
     },
     getUserByUsername(username){
         let deferred = q.defer();
-        User.findOne({username: username}).select('username bio').exec().then(function (user) {
+        User.findOne({username: username}).select('username bio avatar').exec().then(function (user) {
             if(user === null) {
                 deferred.reject("Utilisateur introuvable");
             } else{
