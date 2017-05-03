@@ -1,25 +1,25 @@
   <h2 class="title">Bienvenue sur WebRTC</h2>
-    <div>     
-        <div id="zone1"> 
+    <div class="box">     
+        <div id="zone1">
           <div id="margezone">
-              <h4 class"projectname">Nom du projet</h4>               
+              <h4 class"projectname">Nom du projet</h4>
                   <p class="presentation">
                       Mise en place d’une plateforme permettant de créer son serveur de Stream facilement sur un mode open source, pouvoir streamer en quelques clics.
-                  </p>                
+                  </p>
               <h6 class="tool">Outils utilisés :</h6>
                   <ul class="listtool">
                       <li class="li1">Web RTC</li>
                       <li class="li2">Kurento</li>
-                      <li class="li3">Docker</li>                    
+                      <li class="li3">Docker</li>
                   </ul>
           </div>
-        </div>         
+        </div>
 
         <div id="imgproject">
               <a id="imgRTC2" onclick="ShowHide('contentHide', this);" href="javascript:;"><img id="imgRTC" alt="RTC" src="../../public/img/webrtc2.png" class="img-responsive"></a>
-              <a id="imgkurento2" onclick="ShowHide2('contentHide2', this);" href="javascript:;"><img id="imgkurento"alt="Kurento" src="../../public/img/kurento2.png" class="img-responsive"></a>    
+              <a id="imgkurento2" onclick="ShowHide2('contentHide2', this);" href="javascript:;"><img id="imgkurento"alt="Kurento" src="../../public/img/kurento2.png" class="img-responsive"></a>
               <a id="imgdocker2" onclick="ShowHide3('contentHide3', this);" href="javascript:;"><img id="imgdocker" alt="docker" src="../../public/img/docker.png" class="img-responsive"></a>
-              
+
 
            <div >
               <p id="contentHide" style="display: none;">Web RTC, qui signifie Web Real-Time Communications (Communications Web en temps réel), est un projet open source qui permet de communiquer en temps réel sans plugin via une API JavaScript. Ce système facilite les applications de navigateur à navigateur pour les appels vocaux, le chat vidéo et le partage de fichiers.</p>
@@ -28,9 +28,9 @@
               Comme fonctionnalité différentielle, Kurento Media Server fournit également des capacités avancées de traitement des médias impliquant la vision par ordinateur, l'indexation vidéo, la réalité augmentée et l'analyse de la parole. L'architecture modulaire de Kurento simplifie l'intégration d'algorithmes de traitement de médias tiers (reconnaissance de la parole, analyse des sentiments, reconnaissance de visage, etc.), qui peuvent être utilisés de manière transparente par les développeurs d'applications comme le reste des fonctionnalités intégrées de Kurento.</p>
 
               <p id="contentHide3" style="display: none;"> Docker est un logiciel libre qui automatise le déploiement d'applications dans des conteneurs logiciels. Selon la firme de recherche sur l'industrie 451 Research, « Docker est un outil qui peut empaqueter une application et ses dépendances dans un conteneur isolé, qui pourra être exécuté sur n'importe quel serveur Linux ». Ceci permet d'étendre la flexibilité et la portabilité d’exécution d'une application, que ce soit sur la machine locale, un cloud privé ou public, une machine nue, etc</p>
-               
+
            </div>
-           
+
         </div>
 
     </div>
@@ -39,21 +39,21 @@
 
 
 $("#imgRTC2").click(function(e) {
-        e.preventDefault();        
+        e.preventDefault();
         $("#contentHide").css('display','block');
         $("#contentHide2").css('display','none');
         $("#contentHide3").css('display','none');
     });
 
 $("#imgkurento2").click(function(e) {
-        e.preventDefault();        
+        e.preventDefault();
         $("#contentHide2").css('display','block');
         $("#contentHide").css('display','none');
         $("#contentHide3").css('display','none');
     });
 
 $("#imgdocker2").click(function(e) {
-        e.preventDefault();        
+        e.preventDefault();
         $("#contentHide3").css('display','block');
         $("#contentHide").css('display','none');
         $("#contentHide2").css('display','none');
@@ -75,7 +75,7 @@ $("#imgdocker2").click(function(e) {
 
 
     <div class="form-group">
-      <label class="col-md-4 control-label">Prénom</label>  
+      <label class="col-md-4 control-label">Prénom</label>
       <div class="col-md-4 inputGroupContainer">
       <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -87,7 +87,7 @@ $("#imgdocker2").click(function(e) {
 
 
     <div class="form-group">
-      <label class="col-md-4 control-label" >Nom</label> 
+      <label class="col-md-4 control-label" >Nom</label>
         <div class="col-md-4 inputGroupContainer">
         <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -98,7 +98,7 @@ $("#imgdocker2").click(function(e) {
 
 
              <div class="form-group">
-        <label class="col-md-4 control-label">E-Mail</label>  
+        <label class="col-md-4 control-label">E-Mail</label>
           <div class="col-md-4 inputGroupContainer">
           <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -109,7 +109,7 @@ $("#imgdocker2").click(function(e) {
 
 
       <div class="form-group">
-        <label class="col-md-4 control-label">Téléphone #</label>  
+        <label class="col-md-4 control-label">Téléphone #</label>
           <div class="col-md-4 inputGroupContainer">
           <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
@@ -120,7 +120,7 @@ $("#imgdocker2").click(function(e) {
 
 
 
-<div class="form-group"> 
+<div class="form-group">
   <label class="col-md-4 control-label">Pays</label>
     <div class="col-md-4 selectContainer">
     <div class="input-group">
@@ -182,7 +182,7 @@ $("#imgdocker2").click(function(e) {
   </div>
 </div>
 </div>
-  
+
 <div class="form-group">
   <label class="col-md-4 control-label">Message</label>
     <div class="col-md-4 inputGroupContainer">
@@ -213,7 +213,7 @@ $("#imgdocker2").click(function(e) {
 <script type="text/javascript">
   $(document).ready(function() {
     $('#contact_form').bootstrapValidator({
-       
+
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
@@ -261,7 +261,7 @@ $("#imgdocker2").click(function(e) {
                     }
                 }
             },
-       
+
             state: {
                 validators: {
                     notEmpty: {
@@ -270,7 +270,7 @@ $("#imgdocker2").click(function(e) {
                 }
             },
             zip: {
-        
+
             comment: {
                 validators: {
                       stringLength: {
@@ -286,18 +286,18 @@ $("#imgdocker2").click(function(e) {
             }
         })
         .on('success.form.bv', function(e) {
-            $('#success_message').slideDown({ opacity: "show" }, "slow") 
+            $('#success_message').slideDown({ opacity: "show" }, "slow")
                 $('#contact_form').data('bootstrapValidator').resetForm();
 
-         
+
             e.preventDefault();
 
             var $form = $(e.target);
 
-         
+
             var bv = $form.data('bootstrapValidator');
 
-           
+
             $.post($form.attr('action'), $form.serialize(), function(result) {
                 console.log(result);
             }, 'json');

@@ -1,5 +1,5 @@
 <h3>Bienvenue sur votre compte</h3>
-<div class="row accountPage">
+<div class="row accountPage well">
     {{#if isConnected}}
         {{>uploadAvatar}}
     {{/if}}
@@ -7,14 +7,13 @@
 
       <div class="row">
         <div class="imageUser">
-            <div align="center"><img alt="User Pic" src="{{user.avatar}}" /></div>
+            <div align="center"><img  alt="User Pic" src="{{user.avatar}}" /></div>
         </div>
       </div>
 
       <div class="row">
           <div class="text-center">
-                <a class="btn btn-default" href="#" data-toggle="modal" data-target="#upload-modal">Upload Avatar</a>
-                
+                <a class="btn btn-default imageAvatar" href="#" data-toggle="modal" data-target="#upload-modal">Upload Avatar</a>
           </div>
 
       </div>

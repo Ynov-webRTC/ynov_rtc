@@ -271,15 +271,15 @@ body {
   box-shadow: 5px 5px 5px #000;
 }
 
-h4 {
+.box h4 {
   color: white;
 }
 
-h6 {
+.box h6 {
   color: white;
 }
 
-li {
+.box li {
   color: white;
 }
 
@@ -448,4 +448,37 @@ li a:focus {
 
 .rowUpload {
   margin: 10px;
+}
+
+.accountmodal-container {
+  width: 100% !important;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 2px;
+  background-color: #f7f7f7;
+}
+
+.croppie-container .cr-boundary {
+  width: 50% !important;
+  height: 50% !important;
+}
+
+.imageUser {
+  position: relative;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50%;
+}
+
+.imageUser img {
+  width: auto;
+  height: 100%;
+}
+
+.imageAvatar {
+  margin-top: 20px;
 }
