@@ -49,7 +49,7 @@
     $(document).ready(function(){
         $('#btn-chat').attr('disabled',true);
         $('#message_chat').keyup(function(){
-            if($(this).val().length !=0)
+            if ($(this.val().trim().length() > 0)
                 $('#btn-chat').attr('disabled', false);
             else
                 $('#btn-chat').attr('disabled',true);
