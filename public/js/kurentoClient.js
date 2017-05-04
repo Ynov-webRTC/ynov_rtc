@@ -195,6 +195,10 @@ function viewer () {
                     }
                 })
             }
+            else {
+                swal('Stop!', 'No stream available !', 'error');
+            }
+
         },
         error: function (error) {
             console.log(error);

@@ -113,17 +113,13 @@
 }
 
 .panel-body {
-  overflow-y: scroll;
-  height: 82%;
+  overflow-y: hidden;
 }
 
-.chat_window {
+.panel-footer {
   position: fixed;
-  z-index: 10;
-  right: 0;
   bottom: 0;
-  width: 300px;
-  height: 90%;
+  padding: 0 15px;
 }
 
 .chat_window {
@@ -271,15 +267,15 @@ body {
   box-shadow: 5px 5px 5px #000;
 }
 
-.box h4 {
+h4 {
   color: white;
 }
 
-.box h6 {
+h6 {
   color: white;
 }
 
-.box li {
+li {
   color: white;
 }
 
