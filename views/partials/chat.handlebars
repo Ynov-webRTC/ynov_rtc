@@ -48,11 +48,13 @@
     });
     $(document).ready(function(){
         $('#btn-chat').attr('disabled',true);
-        $('#message_chat').keyup(function(){
-            if(!//.match($(this.val())))
-                $('#btn-chat').attr('disabled', false);
-            else
-                $('#btn-chat').attr('disabled',true);
+        $('#message_chat').keydown(function(){
+            if ($(this).val()) {
+                if ($(this).val().trim().length > 0)
+                    $('#btn-chat').attr('disabled',false);
+                else
+                    $('#btn-chat').attr('disabled', true);
+            }
         })
     });
 </script>
