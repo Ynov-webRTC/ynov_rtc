@@ -110,17 +110,13 @@
 }
 
 .panel-body {
-    overflow-y: scroll;
-    height: 82%;
+    overflow-y: hidden;
 }
 
-.chat_window {
+.panel-footer {
+    padding: 0 15px;
     position: fixed;
-    z-index: 10;
-    right: 0;
     bottom: 0;
-    width: 300px;
-    height: 90%;
 }
 
 .chat_window {

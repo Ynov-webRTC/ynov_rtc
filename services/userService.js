@@ -1,7 +1,6 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const q = require('q');
-//const chalk = require('chalk');
 
 module.exports = {
 

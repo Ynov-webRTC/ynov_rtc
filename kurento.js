@@ -295,8 +295,8 @@ module.exports = {
                     }
                 }
                 presenters[roomId].pipeline.release();
-                presenters.splice(roomId, 1);
-                // presenters[roomId] = null;
+                delete presenters[roomId];
+                console.log(roomId, presenters);
             } else if (presenters[roomId] && presenters[roomId].viewers[sessionId]) {
                 presenters[roomId].viewers[sessionId].webRtcEndpoint.release();
                 delete presenters[roomId].viewers[sessionId];

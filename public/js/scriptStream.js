@@ -23,7 +23,7 @@ $(document).ready(function () {
             message: $('#message_chat').val(),
             user: $('#inputUsername').val()
         }
-        myObject.message = escapeHtml(myObject.message);
+        myObject.message = escapeHtml(myObject.message.trim());
         socket.emit('other_message', JSON.stringify(myObject));
         socket.emit('own_message', JSON.stringify(myObject));
         $('#message_chat').val('');
