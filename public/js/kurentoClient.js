@@ -26,11 +26,17 @@ window.onload = function () {
     $('#call').on('click', function () {
         presenter('webcam', video);
         $(this).addClass('hidden');
+        $('#streamTab a').tab('show');
+        $('#viewer').parent().addClass('hidden');
+        $('#share_screen').parent().addClass('hidden');
         $('#terminate').removeClass('hidden');
     });
     $('#share_screen').on('click', function () {
         presenter('screen', videoShare);
         $(this).addClass('hidden');
+        $('#shareScreenTab a').tab('show');
+        $('#viewer').parent().addClass('hidden');
+        $('#call').parent().addClass('hidden');
         $('#terminateShare').removeClass('hidden');
     });
     $('#viewer').on('click', function () {
@@ -39,25 +45,21 @@ window.onload = function () {
     $('#terminate').on('click', function () {
         stop(video);
         $(this).addClass('hidden');
+        $('#viewer').parent().removeClass('hidden');
+        $('#share_screen').parent().removeClass('hidden');
         $('#call').removeClass('hidden');
     });
     $('#terminateShare').on('click', function () {
         stop(videoShare);
         $(this).addClass('hidden');
+        $('#viewer').parent().removeClass('hidden');
+        $('#call').parent().removeClass('hidden');
         $('#share_screen').removeClass('hidden');
     });
 };
 
 window.onbeforeunload = function () {
     if (webRtcPeer) {
-        // let message = {
-        //     id: 'stop',
-        //     sessionId: $('#inputUsername').val(),
-        //     roomId: roomId
-        // };
-        //
-        // sendMessage(message);
-        // dispose();
         ws.close();
     }
 };
@@ -169,9 +171,12 @@ function viewer () {
                     inputValidator: function (result) {
                         return new Promise(function (resolve, reject) {
                             if (result) {
-                                resolve()
+                                $('#call').parent().addClass('hidden');
+                                $('#share_screen').parent().addClass('hidden');
+                                $('#streamTab a').tab('show');
+                                resolve();
                             } else {
-                                reject('You need to select a streamer !')
+                                reject('You need to select a streamer !');
                             }
                         })
                     }
