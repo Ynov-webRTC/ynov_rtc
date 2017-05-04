@@ -296,7 +296,7 @@ module.exports = {
                 }
                 presenters[roomId].pipeline.release();
                 delete presenters[roomId];
-                // presenters[roomId] = null;
+                console.log(roomId, presenters);
             } else if (presenters[roomId] && presenters[roomId].viewers[sessionId]) {
                 presenters[roomId].viewers[sessionId].webRtcEndpoint.release();
                 delete presenters[roomId].viewers[sessionId];

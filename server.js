@@ -14,9 +14,14 @@ const app = express();
 const argv = minimist(process.argv.slice(2), {
     default: {
         as_uri: 'https://localhost:8443/',
-        ws_uri: 'ws://localhost:8888/kurento'
+        ws_uri: 'ws://edwinnss.fr:8888/kurento'
     }
 });
+
+// app.get('*', function(req,res) {
+//     return res.redirect('https://' + req.headers.host + req.url)
+//
+// }).listen(8443);
 
 const options = {
     key: fs.readFileSync('keys/server.key'),
